@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BaseManager.h"
+
 #include "ResourceManager.generated.h"
 
 UCLASS()
@@ -40,4 +41,10 @@ public:
 	
 	UPROPERTY()
 	class UMediaSource* MS;
+	
+	UPROPERTY()
+	class UMaterialParameterCollectionInstance* GenderMaterialInstance;
+	
+	UPROPERTY()
+	class UMaterialParameterCollection* GenderMaterial;
 };

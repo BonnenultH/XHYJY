@@ -260,6 +260,7 @@
     <None Include="..\..\XHYJY.uproject"/>
     <None Include="..\..\Source\XHYJY.Target.cs"/>
     <None Include="..\..\Source\XHYJYEditor.Target.cs"/>
+    <None Include="..\..\.gitignore"/>
     <None Include="..\..\.vsconfig"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEngine.ini"/>
@@ -288,7 +289,16 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\BaseWidget.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WHistoryTasks.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WHomePage.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WRules.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WTakeTasks.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WUserFile.cpp">
@@ -300,7 +310,10 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\ResourceManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\UIManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\BaseWidget.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHistoryTasks.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHomePage.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WRules.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WTakeTasks.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WUserFile.h"/>
   </ItemGroup>
   <PropertyGroup>

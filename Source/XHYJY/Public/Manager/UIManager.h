@@ -27,7 +27,7 @@ public:
 	virtual void InitManager() override;
 
 public:
-	void CreateVDWidget(EWidgetType UItype, bool bReturnWidget = false);
+	void CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget = false);
 
 public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;

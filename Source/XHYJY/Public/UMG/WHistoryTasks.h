@@ -4,27 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "UMG/BaseWidget.h"
-#include "WHomePage.generated.h"
+#include "WHistoryTasks.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class XHYJY_API UWHomePage : public UBaseWidget
+class XHYJY_API UWHistoryTasks : public UBaseWidget
 {
 	GENERATED_BODY()
 
 protected:
 	UFUNCTION()
-	void CreatUserFile();
+	void ReturnWidget();
 	
 public:
 	virtual void InitWidget() override;
 
-protected:
+public:
 	UPROPERTY(meta=(BindWidget))
-	UOverlay* Overlay_Start;
+	UButton* Button_Return;
 	
-	UPROPERTY(meta=(BindWidget))
-	UButton* StartButton;
+	
 };

@@ -20,6 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	void CreateManagers();
+	
 	void InitManagers();
 
 public:	

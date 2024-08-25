@@ -33,22 +33,30 @@ void AUIManager::InitManager()
 	CreateVDWidget(EWidgetType::EWT_HomePage);
 }
 
-void AUIManager::CreateVDWidget(EWidgetType UItype, bool bReturnWidget)
+void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 {
-	UBaseWidget* Widget = CreateWidget<UBaseWidget>(GetWorld(),ResourceManager->RSWidgetMap[UItype]);
+	if(CurWidgetType != EWidgetType::EWT_None)
+	{
+		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
+	}
+	
+	if(WidgetMap.Contains(WidgetType))
+	{
+		CurWidgetType = WidgetType;
+		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+		return;
+	}
+
+	UBaseWidget* Widget = CreateWidget<UBaseWidget>(GetWorld(),ResourceManager->RSWidgetMap[WidgetType]);
 	if(bReturnWidget)
 	{
 		Widget->ReturnWidgetType = CurWidgetType;
 	}
 	
-	if(CurWidgetType != EWidgetType::EWT_None)
-	{
-		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
-	}
-	CurWidgetType = UItype;
-	
-	WidgetMap.Add(UItype, Widget);
+	CurWidgetType = WidgetType;
+	WidgetMap.Add(WidgetType, Widget);
 	Widget->InitWidget();
 	Widget->AddToViewport();
 }
+
 

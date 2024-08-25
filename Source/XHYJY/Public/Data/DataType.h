@@ -12,9 +12,17 @@ enum class EWidgetType:uint8
 	EWT_None,
 	EWT_HomePage,
 	EWT_UserFile,
-	
+	EWT_HistoryTasks,
+	EWT_TakeTasks,
+	EWT_Rules,
 };
 
+enum class EGender:uint8
+{
+	EG_None,
+	EG_Man,
+	EG_Woman,
+};
 
 
 

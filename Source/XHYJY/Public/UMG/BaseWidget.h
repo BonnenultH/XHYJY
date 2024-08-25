@@ -9,6 +9,7 @@
 #include "Manager/UIManager.h"
 #include "Components/Overlay.h"
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
 #include "BaseWidget.generated.h"
 
 

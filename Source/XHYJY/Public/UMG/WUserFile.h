@@ -13,5 +13,42 @@ UCLASS()
 class XHYJY_API UWUserFile : public UBaseWidget
 {
 	GENERATED_BODY()
+
+protected:
+	UFUNCTION()
+	void CreatHistoryTasks();
+
+	UFUNCTION()
+	void CreatRules();
+
+	UFUNCTION()
+	void CreatTakeTasks();
+
+public:
+	virtual void InitWidget() override;
+
+	void InitUserFileInfo(FString _IDName, FString _Gender, FString _Accomplishment, FString _Grades, FString _HTQNumbers);
 	
-};
+	void InitUserFileGender(EGender _Gender);
+	
+protected:
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_Task;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_History;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_Rules;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* IDName;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* Gender;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* Accomplishment;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* Grades;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* HTQNumbers;
+
+	EGender UserFileGender = EGender::EG_None;
+	
+};	

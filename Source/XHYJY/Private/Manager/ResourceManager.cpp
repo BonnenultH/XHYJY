@@ -4,6 +4,8 @@
 #include "Manager/ResourceManager.h"
 #include "MediaPlayer.h"
 #include "MediaSource.h"
+#include "Materials/MaterialParameterCollection.h"
+
 
 // Sets default values
 AResourceManager::AResourceManager()
@@ -13,6 +15,8 @@ AResourceManager::AResourceManager()
 
 	InitRSWidgetMap();
 	InitMediaResource();
+	ConstructorHelpers::FObjectFinder<UMaterialParameterCollection> GenderObj(TEXT("'/Game/VD/UMG/UserFile/Texture/Meidum_Mat.Meidum_Mat'"));
+	GenderMaterial = GenderObj.Object;
 }
 
 // Called when the game starts or when spawned
@@ -30,6 +34,7 @@ void AResourceManager::Tick(float DeltaTime)
 void AResourceManager::InitManager()
 {
 	Super::InitManager();
+	GenderMaterialInstance = GetWorld()->GetParameterCollectionInstance(GenderMaterial);
 }
 
 TSubclassOf<UUserWidget> AResourceManager::LoadWidgetFile(FString Path)
@@ -41,6 +46,9 @@ void AResourceManager::InitRSWidgetMap()
 {
 	RSWidgetMap.Add(EWidgetType::EWT_HomePage,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_HomePage.WBP_HomePage_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_UserFile,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_UserFile.WBP_UserFile_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_HistoryTasks,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_HistoryTasks.WBP_HistoryTasks_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_TakeTasks,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_TakeTasks.WBP_TakeTasks_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_Rules,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_Rules.WBP_Rules_C'")));
 }
 
 void AResourceManager::InitMediaResource()
