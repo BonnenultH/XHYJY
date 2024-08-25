@@ -5,6 +5,8 @@
 #include "BaseManager.h"
 #include "UIManager.generated.h"
 
+class UBaseWidget;
+
 UCLASS()
 class XHYJY_API AUIManager : public ABaseManager
 {
@@ -24,9 +26,11 @@ public:
 
 	virtual void InitManager() override;
 
-protected:
-	UUserWidget* CreateVDWidget(EWidgetType UItype);
+public:
+	void CreateVDWidget(EWidgetType UItype, bool bReturnWidget = false);
 
 public:
-	TMap<EWidgetType, UUserWidget*> UIMap;
+	TMap<EWidgetType, UBaseWidget*> WidgetMap;
+	
+	EWidgetType CurWidgetType = EWidgetType::EWT_None;
 };

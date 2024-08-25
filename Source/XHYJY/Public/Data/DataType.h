@@ -11,6 +11,7 @@ enum class EWidgetType:uint8
 {
 	EWT_None,
 	EWT_HomePage,
+	EWT_UserFile,
 	
 };
 

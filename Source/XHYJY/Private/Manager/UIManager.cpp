@@ -20,7 +20,6 @@ void AUIManager::BeginPlay()
 	Super::BeginPlay();
 }
 
-
 // Called every frame
 void AUIManager::Tick(float DeltaTime)
 {
@@ -31,14 +30,25 @@ void AUIManager::InitManager()
 {
 	Super::InitManager();
 	
-	UBaseWidget* Widget = Cast<UBaseWidget>(CreateVDWidget(EWidgetType::EWT_HomePage));
-	UIMap.Add(EWidgetType::EWT_HomePage, Widget);
-	Widget->InitWidget();
-	Widget->AddToViewport();
+	CreateVDWidget(EWidgetType::EWT_HomePage);
 }
 
-UUserWidget* AUIManager::CreateVDWidget(EWidgetType UItype)
+void AUIManager::CreateVDWidget(EWidgetType UItype, bool bReturnWidget)
 {
-	return CreateWidget(GetWorld(),ResourceManager->RSWidgetMap[UItype]);
+	UBaseWidget* Widget = CreateWidget<UBaseWidget>(GetWorld(),ResourceManager->RSWidgetMap[UItype]);
+	if(bReturnWidget)
+	{
+		Widget->ReturnWidgetType = CurWidgetType;
+	}
+	
+	if(CurWidgetType != EWidgetType::EWT_None)
+	{
+		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
+	}
+	CurWidgetType = UItype;
+	
+	WidgetMap.Add(UItype, Widget);
+	Widget->InitWidget();
+	Widget->AddToViewport();
 }
 

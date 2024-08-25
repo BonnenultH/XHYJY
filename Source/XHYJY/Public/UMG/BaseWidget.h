@@ -7,6 +7,8 @@
 #include "GM/VDPawn.h"
 #include "Manager/ResourceManager.h"
 #include "Manager/UIManager.h"
+#include "Components/Overlay.h"
+#include "Components/Button.h"
 #include "BaseWidget.generated.h"
 
 
@@ -29,4 +31,5 @@ public:
 	UPROPERTY()
 	AUIManager* UIManager;
 	
+	EWidgetType ReturnWidgetType;
 };

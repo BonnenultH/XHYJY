@@ -39,14 +39,15 @@ TSubclassOf<UUserWidget> AResourceManager::LoadWidgetFile(FString Path)
 
 void AResourceManager::InitRSWidgetMap()
 {
-	RSWidgetMap.Add(EWidgetType::EWT_HomePage,LoadWidgetFile(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/VD/UMG/WBP_HomePage.WBP_HomePage_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_HomePage,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_HomePage.WBP_HomePage_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_UserFile,LoadWidgetFile(TEXT("'/Game/VD/UMG/WBP_UserFile.WBP_UserFile_C'")));
 }
 
 void AResourceManager::InitMediaResource()
 {
-	ConstructorHelpers::FObjectFinder<UMediaPlayer> MediaPlayer (TEXT("/Script/MediaAssets.MediaPlayer'/Game/VD/UMG/Homepage/MediaVideo/MP_Earth.MP_Earth'"));
+	ConstructorHelpers::FObjectFinder<UMediaPlayer> MediaPlayer(TEXT("'/Game/VD/UMG/Homepage/MediaVideo/MP_Earth.MP_Earth'"));
 	MP= MediaPlayer.Object;
-	ConstructorHelpers::FObjectFinder<UMediaSource> MediaSource (TEXT("/Script/MediaAssets.FileMediaSource'/Game/VD/UMG/Homepage/MediaVideo/Earth.Earth'"));
+	ConstructorHelpers::FObjectFinder<UMediaSource> MediaSource(TEXT("'/Game/VD/UMG/Homepage/MediaVideo/Earth.Earth'"));
 	MS= MediaSource.Object;
 }
 
