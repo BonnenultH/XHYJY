@@ -19,6 +19,7 @@ void AVDPawn::BeginPlay()
 	Super::BeginPlay();
 	CreateManagers();
 	InitManagers();
+	UE_LOG(LogTemp,Log,TEXT("AAAAAAAA"))
 }
 
 void AVDPawn::CreateManagers()
