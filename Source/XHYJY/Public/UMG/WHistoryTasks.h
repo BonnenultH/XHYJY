@@ -18,12 +18,17 @@ protected:
 	UFUNCTION()
 	void ReturnWidget();
 	
+	UFUNCTION()
+	void CreateTakeTasks();
+	
 public:
 	virtual void InitWidget() override;
 
 public:
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_Return;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_TakeTasks;
 	
 	
 };

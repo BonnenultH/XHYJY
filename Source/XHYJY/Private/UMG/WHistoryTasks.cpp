@@ -13,3 +13,8 @@ void UWHistoryTasks::ReturnWidget()
 {
 	UIManager->CreateVDWidget(ReturnWidgetType);
 }
+
+void UWHistoryTasks::CreateTakeTasks()
+{
+	UIManager->CreateVDWidget(EWidgetType::EWT_TakeTasks);
+}
