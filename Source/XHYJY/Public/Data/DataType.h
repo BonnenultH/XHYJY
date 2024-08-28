@@ -25,7 +25,14 @@ enum class EGender:uint8
 	EG_Woman,
 };
 
-
+struct S_UserInfo
+{
+	const WIDECHAR* IDName;
+	const WIDECHAR* Accomplishment;
+	const WIDECHAR* Grades;
+	const WIDECHAR* HTQNumbers;
+	EGender Gender = EGender::EG_None;
+};
 
 UCLASS()
 class XHYJY_API ADataType : public AActor

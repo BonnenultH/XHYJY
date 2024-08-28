@@ -4,46 +4,44 @@
 
 #include "CoreMinimal.h"
 #include "UMG/BaseWidget.h"
-#include "WUserFile.generated.h"
+#include "WPersonTitle.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class XHYJY_API UWUserFile : public UBaseWidget
+class XHYJY_API UWPersonTitle : public UBaseWidget
 {
 	GENERATED_BODY()
 
 protected:
 	UFUNCTION()
-	void CreatHistoryTasks();
-
-	UFUNCTION()
-	void CreatRules();
-
-	UFUNCTION()
-	void CreatTakeTasks();
-
+	void UpdateProgressState();
+	
 public:
 	virtual void InitWidget() override;
 
-	void InitUserFileInfo();
-	
 protected:
-	UPROPERTY(meta=(BindWidget))
-	UButton* Button_Task;
-	UPROPERTY(meta=(BindWidget))
-	UButton* Button_History;
-	UPROPERTY(meta=(BindWidget))
-	UButton* Button_Rules;
+	TArray<UImage*> ImageArry;
+	
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* IDName;
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* Gender;
-	UPROPERTY(meta=(BindWidget))
 	UTextBlock* Accomplishment;
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* Grades;
+	UImage* Head;
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* HTQNumbers;
-};	
+	UImage* Progress1;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Progress2;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Progress3;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Progress4;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Progress5;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Progress6;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Progress7;
+};

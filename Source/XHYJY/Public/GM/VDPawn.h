@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Data/DataType.h"
 #include "GameFramework/Pawn.h"
 #include "VDPawn.generated.h"
 
@@ -36,4 +37,6 @@ public:
 
 	UPROPERTY()
 	class AUIManager* UIManager;
+
+	S_UserInfo UserInfoData;
 };

@@ -47,4 +47,7 @@ public:
 	
 	UPROPERTY()
 	class UMaterialParameterCollection* GenderMaterial;
+
+	UPROPERTY()
+	UTexture2D* ProgressOkImage;
 };

@@ -13,13 +13,26 @@ UCLASS()
 class XHYJY_API UWTakeTasks : public UBaseWidget
 {
 	GENERATED_BODY()
+protected:
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
+	void UpdateProgressState();
+	
 public:
 	virtual void InitWidget() override;
 
 	UFUNCTION()
 	void CreateOrbits();
 
-public:
+protected:
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_Ok;
+
+	UPROPERTY(meta=(BindWidget))
+	UBaseWidget* WBP_PersonTitle;
+	
+	UPROPERTY(meta=(BindWidget))
+	UBaseWidget* WBP_Timing;
+
+	float Interval;
 };

@@ -6,6 +6,7 @@
 void UWHistoryTasks::InitWidget()
 {
 	Super::InitWidget();
+	
 	Button_Return->OnClicked.AddDynamic(this, &UWHistoryTasks::ReturnWidget);
 }
 

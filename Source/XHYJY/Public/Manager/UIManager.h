@@ -7,6 +7,9 @@
 
 class UBaseWidget;
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FProgressMag, int32)
+DECLARE_MULTICAST_DELEGATE(FProgressTitle)
+
 UCLASS()
 class XHYJY_API AUIManager : public ABaseManager
 {
@@ -20,6 +23,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+protected:
+	void InitUserFileGender();
+
+	UFUNCTION()
+	void UpdateProgressState(int32 Progres);
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -29,8 +38,21 @@ public:
 public:
 	void CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget = false);
 
+	int32 GetManagerProgress()
+	{
+		return ManagerProgress;
+	}
+
+protected:
+	int32 ManagerProgress = 0;
+
 public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
-	
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;
+
+	FProgressMag OnProgressState;
+	FProgressTitle OnUpdateTitle;
+	
+	float	ManagerMinute = 8;
+	float	ManagerSecond = 0;
 };

@@ -15,8 +15,12 @@ AResourceManager::AResourceManager()
 
 	InitRSWidgetMap();
 	InitMediaResource();
+	
 	ConstructorHelpers::FObjectFinder<UMaterialParameterCollection> GenderObj(TEXT("'/Game/UMG/UserFile/Texture/Meidum_Mat.Meidum_Mat'"));
 	GenderMaterial = GenderObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<UTexture2D> TextureObj(TEXT("'/Game/UMG/HistoryTasks/PersonInfo/LoadingOk.LoadingOk'"));
+	ProgressOkImage = TextureObj.Object;
 }
 
 // Called when the game starts or when spawned

@@ -4,6 +4,7 @@
 #include "Manager/UIManager.h"
 #include "UMG/BaseWidget.h"
 #include "Manager/ResourceManager.h"
+#include "Materials/MaterialParameterCollectionInstance.h"
 
 
 // Sets default values
@@ -20,6 +21,7 @@ void AUIManager::BeginPlay()
 	Super::BeginPlay();
 }
 
+
 // Called every frame
 void AUIManager::Tick(float DeltaTime)
 {
@@ -29,13 +31,35 @@ void AUIManager::Tick(float DeltaTime)
 void AUIManager::InitManager()
 {
 	Super::InitManager();
-	
+	OnProgressState.AddUObject(this, &AUIManager::UpdateProgressState);
 	CreateVDWidget(EWidgetType::EWT_HomePage);
+	InitUserFileGender();
+}
+
+void AUIManager::UpdateProgressState(int32 Progres)
+{
+	ManagerProgress += Progres;
+	OnUpdateTitle.Broadcast();
+}
+
+void AUIManager::InitUserFileGender()
+{
+	if(VDPawn->UserInfoData.Gender == EGender::EG_None)
+		return;
+
+	if(VDPawn->UserInfoData.Gender == EGender::EG_Man)
+	{
+		ResourceManager->GenderMaterialInstance->SetScalarParameterValue("ManORWoman", 2);
+	}
+	else if(VDPawn->UserInfoData.Gender == EGender::EG_Woman)
+	{
+		ResourceManager->GenderMaterialInstance->SetScalarParameterValue("ManORWoman", 0);
+	}
 }
 
 void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 {
-	/*if(CurWidgetType != EWidgetType::EWT_None)
+	if(CurWidgetType != EWidgetType::EWT_None)
 	{
 		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
 	}
@@ -57,28 +81,6 @@ void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 	WidgetMap.Add(WidgetType, Widget);
 	Widget->InitWidget();
 	Widget->AddToViewport();
-	*/
-	if(CurWidgetType != EWidgetType::EWT_None)
-	{
-		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
-	}
-	if(WidgetMap.Contains(WidgetType))
-	{
-		WidgetMap[WidgetType]->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-	}
-	else
-	{
-		UBaseWidget* CurentWidget=Cast<UBaseWidget>(CreateWidget(GetWorld(),ResourceManager->RSWidgetMap[WidgetType]));
-		WidgetMap.Add(WidgetType, CurentWidget);
-		CurentWidget->InitWidget();
-		CurentWidget->AddToViewport();
-	}
-	if(bReturnWidget)
-	{
-		WidgetMap[WidgetType]->ReturnWidgetType = CurWidgetType;
-	}
-	 CurWidgetType = WidgetType;
-
 }
 
 

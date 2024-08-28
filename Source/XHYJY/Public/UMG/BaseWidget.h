@@ -10,6 +10,7 @@
 #include "Components/Overlay.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
+#include "Components/Image.h"
 #include "BaseWidget.generated.h"
 
 
