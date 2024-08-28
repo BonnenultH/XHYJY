@@ -15,6 +15,7 @@ enum class EWidgetType:uint8
 	EWT_HistoryTasks,
 	EWT_TakeTasks,
 	EWT_Rules,
+	EWT_Orbits,
 };
 
 enum class EGender:uint8

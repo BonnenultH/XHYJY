@@ -13,5 +13,13 @@ UCLASS()
 class XHYJY_API UWTakeTasks : public UBaseWidget
 {
 	GENERATED_BODY()
-	
+public:
+	virtual void InitWidget() override;
+
+	UFUNCTION()
+	void CreateOrbits();
+
+public:
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_Ok;
 };

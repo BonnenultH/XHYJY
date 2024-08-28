@@ -35,7 +35,7 @@ void AUIManager::InitManager()
 
 void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 {
-	if(CurWidgetType != EWidgetType::EWT_None)
+	/*if(CurWidgetType != EWidgetType::EWT_None)
 	{
 		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
 	}
@@ -57,6 +57,28 @@ void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 	WidgetMap.Add(WidgetType, Widget);
 	Widget->InitWidget();
 	Widget->AddToViewport();
+	*/
+	if(CurWidgetType != EWidgetType::EWT_None)
+	{
+		WidgetMap[CurWidgetType]->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if(WidgetMap.Contains(WidgetType))
+	{
+		WidgetMap[WidgetType]->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	}
+	else
+	{
+		UBaseWidget* CurentWidget=Cast<UBaseWidget>(CreateWidget(GetWorld(),ResourceManager->RSWidgetMap[WidgetType]));
+		WidgetMap.Add(WidgetType, CurentWidget);
+		CurentWidget->InitWidget();
+		CurentWidget->AddToViewport();
+	}
+	if(bReturnWidget)
+	{
+		WidgetMap[WidgetType]->ReturnWidgetType = CurWidgetType;
+	}
+	 CurWidgetType = WidgetType;
+
 }
 
 

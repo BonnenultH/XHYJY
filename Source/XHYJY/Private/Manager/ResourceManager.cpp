@@ -49,6 +49,7 @@ void AResourceManager::InitRSWidgetMap()
 	RSWidgetMap.Add(EWidgetType::EWT_HistoryTasks,LoadWidgetFile(TEXT("'/Game/UMG/WBP_HistoryTasks.WBP_HistoryTasks_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_TakeTasks,LoadWidgetFile(TEXT("'/Game/UMG/WBP_TakeTasks.WBP_TakeTasks_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_Rules,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Rules.WBP_Rules_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_Orbits,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Oribit.WBP_Oribit_C'")));
 }
 
 void AResourceManager::InitMediaResource()
