@@ -8,6 +8,9 @@ void UWHistoryTasks::InitWidget()
 	Super::InitWidget();
 	
 	Button_Return->OnClicked.AddDynamic(this, &UWHistoryTasks::ReturnWidget);
+	
+	WBP_PersonTitle->InitWidget();
+	UIManager->OnProgressState.Broadcast(0);
 }
 
 void UWHistoryTasks::ReturnWidget()

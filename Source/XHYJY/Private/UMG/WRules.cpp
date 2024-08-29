@@ -8,6 +8,9 @@ void UWRules::InitWidget()
 	Super::InitWidget();
 	Button_Return->OnClicked.AddDynamic(this,&UWRules::ReturnUserFile);
 	Button_TakeTasks->OnClicked.AddDynamic(this,&UWRules::CreateTakeTasks);
+
+	WBP_PersonTitle->InitWidget();
+	UIManager->OnProgressState.Broadcast(0);
 }
 
 void UWRules::ReturnUserFile()

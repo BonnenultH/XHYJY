@@ -26,7 +26,6 @@ void UWPersonTitle::UpdateProgressState()
 
 	for(int i = 1; i <= UIManager->GetManagerProgress(); ++i)
 	{
-		
 		ImageArry[i - 1]->SetBrushFromTexture(ResourceManager->ProgressOkImage);
 	}
 }

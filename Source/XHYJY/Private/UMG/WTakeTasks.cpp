@@ -6,7 +6,7 @@
 void UWTakeTasks::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
-	// UE_LOG(LogTemp, Log, TEXT("当前的分时间：%f, 当前的秒时间：%f, InDeltaTime == %f"), UIManager->ManagerMinute, UIManager->ManagerSecond, InDeltaTime)
+	//UE_LOG(LogTemp, Log, TEXT("当前的分时间：%f, 当前的秒时间：%f, InDeltaTime == %f"), UIManager->ManagerMinute, UIManager->ManagerSecond, InDeltaTime)
 	WBP_Timing->InitWidget();
 	if(UIManager->ManagerSecond == 0)
 	{

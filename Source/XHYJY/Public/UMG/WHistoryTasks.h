@@ -29,6 +29,10 @@ public:
 	UButton* Button_Return;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_TakeTasks;
+
+	UPROPERTY(meta=(BindWidget))
+	UBaseWidget* WBP_PersonTitle;
+	
 	
 	
 };

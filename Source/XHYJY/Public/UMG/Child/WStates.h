@@ -4,31 +4,27 @@
 
 #include "CoreMinimal.h"
 #include "UMG/BaseWidget.h"
-#include "WRules.generated.h"
+#include "WStates.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class XHYJY_API UWRules : public UBaseWidget
+class XHYJY_API UWStates : public UBaseWidget
 {
 	GENERATED_BODY()
 
 public:
 	virtual void InitWidget() override;
 
-	UFUNCTION()
-	void ReturnUserFile();
-
-	UFUNCTION()
-	void CreateTakeTasks();
-
 public:
 	UPROPERTY(meta=(BindWidget))
-	UButton* Button_Return;
+	UTextBlock* HTQName;
+	
 	UPROPERTY(meta=(BindWidget))
-	UButton* Button_TakeTasks;
+	UTextBlock* RocketName;
 
 	UPROPERTY(meta=(BindWidget))
-	UBaseWidget* WBP_PersonTitle;
+	UTextBlock* FirePlace;
+	
 };

@@ -13,6 +13,7 @@ UCLASS()
 class XHYJY_API UWTakeTasks : public UBaseWidget
 {
 	GENERATED_BODY()
+	
 protected:
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
