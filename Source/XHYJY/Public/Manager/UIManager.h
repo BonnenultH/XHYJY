@@ -43,6 +43,7 @@ public:
 		return ManagerProgress;
 	}
 
+	
 protected:
 	int32 ManagerProgress = 0;
 
@@ -55,4 +56,6 @@ public:
 	
 	float	ManagerMinute = 8;
 	float	ManagerSecond = 0;
+
+	
 };

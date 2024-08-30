@@ -25,6 +25,7 @@ public:
 	
 	virtual void InitManager() override;
 
+	void InitOrbitsInfo();
 protected:
 	void InitRSWidgetMap();
 
@@ -35,6 +36,8 @@ protected:
 public:
 	TMap<EWidgetType, TSubclassOf<UUserWidget>> RSWidgetMap;
 
+	TMap<EOrbit, FString> OrbitsInfoMap;
+	
 	UPROPERTY()
 	class UMediaPlayer* MP;
 	

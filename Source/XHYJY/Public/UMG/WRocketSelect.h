@@ -4,26 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "UMG/BaseWidget.h"
-#include "WTiming.generated.h"
+#include "WRocketSelect.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class XHYJY_API UWTiming : public UBaseWidget
+class XHYJY_API UWRocketSelect : public UBaseWidget
 {
 	GENERATED_BODY()
-	
 public:
 	virtual void InitWidget() override;
 
 public:
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* Minute;
-
-	UPROPERTY(meta=(BindWidget))
-	UTextBlock* Second;
-
-	FString _Minute;
-	FString _Second;
+	UBaseWidget* WBP_PersonTitle;
+	
 };

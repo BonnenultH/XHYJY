@@ -18,6 +18,7 @@ AUIManager::AUIManager()
 void AUIManager::BeginPlay()
 {
 	Super::BeginPlay();
+	
 }
 
 // Called every frame
@@ -80,5 +81,6 @@ void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 	Widget->InitWidget();
 	Widget->AddToViewport();
 }
+
 
 

@@ -298,6 +298,9 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WOrbits.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WRocketSelect.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WRules.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -325,6 +328,7 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHistoryTasks.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHomePage.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WOrbits.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WRocketSelect.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WRules.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WTakeTasks.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WUserFile.h"/>

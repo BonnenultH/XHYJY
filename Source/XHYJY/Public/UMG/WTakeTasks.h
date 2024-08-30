@@ -36,4 +36,6 @@ protected:
 	UBaseWidget* WBP_Timing;
 
 	float Interval;
+
+	FTimerHandle TimerHandle;
 };

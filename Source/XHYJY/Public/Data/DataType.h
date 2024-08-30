@@ -16,6 +16,7 @@ enum class EWidgetType:uint8
 	EWT_TakeTasks,
 	EWT_Rules,
 	EWT_Orbits,
+	EWT_RocketSelect,
 };
 
 enum class EGender:uint8
@@ -33,6 +34,19 @@ struct S_UserInfo
 	const WIDECHAR* HTQNumbers;
 	EGender Gender = EGender::EG_None;
 };
+
+enum class EOrbit : uint8
+{
+	ELEO,
+	EMEO,
+	ESSO,
+	EGEO,
+	EGTO,
+	EIGSO,
+	ETLI,
+	ETMI,
+};
+
 
 UCLASS()
 class XHYJY_API ADataType : public AActor
