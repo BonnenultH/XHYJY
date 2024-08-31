@@ -37,4 +37,6 @@ public:
 	
 	UPROPERTY()
 	class AUIManager* UIManager;
+
+	
 };

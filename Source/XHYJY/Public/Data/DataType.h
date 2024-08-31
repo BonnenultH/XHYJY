@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/Image.h"
 #include "GameFramework/Actor.h"
 #include "DataType.generated.h"
 
@@ -75,7 +74,43 @@ public:
 	FString SecondCategory;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UImage* Image;
+	UTexture2D* Image;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString ForAppFunc;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString HTQDes;
+};
+
+
+UCLASS()
+class XHYJY_API UItemTask : public UObject
+{
+	GENERATED_BODY()
+public:
+	void InitTaskData(FTaskTable* Data)
+	{
+		Name			= Data->Name;
+		FirstCategory	= Data->FirstCategory;
+		SecondCategory	= Data->SecondCategory;
+		Image			= Data->Image;
+		ForAppFunc		= Data->ForAppFunc;
+		HTQDes			= Data->HTQDes;
+	}
+	
+public:	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString FirstCategory;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString SecondCategory;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* Image;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString ForAppFunc;

@@ -261,6 +261,7 @@
     <None Include="..\..\Source\XHYJY.Target.cs"/>
     <None Include="..\..\Source\XHYJYEditor.Target.cs"/>
     <None Include="..\..\.gitignore"/>
+    <None Include="..\..\.vsconfig"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEngine.ini"/>
     <None Include="..\..\Config\DefaultGame.ini"/>
@@ -309,6 +310,9 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WUserFile.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\UMG\Child\WItemTask.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\Child\WPersonTitle.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -331,6 +335,7 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WRules.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WTakeTasks.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WUserFile.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\UMG\Child\WItemTask.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\Child\WPersonTitle.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\Child\WStates.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\Child\WTiming.h"/>

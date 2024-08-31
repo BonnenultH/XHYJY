@@ -11,6 +11,9 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/Image.h"
+#include "Components/TileView.h"
+#include "Components/VerticalBox.h"
+#include "Components/Border.h"
 #include "BaseWidget.generated.h"
 
 

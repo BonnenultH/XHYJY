@@ -7,7 +7,7 @@
 
 class UBaseWidget;
 
-//DECLARE_MULTICAST_DELEGATE_OneParam(FProgressDelegate)
+
 DECLARE_MULTICAST_DELEGATE(FProgressDelegate)
 
 UCLASS()

@@ -17,7 +17,12 @@ class XHYJY_API UWTakeTasks : public UBaseWidget
 protected:
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
-	void UpdateProgressState();
+	void InitTaskView();
+	
+	UFUNCTION(BlueprintCallable)
+	void OnSelectTask(UObject* Item);
+
+	void InitRightInfo(UItemTask* ItemData);
 	
 public:
 	virtual void InitWidget() override;
@@ -26,15 +31,29 @@ public:
 	void CreateOrbits();
 
 protected:
-	UPROPERTY(meta=(BindWidget))
-	UButton* Button_Ok;
-
+	UPROPERTY()
+	class UWItemTask* CurItemWidget;
+	
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
-	
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_Timing;
 
-
+	UPROPERTY(meta=(BindWidget))
+	UTileView* TaskView;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_Ok;
+	UPROPERTY(meta=(BindWidget))
+	UVerticalBox* Right;
+	UPROPERTY(meta=(BindWidget))
+	UImage* RightImage;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* RightName;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* RightForAppFunc;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* RightDes;
+	
+	
 	FTimerHandle TimerHandle;
 };

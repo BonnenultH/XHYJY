@@ -53,4 +53,12 @@ public:
 
 	UPROPERTY()
 	UTexture2D* ProgressOkImage;
+
+	UDataTable* HTQTasks;
+	///Script/Engine.Texture2D
+	UPROPERTY()
+	UTexture2D* SelectBG;
+
+	UPROPERTY()
+	UTexture2D* UnSelectBG;
 };

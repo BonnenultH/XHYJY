@@ -19,8 +19,18 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UMaterialParameterCollection> GenderObj(TEXT("'/Game/UMG/UserFile/Texture/Meidum_Mat.Meidum_Mat'"));
 	GenderMaterial = GenderObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> TextureObj(TEXT("'/Game/UMG/Child/PersonInfo/LoadingOk.LoadingOk'"));
-	ProgressOkImage = TextureObj.Object;
+	ConstructorHelpers::FObjectFinder<UTexture2D> TexProgress(TEXT("'/Game/UMG/Child/PersonInfo/LoadingOk.LoadingOk'"));
+	ProgressOkImage = TexProgress.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> TexSelectBG(TEXT("'/Game/UMG/Child/ItemTask/Selected.Selected'"));
+	SelectBG = TexSelectBG.Object;
+	
+	ConstructorHelpers::FObjectFinder<UTexture2D> TexUnSelectBG(TEXT("'/Game/UMG/Child/ItemTask/Unselect.Unselect'"));
+	UnSelectBG = TexUnSelectBG.Object;
+
+	///Script/Engine.DataTable
+	ConstructorHelpers::FObjectFinder<UDataTable> TableObj(TEXT("'/Game/UMG/DataTable/HTQTasks.HTQTasks'"));
+	HTQTasks = TableObj.Object;
 }
 
 // Called when the game starts or when spawned
