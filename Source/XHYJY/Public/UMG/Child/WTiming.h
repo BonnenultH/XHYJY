@@ -18,6 +18,8 @@ protected:
 
 	void UpdateTime();
 
+	FString TimeFormat(float time);
+
 public:
 	virtual void InitWidget() override;
 

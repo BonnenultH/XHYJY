@@ -19,12 +19,27 @@ void UWTiming::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 void UWTiming::UpdateTime()
 {
-	_Minute = LexToString(UIManager->ManagerMinute).Left(1);
-	_Minute.InsertAt(0, TEXT("0"));
-	_Second = LexToString(UIManager->ManagerSecond).Left(2);
+	_Minute = TimeFormat(UIManager->ManagerMinute);
+	_Second = TimeFormat(UIManager->ManagerSecond);
 	
 	Minute->SetText(FText::FromString(_Minute));
 	Second->SetText(FText::FromString(_Second));
+	
+}
+
+FString UWTiming::TimeFormat(float time)
+{
+	FString _Time;
+	if(time<10)
+	{
+		_Time=FString::SanitizeFloat(time).Left(1);
+		_Time.InsertAt(0,TEXT("0"));
+	}
+	else
+	{
+		_Time = FString::SanitizeFloat(time).Left(2);
+	}
+	return _Time;
 }
 
 

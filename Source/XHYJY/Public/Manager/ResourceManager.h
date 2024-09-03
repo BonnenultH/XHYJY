@@ -3,7 +3,6 @@
 #pragma once
 
 #include "BaseManager.h"
-
 #include "ResourceManager.generated.h"
 
 UCLASS()
