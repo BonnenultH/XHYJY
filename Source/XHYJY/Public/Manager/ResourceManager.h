@@ -53,6 +53,7 @@ public:
 	UPROPERTY()
 	UTexture2D* ProgressOkImage;
 
+	UPROPERTY()
 	UDataTable* HTQTasks;
 	///Script/Engine.Texture2D
 	UPROPERTY()

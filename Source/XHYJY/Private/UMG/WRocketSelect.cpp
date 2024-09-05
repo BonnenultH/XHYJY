@@ -8,5 +8,6 @@ void UWRocketSelect::InitWidget()
 	Super::InitWidget();
 
 	WBP_PersonTitle->InitWidget();
-	//UIManager->OnProgressState.Broadcast(1);
+	WBP_Timing->InitWidget();
+	UIManager->OnUpdateProgress.Broadcast();
 }

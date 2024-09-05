@@ -19,5 +19,8 @@ public:
 public:
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
+
+	UPROPERTY(meta=(BindWidget))
+	UBaseWidget* WBP_Timing;
 	
 };

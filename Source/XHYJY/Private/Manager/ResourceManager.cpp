@@ -27,9 +27,8 @@ AResourceManager::AResourceManager()
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> TexUnSelectBG(TEXT("'/Game/UMG/Child/ItemTask/Unselect.Unselect'"));
 	UnSelectBG = TexUnSelectBG.Object;
-
-	///Script/Engine.DataTable
-	ConstructorHelpers::FObjectFinder<UDataTable> TableObj(TEXT("'/Game/UMG/DataTable/HTQTasks.HTQTasks'"));
+	
+	ConstructorHelpers::FObjectFinder<UDataTable> TableObj(TEXT("'/Game/UMG/DataTable/HTQTask.HTQTask'"));
 	HTQTasks = TableObj.Object;
 }
 

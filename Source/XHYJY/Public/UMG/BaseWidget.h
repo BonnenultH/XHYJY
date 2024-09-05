@@ -14,6 +14,7 @@
 #include "Components/TileView.h"
 #include "Components/VerticalBox.h"
 #include "Components/Border.h"
+#include "Animation/WidgetAnimation.h"
 #include "BaseWidget.generated.h"
 
 

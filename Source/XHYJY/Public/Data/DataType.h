@@ -59,6 +59,7 @@ struct FHTQCategory
 	FString SecondCategory;
 };
 
+
 USTRUCT(BlueprintType)
 struct FTaskTable : public FTableRowBase
 {
