@@ -17,6 +17,7 @@ enum class EWidgetType:uint8
 	EWT_Rules,
 	EWT_Orbits,
 	EWT_RocketSelect,
+	EWT_Launch,
 };
 
 enum class EGender:uint8
@@ -118,6 +119,60 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString HTQDes;
+};
+
+
+USTRUCT(BlueprintType)
+struct FSelectRocket : public FTableRowBase
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketEnglishName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString CarryingCapacity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Price;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* RocketImage;
+};
+
+
+UCLASS()
+class XHYJY_API URocketSelection : public UObject
+{
+	GENERATED_BODY()
+public:
+	void InitRocketData(FSelectRocket* Data)
+	{
+		RocketName			= Data->RocketName;
+		RocketEnglishName	= Data->RocketEnglishName;
+		CarryingCapacity	= Data->CarryingCapacity;
+		Price				= Data->Price;
+		RocketImage			= Data->RocketImage;
+	}
+	
+public:	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketEnglishName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString CarryingCapacity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Price;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* RocketImage;
 };
 
 

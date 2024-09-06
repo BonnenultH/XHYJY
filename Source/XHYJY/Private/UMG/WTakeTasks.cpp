@@ -64,11 +64,13 @@ void UWTakeTasks::OnSelectTask(UObject* Item)
 void UWTakeTasks::InitRightInfo(UItemTask* ItemData)
 {
 	RightImage->SetBrushFromTexture(ItemData->Image);
+	RightImage->SetBrushSize(ItemData->Image->GetImportedSize());
 	RightName->SetText(FText::FromString(ItemData->Name));
 	RightForAppFunc->SetText(FText::FromString(ItemData->ForAppFunc));
 	RightDes->SetText(FText::FromString(ItemData->HTQDes));
 
 	HTQ_Image->SetBrushFromTexture(ItemData->Image);
+	HTQ_Image->SetBrushSize(ItemData->Image->GetImportedSize());
 	HTQName->SetText(FText::FromString(ItemData->Name));
 	LockFunc->SetText(FText::FromString(ItemData->ForAppFunc));
 	HTQ_Description->SetText(FText::FromString(ItemData->HTQDes));
@@ -89,12 +91,13 @@ void UWTakeTasks::OnSelectedSatellite()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory==L"人造卫星")
+		if(TaskItem->FirstCategory == L"人造卫星")
 		{
 		TaskView->AddItem(TaskItem);
 		}
 	}
 	Right->SetVisibility(ESlateVisibility::Collapsed);
+	
 }
 
 void UWTakeTasks::OnSelectedNavigation()
@@ -104,7 +107,7 @@ void UWTakeTasks::OnSelectedNavigation()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory==L"导航卫星")
+		if(TaskItem->SecondCategory == L"导航卫星")
 		{
 			TaskView->AddItem(TaskItem);
 		}
@@ -120,7 +123,7 @@ void UWTakeTasks::OnSelectedCommunication()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory==L"通信卫星")
+		if(TaskItem->SecondCategory == L"通信卫星")
 		{
 			TaskView->AddItem(TaskItem);
 		}
@@ -135,7 +138,7 @@ void UWTakeTasks::OnSelectedRemoteSensing()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory==L"遥感卫星")
+		if(TaskItem->SecondCategory == L"遥感卫星")
 		{
 			TaskView->AddItem(TaskItem);
 		}
@@ -150,7 +153,7 @@ void UWTakeTasks::OnSelectedScientificExploration()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory==L"科学探测卫星")
+		if(TaskItem->SecondCategory == L"科学探测卫星")
 		{
 			TaskView->AddItem(TaskItem);
 		}
@@ -165,7 +168,7 @@ void UWTakeTasks::OnSelectedSpaceship()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory==L"宇宙飞船")
+		if(TaskItem->FirstCategory == L"宇宙飞船")
 		{
 			TaskView->AddItem(TaskItem);
 		}
@@ -180,7 +183,7 @@ void UWTakeTasks::OnSelectedDeepSpaceProbes()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory==L"深空探测器")
+		if(TaskItem->FirstCategory == L"深空探测器")
 		{
 			TaskView->AddItem(TaskItem);
 		}
@@ -195,7 +198,7 @@ void UWTakeTasks::OnSelectedSpaceStation()
 	{
 		UItemTask* TaskItem = NewObject<UItemTask>(this);
 		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory==L"空间站")
+		if(TaskItem->FirstCategory == L"空间站")
 		{
 			TaskView->AddItem(TaskItem);
 		}

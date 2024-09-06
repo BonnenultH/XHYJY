@@ -55,10 +55,20 @@ public:
 
 	UPROPERTY()
 	UDataTable* HTQTasks;
-	///Script/Engine.Texture2D
+
+	UPROPERTY()
+	UDataTable* RocketSelect;
+	
 	UPROPERTY()
 	UTexture2D* SelectBG;
 
 	UPROPERTY()
 	UTexture2D* UnSelectBG;
+
+	UPROPERTY()
+	UTexture2D* RocketSelectedBG;
+	UPROPERTY()
+	UTexture2D* RocketUnselectedBG;
+	UPROPERTY()
+	UTexture2D* RocketWrong;
 };

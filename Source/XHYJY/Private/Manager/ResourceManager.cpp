@@ -30,6 +30,18 @@ AResourceManager::AResourceManager()
 	
 	ConstructorHelpers::FObjectFinder<UDataTable> TableObj(TEXT("'/Game/UMG/DataTable/HTQTask.HTQTask'"));
 	HTQTasks = TableObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<UDataTable> RocketSeleOBj(TEXT("'/Game/UMG/DataTable/RocketSelect.RocketSelect'"));
+	RocketSelect = RocketSeleOBj.Object;
+	
+	ConstructorHelpers::FObjectFinder<UTexture2D> RocketSeleBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG_Selected.BG_Selected'"));
+	RocketSelectedBG = RocketSeleBGObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> RocketUnselectedBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG.BG'"));
+	RocketUnselectedBG = RocketUnselectedBGObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> RocketWrongObj(TEXT("'/Game/UMG/Child/RocketMode/WrongBG.WrongBG'"));
+	RocketWrong = RocketWrongObj.Object;
 }
 
 // Called when the game starts or when spawned
@@ -77,7 +89,7 @@ void AResourceManager::InitRSWidgetMap()
 	RSWidgetMap.Add(EWidgetType::EWT_Rules,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Rules.WBP_Rules_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_Orbits,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Oribit.WBP_Oribit_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_RocketSelect,LoadWidgetFile(TEXT("'/Game/UMG/WBP_RocketSelect.WBP_RocketSelect_C'")));
-
+	RSWidgetMap.Add(EWidgetType::EWT_Launch,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Launch.WBP_Launch_C'")));
 }
 
 void AResourceManager::InitMediaResource()

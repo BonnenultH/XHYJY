@@ -8,6 +8,7 @@ void UWItemTask::NativeOnListItemObjectSet(UObject* ListItemObject)
 	IUserObjectListEntry::NativeOnListItemObjectSet(ListItemObject);
 	ItemData = Cast<UItemTask>(ListItemObject);
 	InitWidget();
+	ChangeBG(false);
 }
 
 void UWItemTask::InitWidget()
