@@ -26,16 +26,19 @@ void UWTakeTasks::InitWidget()
 	Button_ScientificExploration->OnClicked.AddDynamic(this, &UWTakeTasks::OnSelectedScientificExploration);
 	Button_Ok->OnClicked.AddDynamic(this, &UWTakeTasks::PlayPoppingAni);
 	Button_StartOrbits->OnClicked.AddDynamic(this, &UWTakeTasks::CreateOrbits);
+	Button_Reselect->OnClicked.AddDynamic(this, &UWTakeTasks::UnSelect);
 }
 
 void UWTakeTasks::InitTaskView()
 {
-	ResourceManager->HTQTasks->GetAllRows<FTaskTable>("", AllTaskArry);
-	for(auto Task : AllTaskArry)
+	for(auto ItemData: UIManager->GetCategoryData().FirstDataMap)
 	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		TaskView->AddItem(TaskItem);
+		for(auto Data : ItemData.Value.AllDataArry)
+		{
+			UItemTask* TaskItem = NewObject<UItemTask>(this);
+			TaskItem->InitTaskData(Data);
+			TaskView->AddItem(TaskItem);
+		}
 	}
 }
 
@@ -68,7 +71,10 @@ void UWTakeTasks::InitRightInfo(UItemTask* ItemData)
 	RightName->SetText(FText::FromString(ItemData->Name));
 	RightForAppFunc->SetText(FText::FromString(ItemData->ForAppFunc));
 	RightDes->SetText(FText::FromString(ItemData->HTQDes));
+}
 
+void UWTakeTasks::InitSelectedInfo(UItemTask* ItemData)
+{
 	HTQ_Image->SetBrushFromTexture(ItemData->Image);
 	HTQ_Image->SetBrushSize(ItemData->Image->GetImportedSize());
 	HTQName->SetText(FText::FromString(ItemData->Name));
@@ -86,134 +92,85 @@ void UWTakeTasks::OnSelectedSatellite()
 	{
 		Satellite->SetVisibility(ESlateVisibility::Collapsed);
 	}
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory == L"人造卫星")
-		{
-		TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
-	
+
+	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].AllDataArry;
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::OnSelectedNavigation()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory == L"导航卫星")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
+	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_Navigation];
+	UpdateView(AllData);
 }
-
 
 void UWTakeTasks::OnSelectedCommunication()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory == L"通信卫星")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
+	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_Communication];
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::OnSelectedRemoteSensing()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory == L"遥感卫星")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
+	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_RemoteSensing];
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::OnSelectedScientificExploration()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->SecondCategory == L"科学探测卫星")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
+	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_ScientificExploration];
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::OnSelectedSpaceship()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory == L"宇宙飞船")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_SpaceShip].AllDataArry;
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::OnSelectedDeepSpaceProbes()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory == L"深空探测器")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_DeepSpaceProbes].AllDataArry;
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::OnSelectedSpaceStation()
 {
-	TaskView->ClearListItems();
-	for(auto Task : AllTaskArry)
-	{
-		UItemTask* TaskItem = NewObject<UItemTask>(this);
-		TaskItem->InitTaskData(Task);
-		if(TaskItem->FirstCategory == L"空间站")
-		{
-			TaskView->AddItem(TaskItem);
-		}
-	}
-	Right->SetVisibility(ESlateVisibility::Collapsed);
+	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_SpaceStation].AllDataArry;
+	UpdateView(AllData);
 }
 
 void UWTakeTasks::PlayPoppingAni()
 {
+	InitSelectedInfo(CurItemWidget->GetItemData());
 	PlayAnimation(Ani_showInfo);
 }
 
 void UWTakeTasks::CreateOrbits()
 {
+	UIManager->SelectTaskData = CurItemWidget->GetItemData();
 	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);	
+}
+
+void UWTakeTasks::UnSelect()
+{
+	PlayAnimationReverse(Ani_showInfo);
+}
+
+void UWTakeTasks::UpdateView(TArray<FHTQData> AllDataArry)
+{
+	TaskView->ClearListItems();
+	for(auto Data : AllDataArry)
+	{
+		UItemTask* TaskItem = NewObject<UItemTask>(this);
+		TaskItem->InitTaskData(Data);
+		TaskView->AddItem(TaskItem);
+	}
+	
+	Right->SetVisibility(ESlateVisibility::Collapsed);
 }
 
 

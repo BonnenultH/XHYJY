@@ -14,9 +14,7 @@ class XHYJY_API UWOrbits : public UBaseWidget
 {
 	GENERATED_BODY()
 
-public:
-	virtual void InitWidget() override;
-
+protected:
 	UFUNCTION()
 	void LEOClicked();
 	UFUNCTION()
@@ -37,9 +35,21 @@ public:
 	UFUNCTION()
 	void CreateRocketSelect();
 
+	void InitOrbitInfo();
+
+	void OrbitInfoFunc(EOrbit Orbit);
+
+	UFUNCTION()
+	void RightAnswer();
+
+	UFUNCTION()
+	void WrongAnswer();
+
+public:
+	virtual void InitWidget() override;
 	
 public:
-    EOrbit OrbitType;
+	FHTQOrbit CurSelectedOrbit;
 	
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
@@ -70,8 +80,19 @@ public:
 	UPROPERTY(meta=(BindWidget))
 	UButton* TMI;
 
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* Orbit_RightPop;
+
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* Orbit_WrongPop;
+		
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_Ok;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_RightOk;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_WrongAgain;
 
+	TMap<EOrbit, FHTQOrbit> OrbitMap;
 	
 };

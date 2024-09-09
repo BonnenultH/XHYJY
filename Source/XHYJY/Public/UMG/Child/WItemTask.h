@@ -22,6 +22,11 @@ public:
 	virtual void InitWidget() override;
 
 	void ChangeBG(bool bIsSelect);
+
+	UItemTask* GetItemData()
+	{
+		return ItemData;
+	}
 	
 protected:
 	UPROPERTY(meta=(BindWidget))

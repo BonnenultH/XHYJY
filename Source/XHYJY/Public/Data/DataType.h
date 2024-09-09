@@ -36,30 +36,86 @@ struct S_UserInfo
 	EGender Gender = EGender::EG_None;
 };
 
+UENUM(BlueprintType)
 enum class EOrbit : uint8
 {
-	ELEO,
-	EMEO,
-	ESSO,
-	EGEO,
-	EGTO,
-	EIGSO,
-	ETLI,
-	ETMI,
+	EO_LEO,
+	EO_MEO,
+	EO_SSO,
+	EO_GEO,
+	EO_GTO,
+	EO_IGSO,
+	EO_TLI,
+	EO_TMI,
+};
+
+UENUM(BlueprintType)
+enum class EHFCategory : uint8
+{
+	EHFC_None,
+	EHFC_Satellite,
+	EHFC_SpaceShip,
+	EHFC_DeepSpaceProbes,
+	EHFC_SpaceStation,
+};
+
+UENUM(BlueprintType)
+enum class EHSCategory : uint8
+{
+	EHSC_None,
+	EHSC_Navigation,
+	EHSC_Communication,
+	EHSC_RemoteSensing,
+	EHSC_ScientificExploration,
 };
 
 USTRUCT(BlueprintType)
-struct FHTQCategory
+struct FHTQOrbit
+{
+	GENERATED_BODY()
+
+	FHTQOrbit() {};
+	
+	FHTQOrbit(EOrbit _HTQOrbitType, FString _HTQOrbitInfo, FString _HTQOrbitName)
+	{
+		HTQOrbitType = _HTQOrbitType;
+		HTQOrbitInfo = _HTQOrbitInfo;
+		HTQOrbitName = _HTQOrbitName;
+	};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EOrbit HTQOrbitType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString HTQOrbitInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString HTQOrbitName;
+};
+
+USTRUCT(BlueprintType)
+struct FHTQFTaskData
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString FirstCategory;
+	EHFCategory HTQFirstType = EHFCategory::EHFC_None;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString SecondCategory;
+	FString FirstCategoryName;
 };
 
+USTRUCT(BlueprintType)
+struct FHTQSTaskData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EHSCategory HTQSecondType = EHSCategory::EHSC_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString SecondCategoryName;
+};
 
 USTRUCT(BlueprintType)
 struct FTaskTable : public FTableRowBase
@@ -70,10 +126,13 @@ public:
 	FString Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString FirstCategory;
-	
+	FHTQFTaskData FirstData;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString SecondCategory;
+	FHTQSTaskData SecondData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EOrbit HTQOrbitType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* Image;
@@ -86,19 +145,71 @@ public:
 };
 
 
+
+USTRUCT(BlueprintType)
+struct FHTQData
+{
+	GENERATED_BODY()
+public:
+	FHTQData()	{};
+	
+	FHTQData(FTaskTable* Task)
+	{
+		TaskTable = Task;
+	};
+	
+public:
+	FTaskTable* TaskTable;
+	
+	// bIsLock = true : 代表锁定; bIsLock = false : 代表解锁;
+	bool bIsLock = true;
+};
+
+USTRUCT(BlueprintType)
+struct FHTQFirstData
+{
+	GENERATED_BODY()
+public:
+	void CreateSecondData(EHSCategory DataType)
+	{
+		TArray<FHTQData> Arry;
+		SecondDataMap.Add(DataType, Arry);
+	}
+	
+public:
+	TMap<EHSCategory, TArray<FHTQData>> SecondDataMap;
+	TArray<FHTQData> AllDataArry;
+};
+
+USTRUCT(BlueprintType)
+struct FHTQCategoryData
+{
+	GENERATED_BODY()
+public:
+	void CreateFirstData(EHFCategory DataType)
+	{
+		FHTQFirstData Data;
+		FirstDataMap.Add(DataType, Data);
+	}
+
+public:
+	TMap<EHFCategory, FHTQFirstData> FirstDataMap;
+};
+
 UCLASS()
 class XHYJY_API UItemTask : public UObject
 {
 	GENERATED_BODY()
 public:
-	void InitTaskData(FTaskTable* Data)
+	void InitTaskData(FHTQData Data)
 	{
-		Name			= Data->Name;
-		FirstCategory	= Data->FirstCategory;
-		SecondCategory	= Data->SecondCategory;
-		Image			= Data->Image;
-		ForAppFunc		= Data->ForAppFunc;
-		HTQDes			= Data->HTQDes;
+		Name			= Data.TaskTable->Name;
+		FirstCategory	= Data.TaskTable->FirstData.FirstCategoryName;
+		SecondCategory	= Data.TaskTable->SecondData.SecondCategoryName;
+		Image			= Data.TaskTable->Image;
+		ForAppFunc		= Data.TaskTable->ForAppFunc;
+		HTQDes			= Data.TaskTable->HTQDes;
+		HTQOrbitType	= Data.TaskTable->HTQOrbitType;
 	}
 	
 public:	
@@ -111,6 +222,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString SecondCategory;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EOrbit HTQOrbitType;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* Image;
 

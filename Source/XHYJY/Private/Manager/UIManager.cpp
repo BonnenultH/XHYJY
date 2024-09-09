@@ -31,10 +31,11 @@ void AUIManager::Tick(float DeltaTime)
 void AUIManager::InitManager()
 {
 	Super::InitManager();
-
+	
 	OnUpdateProgress.AddUObject(this, &AUIManager::UpdateProgress);
 	CreateVDWidget(EWidgetType::EWT_HomePage);
 	InitUserFileGender();
+	InitTaskTable();
 }
 
 void AUIManager::UpdateProgress()
@@ -78,6 +79,35 @@ void AUIManager::InitUserFileGender()
 	else if(VDPawn->UserInfoData.Gender == EGender::EG_Woman)
 	{
 		ResourceManager->GenderMaterialInstance->SetScalarParameterValue("ManORWoman", 0);
+	}
+}
+
+void AUIManager::InitTaskTable()
+{
+	TArray<FTaskTable*> AllTaskArry;
+	ResourceManager->HTQTasks->GetAllRows<FTaskTable>("", AllTaskArry);
+	
+	for(auto Task : AllTaskArry)
+	{
+		if(Task->FirstData.HTQFirstType != EHFCategory::EHFC_None)
+		{
+			if(HTQCategoryData.FirstDataMap.Find(Task->FirstData.HTQFirstType) == nullptr)
+			{
+				HTQCategoryData.CreateFirstData(Task->FirstData.HTQFirstType);
+			}
+			
+			FHTQData HTQData(Task);
+			HTQCategoryData.FirstDataMap[Task->FirstData.HTQFirstType].AllDataArry.Add(HTQData);
+			
+			if(Task->SecondData.HTQSecondType != EHSCategory::EHSC_None)
+			{
+				if(HTQCategoryData.FirstDataMap[Task->FirstData.HTQFirstType].SecondDataMap.Find(Task->SecondData.HTQSecondType) == nullptr)
+				{
+					HTQCategoryData.FirstDataMap[Task->FirstData.HTQFirstType].CreateSecondData(Task->SecondData.HTQSecondType);
+				}
+				HTQCategoryData.FirstDataMap[Task->FirstData.HTQFirstType].SecondDataMap[Task->SecondData.HTQSecondType].Add(HTQData);
+			}
+		}
 	}
 }
 

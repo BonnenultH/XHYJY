@@ -22,6 +22,8 @@ protected:
 
 	void InitRightInfo(UItemTask* ItemData);
 
+	void InitSelectedInfo(UItemTask* ItemData);
+	
 	UFUNCTION()
 	void OnSelectedSatellite();
 
@@ -52,10 +54,13 @@ protected:
 	UFUNCTION()
 	void CreateOrbits();
 
+	UFUNCTION()
+	void UnSelect();
+
+	void UpdateView(TArray<FHTQData> AllDataArry);
+
 public:
 	virtual void InitWidget() override;
-
-
 
 protected:
 	UPROPERTY()
@@ -104,6 +109,7 @@ protected:
 
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Ani_showInfo;
+	
 	UPROPERTY(meta=(BindWidget))
 	UImage* HTQ_Image;
 	UPROPERTY(meta=(BindWidget))

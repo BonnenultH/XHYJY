@@ -26,6 +26,9 @@ protected:
 protected:
 	void InitUserFileGender();
 
+	void InitTaskTable();
+	
+
 	UFUNCTION()
 	void UpdateProgress();
 
@@ -45,20 +48,26 @@ public:
 		return ManagerProgress;
 	}
 
+	FHTQCategoryData GetCategoryData()
+	{
+		return HTQCategoryData;
+	}
 	
 protected:
 	int32 ManagerProgress = 0;
-	
 	float Interval;
+
+	FHTQCategoryData HTQCategoryData;
 
 public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;
 
 	FProgressDelegate OnUpdateProgress;
+
+	UItemTask* SelectTaskData;
 	
 	float	ManagerMinute = 8;
 	float	ManagerSecond = 0;
 	bool	bTimeStart = false;
-	
 };
