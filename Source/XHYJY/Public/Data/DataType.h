@@ -18,6 +18,7 @@ enum class EWidgetType:uint8
 	EWT_Orbits,
 	EWT_RocketSelect,
 	EWT_Launch,
+	EWT_Hoisting,
 };
 
 enum class EGender:uint8

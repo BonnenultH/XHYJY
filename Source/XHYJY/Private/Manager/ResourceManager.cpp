@@ -5,6 +5,9 @@
 #include "MediaPlayer.h"
 #include "MediaSource.h"
 #include "Materials/MaterialParameterCollection.h"
+#include "LevelSequence.h"
+#include "LevelSequencePlayer.h"
+#include "LevelSequenceActor.h"
 
 
 // Sets default values
@@ -40,8 +43,27 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketUnselectedBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG.BG'"));
 	RocketUnselectedBG = RocketUnselectedBGObj.Object;
 
+	ConstructorHelpers::FObjectFinder<UTexture2D> JQObj(TEXT("'/Game/UMG/Launch/button/JQ.JQ'"));
+	JQ = JQObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> TYObj(TEXT("'/Game/UMG/Launch/button/TY.TY'"));
+	TY = TYObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<UTexture2D> XCObj(TEXT("'/Game/UMG/Launch/button/XC.XC'"));
+	XC = XCObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<UTexture2D> WCObj(TEXT("'/Game/UMG/Launch/button/WC.WC'"));
+	WC = WCObj.Object;
+	
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketWrongObj(TEXT("'/Game/UMG/Child/RocketMode/WrongBG.WrongBG'"));
 	RocketWrong = RocketWrongObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
+	WarningMaterial = WarningObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<ULevelSequence> LevelseqObj(TEXT("'/Game/Model/Sequence/JZ_Sequence.JZ_Sequence'"));
+	LevelSequence = LevelseqObj.Object;
+	
 }
 
 // Called when the game starts or when spawned
@@ -60,6 +82,8 @@ void AResourceManager::InitManager()
 {
 	Super::InitManager();
 	GenderMaterialInstance = GetWorld()->GetParameterCollectionInstance(GenderMaterial);
+	
+	LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), LevelSequence, FMovieSceneSequencePlaybackSettings(),currentLevelSequenceActor);
 }
 
 TSubclassOf<UUserWidget> AResourceManager::LoadWidgetFile(FString Path)
@@ -77,6 +101,7 @@ void AResourceManager::InitRSWidgetMap()
 	RSWidgetMap.Add(EWidgetType::EWT_Orbits,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Oribit.WBP_Oribit_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_RocketSelect,LoadWidgetFile(TEXT("'/Game/UMG/WBP_RocketSelect.WBP_RocketSelect_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_Launch,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Launch.WBP_Launch_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_Hoisting, LoadWidgetFile(TEXT("'/Game/UMG/WBP_Hoisting.WBP_Hoisting_C'")));
 }
 
 void AResourceManager::InitMediaResource()

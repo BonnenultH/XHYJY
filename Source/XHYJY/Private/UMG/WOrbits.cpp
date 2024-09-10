@@ -13,6 +13,7 @@ void UWOrbits::InitWidget()
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
 	Left_Orbit->SetVisibility(ESlateVisibility::Collapsed);
+	WBP_States->InitWidget();
 
 	LEO->OnClicked.AddDynamic(this,&UWOrbits::LEOClicked);
 	MEO->OnClicked.AddDynamic(this,&UWOrbits::MEOClicked);
@@ -23,6 +24,9 @@ void UWOrbits::InitWidget()
 	TLI->OnClicked.AddDynamic(this,&UWOrbits::TLIClicked);
 	TMI->OnClicked.AddDynamic(this,&UWOrbits::TMIClicked);
 
+	HTQName->SetText(FText::FromString(UIManager->SelectTaskData->Name));
+	HTQDes->SetText(FText::FromString(UIManager->SelectTaskData->HTQDes));
+	
 	Button_RightOk->OnClicked.AddDynamic(this, &UWOrbits::RightAnswer);
 	Button_WrongAgain->OnClicked.AddDynamic(this, &UWOrbits::WrongAnswer);
 	Button_Ok->OnClicked.AddDynamic(this,&UWOrbits::CreateRocketSelect);
@@ -74,17 +78,19 @@ void UWOrbits::CreateRocketSelect()
 	if(CurSelectedOrbit.HTQOrbitType == UIManager->SelectTaskData->HTQOrbitType)
 	{
 		PlayAnimation(Orbit_RightPop);
+		UIManager->OrbitName = OrbitMap[CurSelectedOrbit.HTQOrbitType].HTQOrbitName;
 	}
 	else
 	{
 		PlayAnimation(Orbit_WrongPop);
 	}
+	
 }
 
 void UWOrbits::InitOrbitInfo()
 {
 	FHTQOrbit OrbitGEO(EOrbit::EO_GEO, TEXT("即轨道倾角i=0°的地球同步轨道，距地面约36000公里的圆轨道。卫星与地面的相对位置保持不变，轨道周期与地球自转周期一致。典型航天器：通信、对地观测、导航、预警、气象等民用和军用卫星。"), TEXT("GEO轨道"));
-	FHTQOrbit OrbitLEO(EOrbit::EO_LEO, TEXT("轨道	LEO	低地（球）轨道/近地（球）轨道（LEO：Low Earth Orbit）距地面约200-1200千米的近圆轨道。典型航天器：载人飞船、空间站、对地观测卫星以及一些新型通信卫星系统等。"), TEXT("LEO轨道"));
+	FHTQOrbit OrbitLEO(EOrbit::EO_LEO, TEXT("低地（球）轨道/近地（球）轨道（LEO：Low Earth Orbit）距地面约200-1200千米的近圆轨道。典型航天器：载人飞船、空间站、对地观测卫星以及一些新型通信卫星系统等。"), TEXT("LEO轨道"));
 	FHTQOrbit OrbitIGSO(EOrbit::EO_IGSO, TEXT("倾斜地球同步轨道（IGSO：Inclined Geosynchronous Orbit ）即轨道倾角i≠0°的地球同步轨道，其星下点轨迹是一条“8”字形的封闭曲线，中国北斗卫星导航系统的其中三颗卫星位于55°倾角的倾斜地球同步轨道。"), TEXT("IGSO轨道"));
 	FHTQOrbit OrbitMEO(EOrbit::EO_MEO, TEXT("中地球轨道（MEO：Middle Earth Orbit）轨道高度为1200-36000公里之间；GPS、GLONASS都属于此类轨道。美国GPS系统、俄罗斯GLONASS系统、欧盟伽利略系统和中国北斗系统均使用了高度20000-24000km的约55°倾角的中地球轨道。"), TEXT("MEO轨道"));
 	FHTQOrbit OrbitGTO(EOrbit::EO_GTO, TEXT("地球同步转移轨道（GTO：Geostationary Transfer Orbit ）指距地面近地点约200公里，远地点约36000公里的椭圆轨道。地球同步转移轨道为霍曼转移轨道的运用之一，为椭圆形轨道，经加速后可达地球静止轨道(GEO)。近地点多在1000公里以下，远地点则为地球静止轨道高度36000公里。地球同步转移轨道一般只作为地球同步轨道的过渡轨道。"), TEXT("GTO轨道"));

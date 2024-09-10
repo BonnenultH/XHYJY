@@ -55,6 +55,9 @@ public:
 	UBaseWidget* WBP_PersonTitle;
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_Timing;
+	UPROPERTY(meta=(BindWidget))
+	UBaseWidget* WBP_States;
+	
 
 	UPROPERTY(meta=(BindWidget))
 	UOverlay* Left_Orbit;
@@ -63,6 +66,11 @@ public:
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* OrbitInfo;
 
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* HTQName;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* HTQDes;
+	
 	UPROPERTY(meta=(BindWidget))
 	UButton* LEO;
 	UPROPERTY(meta=(BindWidget))
@@ -92,6 +100,8 @@ public:
 	UButton* Button_RightOk;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_WrongAgain;
+
+	
 
 	TMap<EOrbit, FHTQOrbit> OrbitMap;
 	

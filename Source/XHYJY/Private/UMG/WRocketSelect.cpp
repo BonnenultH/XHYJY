@@ -12,6 +12,8 @@ void UWRocketSelect::InitWidget()
 
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
+	WBP_States->InitWidget();
+	
 	UIManager->OnUpdateProgress.Broadcast();
 	Button_Ok->OnClicked.AddDynamic(this, &UWRocketSelect::CreateLaunch);
 	InitRocketView();
@@ -19,25 +21,12 @@ void UWRocketSelect::InitWidget()
 
 void UWRocketSelect::InitRocketView()
 {
-	TArray<FSelectRocket*> AllSelectRocket;
-	ResourceManager->RocketSelect->GetAllRows("", AllSelectRocket);
-	for (auto Rocket : AllSelectRocket)
-	{
-		URocketSelection* RocketSelection = NewObject<URocketSelection>(this);
-		RocketSelection->InitRocketData(Rocket);
-		RocketListView->AddItem(RocketSelection);
-	}
+	
 }
 
 void UWRocketSelect::SelectRocketItem(UObject* objItem)
 {
-	UWRocketMode* RocketMode = Cast<UWRocketMode>(RocketListView->GetEntryWidgetFromItem(objItem));
-	if(RocketMode)
-	{
-		RocketMode->BGChanged(true);
-	}
-	SelectNum++;
-	Chosen->SetText(FText::FromString(FString::FromInt(SelectNum)));
+	
 }
 
 void UWRocketSelect::CreateLaunch()

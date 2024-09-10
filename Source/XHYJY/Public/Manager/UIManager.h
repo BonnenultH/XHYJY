@@ -66,8 +66,9 @@ public:
 	FProgressDelegate OnUpdateProgress;
 
 	UItemTask* SelectTaskData;
+	FString OrbitName;
 	
-	float	ManagerMinute = 8;
+	float	ManagerMinute = 2;
 	float	ManagerSecond = 0;
 	bool	bTimeStart = false;
 };

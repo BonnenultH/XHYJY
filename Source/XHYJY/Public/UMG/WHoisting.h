@@ -4,29 +4,27 @@
 
 #include "CoreMinimal.h"
 #include "UMG/BaseWidget.h"
-#include "WStates.generated.h"
+#include "WHoisting.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class XHYJY_API UWStates : public UBaseWidget
+class XHYJY_API UWHoisting : public UBaseWidget
 {
 	GENERATED_BODY()
 
+protected:
+
+	void LoadLevelAssets();
 public:
 	virtual void InitWidget() override;
 
-public:
+protected:
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* HTQName;
+	UBaseWidget* WBP_PersonTitle;
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* Orbit;
+	UBaseWidget* WBP_Timing;
 	UPROPERTY(meta=(BindWidget))
-	UTextBlock* RocketName;
-
-	
-	UPROPERTY(meta=(BindWidget))
-	UTextBlock* FirePlace;
-	
+	UBaseWidget* WBP_States;
 };

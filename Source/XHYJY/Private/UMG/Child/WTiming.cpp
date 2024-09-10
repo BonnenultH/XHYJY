@@ -21,7 +21,18 @@ void UWTiming::UpdateTime()
 {
 	_Minute = TimeFormat(UIManager->ManagerMinute);
 	_Second = TimeFormat(UIManager->ManagerSecond);
-	
+
+	if(UIManager->ManagerMinute <1)
+    	{
+    		Minute->SetColorAndOpacity(FColor::White);
+    		Second->SetColorAndOpacity(FColor::White);
+    		colon->SetColorAndOpacity(FColor::White);
+    		
+    		Minute->SetFontMaterial(ResourceManager->WarningMaterial);
+    		Second->SetFontMaterial(ResourceManager->WarningMaterial);
+    		colon->SetFontMaterial(ResourceManager->WarningMaterial);
+    	}
+
 	Minute->SetText(FText::FromString(_Minute));
 	Second->SetText(FText::FromString(_Second));
 	

@@ -15,6 +15,7 @@
 #include "Components/VerticalBox.h"
 #include "Components/Border.h"
 #include "Animation/WidgetAnimation.h"
+#include "LevelSequencePlayer.h"
 #include "BaseWidget.generated.h"
 
 

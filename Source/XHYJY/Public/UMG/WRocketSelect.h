@@ -30,6 +30,8 @@ public:
 	UBaseWidget* WBP_PersonTitle;
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_Timing;
+	UPROPERTY(meta=(BindWidget))
+	UBaseWidget* WBP_States;
 
 	UPROPERTY(meta=(BindWidget))
 	UListView* RocketListView;

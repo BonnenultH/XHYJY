@@ -26,9 +26,10 @@ public:
 public:
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* Minute;
-
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* Second;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* colon;
 
 	FString _Minute;
 	FString _Second;

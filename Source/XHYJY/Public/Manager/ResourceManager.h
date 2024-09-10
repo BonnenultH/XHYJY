@@ -5,6 +5,7 @@
 #include "BaseManager.h"
 #include "ResourceManager.generated.h"
 
+
 UCLASS()
 class XHYJY_API AResourceManager : public ABaseManager
 {
@@ -62,9 +63,33 @@ public:
 	UTexture2D* UnSelectBG;
 
 	UPROPERTY()
+	UTexture2D* JQ;
+	UPROPERTY()
+	UTexture2D* TY;
+	UPROPERTY()
+	UTexture2D* XC;
+	UPROPERTY()
+	UTexture2D* WC;
+
+	UPROPERTY()
 	UTexture2D* RocketSelectedBG;
 	UPROPERTY()
 	UTexture2D* RocketUnselectedBG;
 	UPROPERTY()
 	UTexture2D* RocketWrong;
+
+	UPROPERTY()
+	UMaterial* WarningMaterial;
+
+	UPROPERTY()
+	class ULevelSequence* LevelSequence;
+
+	UPROPERTY()
+	class ULevelSequencePlayer* LevelSequencePlayer;
+
+	class ALevelSequenceActor * currentLevelSequenceActor = nullptr;
+	
+	
+	
+	
 };
