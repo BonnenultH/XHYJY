@@ -15,3 +15,9 @@ void UBaseWidget::InitWidget()
 		UIManager = Pawn->UIManager;
 	}
 }
+
+void UBaseWidget::CountErrorNums()
+{
+	ErrorNums -= 1;
+}
+

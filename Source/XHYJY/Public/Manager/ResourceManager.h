@@ -63,6 +63,12 @@ public:
 	UTexture2D* UnSelectBG;
 
 	UPROPERTY()
+	UTexture2D* CheckBar;
+
+	UPROPERTY()
+	UTexture2D* UnCheckBar;
+
+	UPROPERTY()
 	UTexture2D* JQ;
 	UPROPERTY()
 	UTexture2D* TY;

@@ -2,6 +2,8 @@
 
 
 #include "UMG/WRocketSelect.h"
+
+#include "Components/HorizontalBoxSlot.h"
 #include "UMG/Child/WRocketMode.h"
 
 
@@ -20,6 +22,26 @@ void UWRocketSelect::InitWidget()
 }
 
 void UWRocketSelect::InitRocketView()
+{
+	for(auto Rocket : UIManager->SelectTaskData->RocketArry)
+	{
+		if(Rocket.bRight)
+		{
+			RightRocketArry.Add(Rocket.RocketType);
+			UImage* TempImage = NewObject<UImage>(this);
+			ImageBox->AddChildToHorizontalBox(TempImage);
+			TempImage->SetBrushFromTexture(ResourceManager->UnCheckBar);
+			TempImage->SetDesiredSizeOverride(TempImage->GetDesiredSize());
+		}
+		
+		FSelectRocket* RocketData = UIManager->GetRocketData(Rocket.RocketType);
+		UItemRocket* RocketItem = NewObject<UItemRocket>(this);
+		RocketItem->InitRocketData(RocketData);
+		RocketListView->AddItem(RocketItem);
+	}
+}
+
+void UWRocketSelect::CheckSelectRocket()
 {
 	
 }

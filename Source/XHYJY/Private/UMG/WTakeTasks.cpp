@@ -152,6 +152,7 @@ void UWTakeTasks::PlayPoppingAni()
 void UWTakeTasks::CreateOrbits()
 {
 	UIManager->SelectTaskData = CurItemWidget->GetItemData();
+	
 	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);	
 }
 

@@ -36,6 +36,7 @@ void AUIManager::InitManager()
 	CreateVDWidget(EWidgetType::EWT_HomePage);
 	InitUserFileGender();
 	InitTaskTable();
+	InitRocketTable();
 }
 
 void AUIManager::UpdateProgress()
@@ -109,6 +110,18 @@ void AUIManager::InitTaskTable()
 			}
 		}
 	}
+}
+
+void AUIManager::InitRocketTable()
+{
+	TArray<FSelectRocket*> AllTaskArry;
+	ResourceManager->RocketSelect->GetAllRows<FSelectRocket>("", AllTaskArry);
+	
+	for(auto Task : AllTaskArry)
+	{
+		RocketMap.Add(Task->RocketType, Task);
+	}
+	
 }
 
 void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)

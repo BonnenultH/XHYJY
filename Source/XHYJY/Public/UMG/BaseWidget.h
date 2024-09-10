@@ -16,6 +16,8 @@
 #include "Components/Border.h"
 #include "Animation/WidgetAnimation.h"
 #include "LevelSequencePlayer.h"
+#include "Components/ProgressBar.h"
+#include "Components/HorizontalBox.h"
 #include "BaseWidget.generated.h"
 
 
@@ -28,6 +30,8 @@ class XHYJY_API UBaseWidget : public UUserWidget
 public:
 	virtual void InitWidget();
 
+	virtual void CountErrorNums();
+
 public:
 	UPROPERTY()
 	AVDPawn* VDPawn;
@@ -39,4 +43,6 @@ public:
 	AUIManager* UIManager;
 	
 	EWidgetType ReturnWidgetType;
+
+	int32 ErrorNums = 0;
 };

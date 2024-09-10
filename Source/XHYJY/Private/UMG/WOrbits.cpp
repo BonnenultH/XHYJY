@@ -10,6 +10,8 @@ void UWOrbits::InitWidget()
 	Super::InitWidget();
 	InitOrbitInfo();
 
+	ErrorNums = 2;
+
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
 	Left_Orbit->SetVisibility(ESlateVisibility::Collapsed);
@@ -32,6 +34,7 @@ void UWOrbits::InitWidget()
 	Button_Ok->OnClicked.AddDynamic(this,&UWOrbits::CreateRocketSelect);
 	UIManager->OnUpdateProgress.Broadcast();
 }
+
 
 void UWOrbits::LEOClicked()
 {
@@ -82,9 +85,17 @@ void UWOrbits::CreateRocketSelect()
 	}
 	else
 	{
-		PlayAnimation(Orbit_WrongPop);
+		if(ErrorNums != 0)
+		{
+			UIManager->MinusGrade(5);
+			CountErrorNums();
+			PlayAnimation(Orbit_WrongPop);
+		}
+		else
+		{
+			UIManager->CreateVDWidget(EWidgetType::EWT_RocketSelect);
+		}
 	}
-	
 }
 
 void UWOrbits::InitOrbitInfo()

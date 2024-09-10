@@ -27,6 +27,8 @@ protected:
 	void InitUserFileGender();
 
 	void InitTaskTable();
+
+	void InitRocketTable();
 	
 
 	UFUNCTION()
@@ -52,13 +54,26 @@ public:
 	{
 		return HTQCategoryData;
 	}
+
+	FSelectRocket* GetRocketData(ERocketType RocketType)
+	{
+		return RocketMap[RocketType];
+	}
+
+	void MinusGrade(int32 Grade)
+	{
+		TaskGrade -= Grade;
+	}
 	
 protected:
 	int32 ManagerProgress = 0;
 	float Interval;
 
 	FHTQCategoryData HTQCategoryData;
+	TMap<ERocketType, FSelectRocket*> RocketMap;
 
+	int32 TaskGrade = 100;
+	
 public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;

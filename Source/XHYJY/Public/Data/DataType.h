@@ -70,6 +70,51 @@ enum class EHSCategory : uint8
 	EHSC_ScientificExploration,
 };
 
+UENUM(BlueprintType)
+enum class ERocketType : uint8
+{
+	ERT_None,
+	ERT_CZ_1,
+	ERT_CZ_2,
+	ERT_CZ_2D,
+	ERT_CZ_2F,
+	ERT_CZ_3,
+	ERT_CZ_3A,
+	ERT_CZ_3B,
+	ERT_CZ_3C,
+	ERT_CZ_4A,
+	ERT_CZ_4B,
+	ERT_CZ_4C,
+	ERT_CZ_5,
+	ERT_CZ_5B,
+	ERT_CZ_6,
+	ERT_CZ_7,
+};
+
+USTRUCT(BlueprintType)
+struct FSelectRocket : public FTableRowBase
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ERocketType RocketType = ERocketType::ERT_None;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketCNName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketEnglishName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float CarryingCapacity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Price;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* RocketImage;
+};
+
 USTRUCT(BlueprintType)
 struct FHTQOrbit
 {
@@ -119,6 +164,18 @@ struct FHTQSTaskData
 };
 
 USTRUCT(BlueprintType)
+struct FTaskRocket
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ERocketType RocketType = ERocketType::ERT_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bRight = false;
+};
+
+USTRUCT(BlueprintType)
 struct FTaskTable : public FTableRowBase
 {
 	GENERATED_BODY()
@@ -143,9 +200,22 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString HTQDes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTaskRocket TaskRocket1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTaskRocket TaskRocket2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTaskRocket TaskRocket3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTaskRocket TaskRocket4;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTaskRocket TaskRocket5;
 };
-
-
 
 USTRUCT(BlueprintType)
 struct FHTQData
@@ -198,6 +268,41 @@ public:
 };
 
 UCLASS()
+class XHYJY_API UItemRocket : public UObject
+{
+	GENERATED_BODY()
+public:
+	void InitRocketData(FSelectRocket* Data)
+	{
+		RocketType			= Data->RocketType;
+		RocketName			= Data->RocketCNName;
+		RocketEnglishName	= Data->RocketEnglishName;
+		CarryingCapacity	= Data->CarryingCapacity;
+		Price				= Data->Price;
+		RocketImage			= Data->RocketImage;
+	}
+	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ERocketType RocketType = ERocketType::ERT_None;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString RocketEnglishName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float CarryingCapacity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Price;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* RocketImage;
+};
+
+UCLASS()
 class XHYJY_API UItemTask : public UObject
 {
 	GENERATED_BODY()
@@ -211,6 +316,12 @@ public:
 		ForAppFunc		= Data.TaskTable->ForAppFunc;
 		HTQDes			= Data.TaskTable->HTQDes;
 		HTQOrbitType	= Data.TaskTable->HTQOrbitType;
+
+		RocketArry.Add(Data.TaskTable->TaskRocket1);
+		RocketArry.Add(Data.TaskTable->TaskRocket2);
+		RocketArry.Add(Data.TaskTable->TaskRocket3);
+		RocketArry.Add(Data.TaskTable->TaskRocket4);
+		RocketArry.Add(Data.TaskTable->TaskRocket5);
 	}
 	
 public:	
@@ -234,61 +345,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString HTQDes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FTaskRocket> RocketArry;
 };
 
 
-USTRUCT(BlueprintType)
-struct FSelectRocket : public FTableRowBase
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString RocketName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString RocketEnglishName;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString CarryingCapacity;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString Price;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UTexture2D* RocketImage;
-};
-
-
-UCLASS()
-class XHYJY_API URocketSelection : public UObject
-{
-	GENERATED_BODY()
-public:
-	void InitRocketData(FSelectRocket* Data)
-	{
-		RocketName			= Data->RocketName;
-		RocketEnglishName	= Data->RocketEnglishName;
-		CarryingCapacity	= Data->CarryingCapacity;
-		Price				= Data->Price;
-		RocketImage			= Data->RocketImage;
-	}
-	
-public:	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString RocketName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString RocketEnglishName;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString CarryingCapacity;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString Price;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UTexture2D* RocketImage;
-};
 
 
 UCLASS()

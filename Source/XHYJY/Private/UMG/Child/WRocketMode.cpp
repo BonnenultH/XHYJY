@@ -2,23 +2,45 @@
 
 
 #include "UMG/Child/WRocketMode.h"
-
-void UWRocketMode::InitWidget()
-{
-	Super::InitWidget();
-	
-}
+#include "UMG/WRocketSelect.h"
 
 void UWRocketMode::NativeOnListItemObjectSet(UObject* ListItemObject)
 {
 	IUserObjectListEntry::NativeOnListItemObjectSet(ListItemObject);
-	URocketSelection* RocketSelection = Cast<URocketSelection>(ListItemObject);
+	ItemData = Cast<UItemRocket>(ListItemObject);
 	InitWidget();
-	RocketName->SetText(FText::FromString(RocketSelection->RocketName));
-	RocketEnglishName->SetText(FText::FromString(RocketSelection->RocketEnglishName));
-	RocketImage->SetBrushFromTexture(RocketSelection->RocketImage);
-	RocketImage->SetDesiredSizeOverride(RocketSelection->RocketImage->GetImportedSize());
-	CarryingCapacity->SetText(FText::FromString(RocketSelection->CarryingCapacity));
+	SelectMode(false);
+}
+
+void UWRocketMode::InitWidget()
+{
+	Super::InitWidget();
+
+	UWRocketSelect* Widget = Cast<UWRocketSelect>(UIManager->WidgetMap[UIManager->CurWidgetType]);
+	Widget->ChangeMode.AddUObject(this, &UWRocketMode::SelectMode);
+	
+	RocketName->SetText(FText::FromString(ItemData->RocketName));
+	RocketEnglishName->SetText(FText::FromString(ItemData->RocketEnglishName));
+	RocketImage->SetBrushFromTexture(ItemData->RocketImage);
+	RocketImage->SetDesiredSizeOverride(ItemData->RocketImage->GetImportedSize());
+	CarryingCapacity->SetText(FText::FromString(FString::SanitizeFloat(ItemData->CarryingCapacity)));
+}
+
+void UWRocketMode::SelectMode(bool bMode)
+{
+	if(!bMode)
+	{
+		Category->SetText(FText::FromString(TEXT("运载能力")));
+		ProgressBar->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+		LogoImage->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+		ProgressBar->SetPercent(ItemData->CarryingCapacity / 15000);
+	}
+	else if(bMode)
+	{
+		Category->SetText(FText::FromString(TEXT("经济能力")));
+		ProgressBar->SetVisibility(ESlateVisibility::Collapsed);
+		LogoImage->SetVisibility(ESlateVisibility::Collapsed);
+	}
 }
 
 void UWRocketMode::BGChanged(bool bSelected)
