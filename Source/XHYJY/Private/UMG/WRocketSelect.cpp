@@ -2,8 +2,7 @@
 
 
 #include "UMG/WRocketSelect.h"
-
-#include "Components/HorizontalBoxSlot.h"
+#include "Components/Spacer.h"
 #include "UMG/Child/WRocketMode.h"
 
 
@@ -18,7 +17,11 @@ void UWRocketSelect::InitWidget()
 	
 	UIManager->OnUpdateProgress.Broadcast();
 	Button_Ok->OnClicked.AddDynamic(this, &UWRocketSelect::CreateLaunch);
+
 	InitRocketView();
+
+	ToChosen->SetText(FText::FromString(FString::FromInt(RightRocketArry.Num())));
+	PlayAnimation(ShowTwoSlide);
 }
 
 void UWRocketSelect::InitRocketView()
@@ -28,13 +31,14 @@ void UWRocketSelect::InitRocketView()
 		if(Rocket.bRight)
 		{
 			RightRocketArry.Add(Rocket.RocketType);
-			UImage* TempImage = NewObject<UImage>(this);
-			ImageBox->AddChildToHorizontalBox(TempImage);
-			TempImage->SetBrushFromTexture(ResourceManager->UnCheckBar);
-			TempImage->SetDesiredSizeOverride(TempImage->GetDesiredSize());
+			auto TempImage =NewObject<UImage>(this);
+			auto MySpacer = NewObject<USpacer>(this);
+			SeletedBox->AddChild(TempImage);
+			SeletedBox->AddChild(MySpacer);
+			TempImage->SetBrushFromTexture(ResourceManager->UnCheckBar, true);
+			MySpacer->SetSize(FVector2d(12.0f,1.0f));
 		}
-		
-		FSelectRocket* RocketData = UIManager->GetRocketData(Rocket.RocketType);
+		FRocketTable* RocketData = UIManager->GetRocketData(Rocket.RocketType);
 		UItemRocket* RocketItem = NewObject<UItemRocket>(this);
 		RocketItem->InitRocketData(RocketData);
 		RocketListView->AddItem(RocketItem);

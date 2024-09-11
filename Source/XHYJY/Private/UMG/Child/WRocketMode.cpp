@@ -21,9 +21,8 @@ void UWRocketMode::InitWidget()
 	
 	RocketName->SetText(FText::FromString(ItemData->RocketName));
 	RocketEnglishName->SetText(FText::FromString(ItemData->RocketEnglishName));
-	RocketImage->SetBrushFromTexture(ItemData->RocketImage);
-	RocketImage->SetDesiredSizeOverride(ItemData->RocketImage->GetImportedSize());
-	CarryingCapacity->SetText(FText::FromString(FString::SanitizeFloat(ItemData->CarryingCapacity)));
+	RocketImage->SetBrushFromTexture(ItemData->RocketImage, true);
+	CarryingCapacity->SetText(FText::FromString(FString::FromInt(FMath::RoundToInt(ItemData->CarryingCapacity))));
 }
 
 void UWRocketMode::SelectMode(bool bMode)

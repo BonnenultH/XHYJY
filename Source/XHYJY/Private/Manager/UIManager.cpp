@@ -114,8 +114,8 @@ void AUIManager::InitTaskTable()
 
 void AUIManager::InitRocketTable()
 {
-	TArray<FSelectRocket*> AllTaskArry;
-	ResourceManager->RocketSelect->GetAllRows<FSelectRocket>("", AllTaskArry);
+	TArray<FRocketTable*> AllTaskArry;
+	ResourceManager->RocketSelect->GetAllRows<FRocketTable>("", AllTaskArry);
 	
 	for(auto Task : AllTaskArry)
 	{

@@ -81,6 +81,8 @@ enum class ERocketType : uint8
 	ERT_CZ_3,
 	ERT_CZ_3A,
 	ERT_CZ_3B,
+	ERT_CZ_3BG2,
+	ERT_CZ_3BG3,
 	ERT_CZ_3C,
 	ERT_CZ_4A,
 	ERT_CZ_4B,
@@ -92,7 +94,7 @@ enum class ERocketType : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FSelectRocket : public FTableRowBase
+struct FRocketTable : public FTableRowBase
 {
 	GENERATED_BODY()
 public:
@@ -109,7 +111,7 @@ public:
 	float CarryingCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString Price;
+	int32 Price;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* RocketImage;
@@ -200,7 +202,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString HTQDes;
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTaskRocket TaskRocket1;
 
@@ -272,7 +274,7 @@ class XHYJY_API UItemRocket : public UObject
 {
 	GENERATED_BODY()
 public:
-	void InitRocketData(FSelectRocket* Data)
+	void InitRocketData(FRocketTable* Data)
 	{
 		RocketType			= Data->RocketType;
 		RocketName			= Data->RocketCNName;
@@ -296,7 +298,7 @@ public:
 	float CarryingCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString Price;
+	int32 Price;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* RocketImage;

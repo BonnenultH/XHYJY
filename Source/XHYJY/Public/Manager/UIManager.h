@@ -55,7 +55,7 @@ public:
 		return HTQCategoryData;
 	}
 
-	FSelectRocket* GetRocketData(ERocketType RocketType)
+	FRocketTable* GetRocketData(ERocketType RocketType)
 	{
 		return RocketMap[RocketType];
 	}
@@ -70,7 +70,7 @@ protected:
 	float Interval;
 
 	FHTQCategoryData HTQCategoryData;
-	TMap<ERocketType, FSelectRocket*> RocketMap;
+	TMap<ERocketType, FRocketTable*> RocketMap;
 
 	int32 TaskGrade = 100;
 	

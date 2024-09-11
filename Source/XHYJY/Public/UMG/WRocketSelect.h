@@ -44,14 +44,21 @@ protected:
 	UButton* Button_Ok;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* Chosen;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* ToChosen;
 	
 	UPROPERTY(meta=(BindWidget))
-	UHorizontalBox* ImageBox;
+	UHorizontalBox* SeletedBox;
+	
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* ShowTwoSlide;
+	
 	
 	uint8 SelectNum = 0;
 	TArray<ERocketType> RightRocketArry;
 
 public:
 	FChangeModeDelegate ChangeMode;
+	
 	
 };

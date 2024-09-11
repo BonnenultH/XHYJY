@@ -22,7 +22,7 @@ void UWHoisting::InitWidget()
 	UGameplayStatics::LoadStreamLevel(GetWorld(), "XHYJY_Out_JQ", true, true,info2);
 
 	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UWHoisting::LoadLevelAssets,1.0f, false, 0.02f);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UWHoisting::LoadLevelAssets,1.0f, false, 0.002f);
 
 }
 void UWHoisting::LoadLevelAssets()

@@ -40,7 +40,7 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UDataTable> TableObj(TEXT("'/Game/UMG/DataTable/HTQTask.HTQTask'"));
 	HTQTasks= TableObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UDataTable> RocketSeleOBj(TEXT("'/Game/UMG/DataTable/RocketSelect.RocketSelect'"));
+	ConstructorHelpers::FObjectFinder<UDataTable> RocketSeleOBj(TEXT("'/Game/UMG/DataTable/RocketTable.RocketTable'"));
 	RocketSelect= RocketSeleOBj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketSeleBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG_Selected.BG_Selected'"));
@@ -67,8 +67,6 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
 	WarningMaterial= WarningObj.Object;
 	
-	//ConstructorHelpers::FObjectFinder<ULevelSequence> LevelseqObj(TEXT("'/Game/Model/Sequence/JZ_Sequence.JZ_Sequence'"));
-	//LevelSequence = LevelseqObj.Object;
 }
 
 // Called when the game starts or when spawned
@@ -87,7 +85,7 @@ void AResourceManager::InitManager()
 {
 	Super::InitManager();
 	GenderMaterialInstance = GetWorld()->GetParameterCollectionInstance(GenderMaterial);
-	
+	LevelSequence = LoadObject<ULevelSequence>(this,TEXT("'/Game/Model/Sequence/JZ_Sequence.JZ_Sequence'"));
 	LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), LevelSequence, FMovieSceneSequencePlaybackSettings(),currentLevelSequenceActor);
 }
 
