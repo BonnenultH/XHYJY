@@ -11,6 +11,7 @@ void UWRocketSelect::InitWidget()
 {
 	Super::InitWidget();
 
+
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
 	WBP_States->InitWidget();
@@ -21,6 +22,7 @@ void UWRocketSelect::InitWidget()
 	InitRocketView();
 
 	ToChosen->SetText(FText::FromString(FString::FromInt(RightRocketArry.Num())));
+	
 	PlayAnimation(ShowTwoSlide);
 }
 

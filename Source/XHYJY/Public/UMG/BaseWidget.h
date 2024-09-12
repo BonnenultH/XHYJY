@@ -18,6 +18,7 @@
 #include "LevelSequencePlayer.h"
 #include "Components/ProgressBar.h"
 #include "Components/HorizontalBox.h"
+#include "Components/CanvasPanel.h"
 #include "BaseWidget.generated.h"
 
 

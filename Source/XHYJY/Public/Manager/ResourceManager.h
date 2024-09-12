@@ -91,11 +91,8 @@ public:
 	class ULevelSequence* LevelSequence;
 
 	UPROPERTY()
-	class ULevelSequencePlayer* LevelSequencePlayer;
+	class ULevelSequencePlayer* MainLevelSequencePlayer;
 
 	class ALevelSequenceActor * currentLevelSequenceActor = nullptr;
-	
-	
-	
 	
 };

@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "UMG/BaseWidget.h"
 #include "WHoisting.generated.h"
 
@@ -15,8 +14,16 @@ class XHYJY_API UWHoisting : public UBaseWidget
 	GENERATED_BODY()
 
 protected:
-
 	void LoadLevelAssets();
+
+	UFUNCTION()
+	void PlayOperateInstructions();
+
+	UFUNCTION()
+	void PlayReverseOperateIns();
+
+	void GoHoisting();
+	
 public:
 	virtual void InitWidget() override;
 
@@ -27,4 +34,23 @@ protected:
 	UBaseWidget* WBP_Timing;
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_States;
+
+	UPROPERTY(meta=(BindWidget))
+	UCanvasPanel* Hoisting;
+
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_ClickAssembly;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_OperateInstructions;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_ok;
+
+	
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* Instructions;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* Tests;
+
+	class APlayerCameraManager* PlayerCameraManager;
+	TArray<AActor*> MyPlayerCameras;
 };
