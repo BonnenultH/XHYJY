@@ -93,6 +93,18 @@ enum class ERocketType : uint8
 	ERT_CZ_7,
 };
 
+UENUM(BlueprintType)
+enum class ERocketPartsType : uint8
+{
+	ERP_None,
+	ERP_EscapeTower,
+	ERP_Cowling,
+	ERP_CoreThreeLevels,
+	ERP_CoreTwoLevels,
+	ERP_CoreOneLevel,
+	ERP_Boosters,
+};
+
 USTRUCT(BlueprintType)
 struct FRocketTable : public FTableRowBase
 {
@@ -267,6 +279,55 @@ public:
 
 public:
 	TMap<EHFCategory, FHTQFirstData> FirstDataMap;
+};
+
+USTRUCT(BlueprintType)
+struct FPartsAttribute
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* UnselectedRocketPart;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* selectedRocketPart;
+
+};
+
+USTRUCT(BlueprintType)
+struct FSingleRocketPart
+{
+	GENERATED_BODY()
+	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ERocketPartsType RocketPartsType = ERocketPartsType::ERP_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString  RocketPartName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FPartsAttribute ImagePartDiagram;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FPartsAttribute TextPartDiagram;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bchosen = false;
+	
+};
+
+
+USTRUCT(BlueprintType)
+struct FDiagramUITable : public FTableRowBase
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ERocketType RocketType = ERocketType::ERT_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FSingleRocketPart>  RocketParts;
 };
 
 UCLASS()

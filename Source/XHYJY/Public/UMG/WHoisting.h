@@ -14,6 +14,8 @@ class XHYJY_API UWHoisting : public UBaseWidget
 	GENERATED_BODY()
 
 protected:
+	void InitDiagram();
+	
 	void LoadLevelAssets();
 
 	UFUNCTION()
@@ -37,6 +39,13 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 	UCanvasPanel* Hoisting;
+	UPROPERTY(meta=(BindWidget))
+	UVerticalBox* VerticalBox_PartImage;
+	UPROPERTY(meta=(BindWidget))
+	UVerticalBox* VerticalBox_PartText;
+
+	
+	
 
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_ClickAssembly;
@@ -50,7 +59,8 @@ protected:
 	UWidgetAnimation* Instructions;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Tests;
-
-	class APlayerCameraManager* PlayerCameraManager;
+	
 	TArray<AActor*> MyPlayerCameras;
+
+	
 };

@@ -42,6 +42,9 @@ AResourceManager::AResourceManager()
 	
 	ConstructorHelpers::FObjectFinder<UDataTable> RocketSeleOBj(TEXT("'/Game/UMG/DataTable/RocketTable.RocketTable'"));
 	RocketSelect= RocketSeleOBj.Object;
+
+	ConstructorHelpers::FObjectFinder<UDataTable> RocketPartTableObj(TEXT("'/Game/UMG/DataTable/RocketPartDiagram.RocketPartDiagram'"));
+	RocketPartTable= RocketPartTableObj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketSeleBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG_Selected.BG_Selected'"));
 	RocketSelectedBG= RocketSeleBGObj.Object;

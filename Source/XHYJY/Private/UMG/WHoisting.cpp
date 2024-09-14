@@ -8,10 +8,6 @@
 #include "Engine/LevelStreaming.h"
 #include "GameFramework/PlayerController.h"
 
-
-
-
-
 void UWHoisting::InitWidget()
 {
 	Super::InitWidget();
@@ -21,7 +17,6 @@ void UWHoisting::InitWidget()
 	WBP_Timing->InitWidget();
 	WBP_States->InitWidget();
 	UIManager->OnUpdateProgress.Broadcast();
-	Hoisting->SetVisibility(ESlateVisibility::Collapsed);
 	
 	FLatentActionInfo info;
 	info.UUID = FMath::Rand();
@@ -34,7 +29,24 @@ void UWHoisting::InitWidget()
 
 	Button_OperateInstructions->OnClicked.AddDynamic(this, &UWHoisting::PlayOperateInstructions);
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);
-	
+
+	InitDiagram();
+}
+
+void UWHoisting::InitDiagram()
+{
+	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(ERocketType::ERT_CZ_3B);
+	for(int i = 0; i < UIDiagram->RocketParts.Num(); ++i)
+	{
+		auto PartImage =NewObject<UImage>(this);
+		auto PartText =NewObject<UImage>(this);
+		VerticalBox_PartImage->AddChildToVerticalBox(PartImage);
+		VerticalBox_PartText->AddChildToVerticalBox(PartText);
+		
+		PartImage->SetBrushFromTexture(UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart);
+		PartText->SetBrushFromTexture(UIDiagram->RocketParts[i].TextPartDiagram.UnselectedRocketPart);
+
+	}
 }
 
 void UWHoisting::LoadLevelAssets()
@@ -71,11 +83,8 @@ void UWHoisting::GoHoisting()
 	Hoisting->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 
 	UGameplayStatics::GetAllActorsOfClassWithTag(this, ACameraActor::StaticClass(),"MainCamera",MyPlayerCameras);
-	for(auto* Camera : MyPlayerCameras)
-	{
-		UE_LOG(LogTemp, Log, TEXT("摄像机的名字是:%s"), *(Camera->GetName()));
-		UGameplayStatics::GetPlayerController(this, 0)->SetViewTarget(Camera);
-	}
+	UGameplayStatics::GetPlayerController(this, 0)->SetViewTarget(MyPlayerCameras[0]);
+	
 }
 
 

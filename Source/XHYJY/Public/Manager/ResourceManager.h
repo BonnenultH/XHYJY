@@ -55,6 +55,9 @@ public:
 
 	UPROPERTY()
 	UDataTable* RocketSelect;
+
+	UPROPERTY()
+	UDataTable* RocketPartTable;
 	
 	UPROPERTY()
 	UTexture2D* SelectBG;

@@ -37,6 +37,7 @@ void AUIManager::InitManager()
 	InitUserFileGender();
 	InitTaskTable();
 	InitRocketTable();
+	InitRocketPartDiagram();
 }
 
 void AUIManager::UpdateProgress()
@@ -122,6 +123,16 @@ void AUIManager::InitRocketTable()
 		RocketMap.Add(Task->RocketType, Task);
 	}
 	
+}
+
+void AUIManager::InitRocketPartDiagram()
+{
+	TArray<FDiagramUITable*> AllRocketPartsTables;
+	ResourceManager->RocketPartTable->GetAllRows("",AllRocketPartsTables);
+	for(auto Part:AllRocketPartsTables)
+	{
+		DiagramMap.Add(Part->RocketType,Part);
+	}
 }
 
 void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)

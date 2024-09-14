@@ -29,7 +29,8 @@ protected:
 	void InitTaskTable();
 
 	void InitRocketTable();
-	
+
+	void InitRocketPartDiagram();
 
 	UFUNCTION()
 	void UpdateProgress();
@@ -64,6 +65,10 @@ public:
 	{
 		TaskGrade -= Grade;
 	}
+
+	FDiagramUITable* GetDiagramMap(ERocketType RocketType){
+		return DiagramMap[RocketType];
+	}
 	
 protected:
 	int32 ManagerProgress = 0;
@@ -72,6 +77,7 @@ protected:
 	FHTQCategoryData HTQCategoryData;
 	TMap<ERocketType, FRocketTable*> RocketMap;
 
+	TMap<ERocketType, FDiagramUITable*> DiagramMap;
 	int32 TaskGrade = 100;
 	
 public:
