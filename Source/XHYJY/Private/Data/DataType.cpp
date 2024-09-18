@@ -2,7 +2,33 @@
 
 
 #include "Data/DataType.h"
+#include "GM/VDPawn.h"
+#include "Kismet/GameplayStatics.h"
+#include "Manager/UIManager.h"
 
+ERocketType UItemTask::GetCheapestRocket()
+{
+	if(CheapestRocketType != ERocketType::ERT_None)
+	{
+		return CheapestRocketType;
+	}
+		
+	int32 Price = 0;
+	for(auto Rocket : RocketArry)
+	{
+		AVDPawn* Pawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+		FRocketTable* RocketData = Pawn->UIManager->GetRocketData(Rocket.RocketType);
+		if(Rocket.bRight)
+		{
+			if(Price > RocketData->Price || Price == 0)
+			{
+				Price = RocketData->Price;
+				CheapestRocketType = RocketData->RocketType;
+			}
+		}
+	}
+	return CheapestRocketType;
+}
 
 // Sets default values
 ADataType::ADataType()

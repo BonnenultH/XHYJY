@@ -28,6 +28,14 @@ enum class EGender:uint8
 	EG_Woman,
 };
 
+UENUM(BlueprintType)
+enum class ERSMode : uint8
+{
+	ERSM_Capacity,
+	ERSM_Price,
+};
+
+
 struct S_UserInfo
 {
 	const WIDECHAR* IDName;
@@ -335,7 +343,7 @@ class XHYJY_API UItemRocket : public UObject
 {
 	GENERATED_BODY()
 public:
-	void InitRocketData(FRocketTable* Data)
+	void InitRocketData(FRocketTable* Data, bool bRight)
 	{
 		RocketType			= Data->RocketType;
 		RocketName			= Data->RocketCNName;
@@ -343,7 +351,10 @@ public:
 		CarryingCapacity	= Data->CarryingCapacity;
 		Price				= Data->Price;
 		RocketImage			= Data->RocketImage;
+		bRocketRight		= bRight;
 	}
+
+	
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -363,6 +374,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* RocketImage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bRocketRight = false;
 };
 
 UCLASS()
@@ -386,6 +400,9 @@ public:
 		RocketArry.Add(Data.TaskTable->TaskRocket4);
 		RocketArry.Add(Data.TaskTable->TaskRocket5);
 	}
+
+	ERocketType GetCheapestRocket();
+	
 	
 public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -411,6 +428,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FTaskRocket> RocketArry;
+
+	ERocketType CheapestRocketType = ERocketType::ERT_None;
 };
 
 

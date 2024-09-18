@@ -6,7 +6,7 @@
 #include "UMG/BaseWidget.h"
 #include "WRocketSelect.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FChangeModeDelegate, bool)
+DECLARE_MULTICAST_DELEGATE_OneParam(FChangeModeDelegate, ERSMode)
 
 /**
  * 
@@ -19,18 +19,38 @@ class XHYJY_API UWRocketSelect : public UBaseWidget
 protected:
 	void InitRocketView();
 
+	UFUNCTION()
 	void CheckSelectRocket();
+
+	void SelectRocketError();
+
+	void SelectRocketRight();
+
+	void ReInitialRocketView();
+
+	void SelectPRocketError();
 	
+	void CreateLaunch();
+	
+	UFUNCTION(BlueprintCallable)
+	void SelectRocketItem(UObject* ObjItem);
+
 public:
 	virtual void InitWidget() override;
-
-	UFUNCTION(BlueprintCallable)
-	void SelectRocketItem(UObject* objItem);
-
-	UFUNCTION()
-	void CreateLaunch();
-
+	
+	ERSMode GetCurMode()
+	{
+		return CurMode;
+	}
+	
 protected:
+	UPROPERTY(meta=(BindWidget))
+	UCanvasPanel* CanvasPanel;
+	UPROPERTY(meta=(BindWidget))
+	UWidgetSwitcher* SwitchLeft;
+	UPROPERTY(meta=(BindWidget))
+	UWidgetSwitcher* SwitchRight;
+	
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
 	UPROPERTY(meta=(BindWidget))
@@ -52,13 +72,15 @@ protected:
 	
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* ShowTwoSlide;
-	
-	
-	uint8 SelectNum = 0;
-	TArray<ERocketType> RightRocketArry;
+
+	TArray<UImage*> SeletedBoxArry;
+	TArray<FTaskRocket> RightRocketArry;
+	TArray<UItemRocket*> SelectedRocketArry;
+	FTimerHandle TimerHandle;
+
+	ERSMode CurMode = ERSMode::ERSM_Capacity;
 
 public:
 	FChangeModeDelegate ChangeMode;
-	
 	
 };

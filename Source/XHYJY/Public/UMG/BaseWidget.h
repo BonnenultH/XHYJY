@@ -19,6 +19,7 @@
 #include "Components/ProgressBar.h"
 #include "Components/HorizontalBox.h"
 #include "Components/CanvasPanel.h"
+#include "Components/WidgetSwitcher.h"
 #include "BaseWidget.generated.h"
 
 

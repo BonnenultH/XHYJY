@@ -52,6 +52,9 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketUnselectedBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG.BG'"));
 	RocketUnselectedBG= RocketUnselectedBGObj.Object;
 
+	ConstructorHelpers::FObjectFinder<UTexture2D> RocketWrongObj(TEXT("'/Game/UMG/Child/RocketMode/WrongBG.WrongBG'"));
+	RocketWrong= RocketWrongObj.Object;
+	
 	ConstructorHelpers::FObjectFinder<UTexture2D> JQObj(TEXT("'/Game/UMG/Launch/button/JQ.JQ'"));
 	JQ= JQObj.Object;
 
@@ -64,9 +67,6 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UTexture2D> WCObj(TEXT("'/Game/UMG/Launch/button/WC.WC'"));
 	WC= WCObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> RocketWrongObj(TEXT("'/Game/UMG/Child/RocketMode/WrongBG.WrongBG'"));
-	RocketWrong= RocketWrongObj.Object;
-
 	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
 	WarningMaterial= WarningObj.Object;
 	

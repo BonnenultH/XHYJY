@@ -17,14 +17,14 @@ class XHYJY_API UWRocketMode : public UBaseWidget, public IUserObjectListEntry
 protected:
 	// bMode = false : 代表是运载；bMode = true : 代表是经济；
 	UFUNCTION()
-	void SelectMode(bool bMode = false);
+	void SelectMode(ERSMode Mode);
 
 public:
 	virtual void InitWidget() override;
 
     virtual void NativeOnListItemObjectSet(UObject* ListItemObject) override;
 
-	void BGChanged(bool bSelected);
+	void BGChanged(int32 bSelected);
 
 protected:
 	UPROPERTY(meta=(BindWidget))

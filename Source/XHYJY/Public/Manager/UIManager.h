@@ -66,6 +66,11 @@ public:
 		TaskGrade -= Grade;
 	}
 
+	int32 GetGrade()
+	{
+		return TaskGrade;
+	}
+
 	FDiagramUITable* GetDiagramMap(ERocketType RocketType){
 		return DiagramMap[RocketType];
 	}
