@@ -24,6 +24,9 @@ protected:
 	UFUNCTION()
 	void PlayReverseOperateIns();
 
+	UFUNCTION()
+	void PlayErrorPart();
+
 	void GoHoisting();
 	
 public:
@@ -43,8 +46,6 @@ protected:
 	UVerticalBox* VerticalBox_PartImage;
 	UPROPERTY(meta=(BindWidget))
 	UVerticalBox* VerticalBox_PartText;
-
-	
 	
 
 	UPROPERTY(meta=(BindWidget))
@@ -53,14 +54,19 @@ protected:
 	UButton* Button_OperateInstructions;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_ok;
-
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_close;
 	
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Instructions;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Tests;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* ErrorPartSelection;
 	
 	TArray<AActor*> MyPlayerCameras;
 
+	UVerticalBoxSlot* ImageSlot;
+	UVerticalBoxSlot* TextSlot;
 	
 };

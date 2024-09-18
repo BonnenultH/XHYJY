@@ -2,8 +2,8 @@
 
 
 #include "UMG/WHoisting.h"
-
 #include "Camera/CameraActor.h"
+#include "Components/VerticalBoxSlot.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/LevelStreaming.h"
 #include "GameFramework/PlayerController.h"
@@ -29,25 +29,11 @@ void UWHoisting::InitWidget()
 
 	Button_OperateInstructions->OnClicked.AddDynamic(this, &UWHoisting::PlayOperateInstructions);
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);
-
+	Button_close->OnClicked.AddDynamic(this, &UWHoisting::PlayErrorPart);
+	
 	InitDiagram();
 }
 
-void UWHoisting::InitDiagram()
-{
-	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(ERocketType::ERT_CZ_3B);
-	for(int i = 0; i < UIDiagram->RocketParts.Num(); ++i)
-	{
-		auto PartImage =NewObject<UImage>(this);
-		auto PartText =NewObject<UImage>(this);
-		VerticalBox_PartImage->AddChildToVerticalBox(PartImage);
-		VerticalBox_PartText->AddChildToVerticalBox(PartText);
-		
-		PartImage->SetBrushFromTexture(UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart);
-		PartText->SetBrushFromTexture(UIDiagram->RocketParts[i].TextPartDiagram.UnselectedRocketPart);
-
-	}
-}
 
 void UWHoisting::LoadLevelAssets()
 {
@@ -68,6 +54,33 @@ void UWHoisting::LoadLevelAssets()
 	}
 }
 
+void UWHoisting::InitDiagram()
+{
+	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(ERocketType::ERT_CZ_3B);
+	for(int i = 0; i < UIDiagram->RocketParts.Num(); ++i)
+	{
+		auto PartImage =NewObject<UImage>(this);
+		auto PartText =NewObject<UImage>(this);
+		VerticalBox_PartImage->AddChildToVerticalBox(PartImage);
+		VerticalBox_PartText->AddChildToVerticalBox(PartText);
+		ImageSlot = Cast<UVerticalBoxSlot>(PartImage->Slot);
+		if(ImageSlot)
+		{
+			ImageSlot->Size.SizeRule = ESlateSizeRule::Automatic;
+			ImageSlot->HorizontalAlignment = EHorizontalAlignment::HAlign_Center;
+			ImageSlot->VerticalAlignment = VAlign_Top;
+		}
+		if(UIDiagram->RocketParts[i].RocketPartsType == ERocketPartsType::ERP_Boosters)
+		{
+			
+			ImageSlot->SetPadding(FMargin(0,-UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart->GetSizeY(),0,0));
+		}
+		PartImage->SetBrushFromTexture(UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart,true);
+		PartText->SetBrushFromTexture(UIDiagram->RocketParts[i].TextPartDiagram.UnselectedRocketPart, true);
+	}
+	
+}
+
 void UWHoisting::PlayOperateInstructions()
 {
 	PlayAnimation(Instructions);
@@ -76,6 +89,11 @@ void UWHoisting::PlayOperateInstructions()
 void UWHoisting::PlayReverseOperateIns()
 {
 	PlayAnimationReverse(Instructions);
+}
+
+void UWHoisting::PlayErrorPart()
+{
+	PlayAnimationReverse(ErrorPartSelection);
 }
 
 void UWHoisting::GoHoisting()
