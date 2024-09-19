@@ -121,7 +121,7 @@ void UWRocketSelect::CheckSelectRocket()
 		
 		if(bResult)
 		{
-			UIManager->CurRightRocketType = UIManager->SelectTaskData->GetCheapestRocket();
+			UIManager->bShowRocket = true;
 			CreateLaunch();
 		}
 		else

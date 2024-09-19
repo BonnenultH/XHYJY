@@ -35,8 +35,6 @@ protected:
 	UFUNCTION()
 	void CreateRocketSelect();
 
-	void InitOrbitInfo();
-
 	void OrbitInfoFunc(EOrbit Orbit);
 
 	UFUNCTION()
@@ -100,9 +98,5 @@ public:
 	UButton* Button_RightOk;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_WrongAgain;
-
-	
-
-	TMap<EOrbit, FHTQOrbit> OrbitMap;
 	
 };

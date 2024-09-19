@@ -12,23 +12,27 @@ void UWStates::InitWidget()
 		HTQName->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 		HTQName->SetText(FText::FromString(UIManager->SelectTaskData->Name));
 	}
-	if(UIManager->OrbitName != L"")
+	
+	if(UIManager->bShowOrbit)
 	{
 		Orbit->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-		Orbit->SetText(FText::FromString(UIManager->OrbitName));
+		FString Name = UIManager->GetOrbit(UIManager->SelectTaskData->HTQOrbitType).HTQOrbitName;
+		Orbit->SetText(FText::FromString(Name));
 	}
 
-	if(UIManager->CurRightRocketType != ERocketType::ERT_None)
+	if(UIManager->bShowRocket)
 	{
 		Image_Rocket->SetBrushFromTexture(ResourceManager->StatesRocketLight, true);
 		RocketName->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-		RocketName->SetText(FText::FromString(UIManager->GetRocketData(UIManager->CurRightRocketType)->RocketCNName));
+		FString Name = UIManager->GetRocketData(UIManager->SelectTaskData->GetCheapestRocket())->RocketCNName;
+		RocketName->SetText(FText::FromString(Name));
 	}
-	if(UIManager->SelectFirePlace != EFirePlace::EFP_None)
+	
+	if(UIManager->bShowFirePlace)
 	{
 		Image_FirePlace->SetBrushFromTexture(ResourceManager->StatesFireplaceLight, true);
 		FirePlace->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-		//FirePlace->SetText(FText::FromString());
+		FirePlace->SetText(FText::FromString(UIManager->SelectTaskData->FirePlaceName));
 	}
 }
 

@@ -231,6 +231,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString HTQDes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EFirePlace FirePlace;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString FirePlaceName;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTaskRocket TaskRocket1;
@@ -402,7 +408,9 @@ public:
 		ForAppFunc		= Data.TaskTable->ForAppFunc;
 		HTQDes			= Data.TaskTable->HTQDes;
 		HTQOrbitType	= Data.TaskTable->HTQOrbitType;
-
+		FirePlace		= Data.TaskTable->FirePlace;
+		FirePlaceName	= Data.TaskTable->FirePlaceName;
+		
 		RocketArry.Add(Data.TaskTable->TaskRocket1);
 		RocketArry.Add(Data.TaskTable->TaskRocket2);
 		RocketArry.Add(Data.TaskTable->TaskRocket3);
@@ -435,6 +443,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString HTQDes;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EFirePlace FirePlace;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString FirePlaceName;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FTaskRocket> RocketArry;
 

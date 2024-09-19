@@ -30,6 +30,8 @@ protected:
 
 	void InitRocketTable();
 
+	void InitOrbitInfo();
+
 	void InitRocketPartDiagram();
 
 	UFUNCTION()
@@ -74,14 +76,20 @@ public:
 	FDiagramUITable* GetDiagramMap(ERocketType RocketType){
 		return DiagramMap[RocketType];
 	}
-	
+
+	FHTQOrbit GetOrbit(EOrbit OrbitType)
+	{
+		return OrbitMap[OrbitType];
+	}
+
 protected:
 	int32 ManagerProgress = 0;
 	float Interval;
 
 	FHTQCategoryData HTQCategoryData;
 	TMap<ERocketType, FRocketTable*> RocketMap;
-
+	TMap<EOrbit, FHTQOrbit> OrbitMap;
+	
 	TMap<ERocketType, FDiagramUITable*> DiagramMap;
 	int32 TaskGrade = 100;
 	
@@ -92,10 +100,10 @@ public:
 	FProgressDelegate OnUpdateProgress;
 
 	UItemTask* SelectTaskData;
-	FString OrbitName;
 
-	ERocketType CurRightRocketType = ERocketType::ERT_None;
-	EFirePlace SelectFirePlace = EFirePlace::EFP_None;
+	bool bShowOrbit = false;
+	bool bShowRocket = false;
+	bool bShowFirePlace = false;
 	
 	float	ManagerMinute = 2;
 	float	ManagerSecond = 0;

@@ -28,7 +28,7 @@ protected:
 	void ClickedWC();
 
 	UFUNCTION()
-	void CreateAnim();
+	void CheckFirePlace();
 
 	UFUNCTION()
 	void WrongAgain();
@@ -72,6 +72,8 @@ protected:
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* WrongAnswer;
 
-	
+	EFirePlace CurFirePlace = EFirePlace::EFP_None;
+	UPROPERTY()
+	UButton* CurButton;
 	
 };
