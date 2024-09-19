@@ -61,16 +61,19 @@ public:
 	
 	UPROPERTY()
 	UTexture2D* SelectBG;
-
 	UPROPERTY()
 	UTexture2D* UnSelectBG;
 
 	UPROPERTY()
 	UTexture2D* CheckBar;
-
 	UPROPERTY()
 	UTexture2D* UnCheckBar;
 
+	UPROPERTY()
+	UTexture2D* StatesRocketLight;
+	UPROPERTY()
+	UTexture2D* StatesFireplaceLight;
+	
 	UPROPERTY()
 	UTexture2D* JQ;
 	UPROPERTY()
@@ -80,6 +83,11 @@ public:
 	UPROPERTY()
 	UTexture2D* WC;
 
+	UPROPERTY()
+	UTexture2D* CapacityIcon;
+	UPROPERTY()
+	UTexture2D* PriceIcon;
+	
 	UPROPERTY()
 	UTexture2D* RocketSelectedBG;
 	UPROPERTY()

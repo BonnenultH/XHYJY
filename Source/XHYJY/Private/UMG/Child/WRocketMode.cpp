@@ -31,14 +31,14 @@ void UWRocketMode::SelectMode(ERSMode Mode)
 	{
 		Category->SetText(FText::FromString(TEXT("运载能力")));
 		ProgressBar->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-		LogoImage->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+		LogoImage->SetBrushFromTexture(ResourceManager->CapacityIcon,true);
 		ProgressBar->SetPercent(ItemData->CarryingCapacity / 15000);
 	}
 	else if(Mode == ERSMode::ERSM_Price)
 	{
 		Category->SetText(FText::FromString(TEXT("经济能力")));
 		ProgressBar->SetVisibility(ESlateVisibility::Collapsed);
-		LogoImage->SetVisibility(ESlateVisibility::Collapsed);
+		LogoImage->SetBrushFromTexture(ResourceManager->PriceIcon,true);
 	}
 }
 

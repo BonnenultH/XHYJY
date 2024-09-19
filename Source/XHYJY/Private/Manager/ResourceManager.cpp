@@ -36,7 +36,13 @@ AResourceManager::AResourceManager()
 
 	ConstructorHelpers::FObjectFinder<UTexture2D> TexUnCheckBar(TEXT("'/Game/UMG/Child/RocketMode/UnCheckBar.UnCheckBar'"));
 	UnCheckBar = TexUnCheckBar.Object;
-	
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> StatesRocketLightOBj(TEXT("'/Game/UMG/Child/Textures/Rocket_Highlight.Rocket_Highlight'"));
+	StatesRocketLight = StatesRocketLightOBj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> StatesFireplaceLightObj(TEXT("'/Game/UMG/Child/Textures/FirePlace_Highlight.FirePlace_Highlight'"));
+	StatesFireplaceLight = StatesFireplaceLightObj.Object;
+		
 	ConstructorHelpers::FObjectFinder<UDataTable> TableObj(TEXT("'/Game/UMG/DataTable/HTQTask.HTQTask'"));
 	HTQTasks= TableObj.Object;
 	
@@ -45,6 +51,12 @@ AResourceManager::AResourceManager()
 
 	ConstructorHelpers::FObjectFinder<UDataTable> RocketPartTableObj(TEXT("'/Game/UMG/DataTable/RocketPartDiagram.RocketPartDiagram'"));
 	RocketPartTable= RocketPartTableObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> CapacityIconObj(TEXT("'/Game/UMG/Child/RocketMode/Tabel.Tabel'"));
+	CapacityIcon= CapacityIconObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> PriceIconObj(TEXT("'/Game/UMG/Child/RocketMode/PriceTable.PriceTable'"));
+	PriceIcon= PriceIconObj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketSeleBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG_Selected.BG_Selected'"));
 	RocketSelectedBG= RocketSeleBGObj.Object;

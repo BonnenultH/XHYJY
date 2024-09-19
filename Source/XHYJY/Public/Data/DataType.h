@@ -35,7 +35,6 @@ enum class ERSMode : uint8
 	ERSM_Price,
 };
 
-
 struct S_UserInfo
 {
 	const WIDECHAR* IDName;
@@ -99,6 +98,16 @@ enum class ERocketType : uint8
 	ERT_CZ_5B,
 	ERT_CZ_6,
 	ERT_CZ_7,
+};
+
+UENUM(BlueprintType)
+enum class EFirePlace : uint8
+{
+	EFP_None,
+	EFP_JQ,
+	EFP_TY,
+	EFP_XC,
+	EFP_WC,
 };
 
 UENUM(BlueprintType)

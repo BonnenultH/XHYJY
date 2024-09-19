@@ -93,6 +93,9 @@ public:
 
 	UItemTask* SelectTaskData;
 	FString OrbitName;
+
+	ERocketType CurRightRocketType = ERocketType::ERT_None;
+	EFirePlace SelectFirePlace = EFirePlace::EFP_None;
 	
 	float	ManagerMinute = 2;
 	float	ManagerSecond = 0;

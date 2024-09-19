@@ -40,7 +40,7 @@ public:
 	virtual void InitWidget() override;
 
 
-public:
+protected:
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
 	UPROPERTY(meta=(BindWidget))
@@ -71,5 +71,7 @@ public:
 	UWidgetAnimation* RightAnswer;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* WrongAnswer;
+
+	
 	
 };

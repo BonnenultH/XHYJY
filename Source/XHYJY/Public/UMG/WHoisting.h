@@ -19,6 +19,9 @@ protected:
 	void LoadLevelAssets();
 
 	UFUNCTION()
+	void PlayStartHoist();
+	
+	UFUNCTION()
 	void PlayOperateInstructions();
 
 	UFUNCTION()
@@ -47,7 +50,8 @@ protected:
 	UPROPERTY(meta=(BindWidget))
 	UVerticalBox* VerticalBox_PartText;
 	
-
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_StartHoist;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_ClickAssembly;
 	UPROPERTY(meta=(BindWidget))
@@ -63,6 +67,8 @@ protected:
 	UWidgetAnimation* Tests;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* ErrorPartSelection;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* StartHoist;
 	
 	TArray<AActor*> MyPlayerCameras;
 

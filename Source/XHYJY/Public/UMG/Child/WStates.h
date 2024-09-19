@@ -17,16 +17,19 @@ class XHYJY_API UWStates : public UBaseWidget
 public:
 	virtual void InitWidget() override;
 
-public:
+protected:
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* HTQName;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* Orbit;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* RocketName;
-
-	
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* FirePlace;
+
+	UPROPERTY(meta=(BindWidget))
+	UImage* Image_Rocket;
+	UPROPERTY(meta=(BindWidget))
+	UImage* Image_FirePlace;
 	
 };

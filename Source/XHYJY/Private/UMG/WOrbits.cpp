@@ -16,6 +16,7 @@ void UWOrbits::InitWidget()
 	WBP_Timing->InitWidget();
 	Left_Orbit->SetVisibility(ESlateVisibility::Collapsed);
 	WBP_States->InitWidget();
+	
 
 	LEO->OnClicked.AddDynamic(this,&UWOrbits::LEOClicked);
 	MEO->OnClicked.AddDynamic(this,&UWOrbits::MEOClicked);

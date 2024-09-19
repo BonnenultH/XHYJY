@@ -16,6 +16,7 @@ void UWHoisting::InitWidget()
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
 	WBP_States->InitWidget();
+
 	UIManager->OnUpdateProgress.Broadcast();
 	
 	FLatentActionInfo info;
@@ -30,6 +31,7 @@ void UWHoisting::InitWidget()
 	Button_OperateInstructions->OnClicked.AddDynamic(this, &UWHoisting::PlayOperateInstructions);
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);
 	Button_close->OnClicked.AddDynamic(this, &UWHoisting::PlayErrorPart);
+	Button_StartHoist->OnClicked.AddDynamic(this, &UWHoisting::PlayStartHoist);
 	
 	InitDiagram();
 }
@@ -47,12 +49,13 @@ void UWHoisting::LoadLevelAssets()
         	{
         		ResourceManager->MainLevelSequencePlayer->Play();
 			
-		       
 				FTimerHandle TimeAnimDelay;
 				GetWorld()->GetTimerManager().SetTimer(TimeAnimDelay, this, &UWHoisting::GoHoisting, 1.0f, false, ResourceManager->MainLevelSequencePlayer->GetDuration().AsSeconds());
         	}
 	}
 }
+
+
 
 void UWHoisting::InitDiagram()
 {
@@ -81,6 +84,10 @@ void UWHoisting::InitDiagram()
 	
 }
 
+void UWHoisting::PlayStartHoist()
+{
+	PlayAnimation(StartHoist);
+}
 void UWHoisting::PlayOperateInstructions()
 {
 	PlayAnimation(Instructions);

@@ -11,6 +11,7 @@ void UWLaunch::InitWidget()
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
 	UIManager->OnUpdateProgress.Broadcast();
+	WBP_States->InitWidget();
 
 	Button_JQ->OnClicked.AddDynamic(this, &UWLaunch::ClickedJQ);
 	Button_TY->OnClicked.AddDynamic(this, &UWLaunch::ClickedTY);
@@ -25,21 +26,25 @@ void UWLaunch::InitWidget()
 void UWLaunch::ClickedJQ()
 {
 	ImageBG->SetBrushFromTexture(ResourceManager->JQ);
+	UIManager->SelectFirePlace = EFirePlace::EFP_JQ;
 }
 
 void UWLaunch::ClickedTY()
 {
 	ImageBG->SetBrushFromTexture(ResourceManager->TY);
+	UIManager->SelectFirePlace = EFirePlace::EFP_TY;
 }
 
 void UWLaunch::ClickedXC()
 {
 	ImageBG->SetBrushFromTexture(ResourceManager->XC);
+	UIManager->SelectFirePlace = EFirePlace::EFP_XC;
 }
 
 void UWLaunch::ClickedWC()
 {
 	ImageBG->SetBrushFromTexture(ResourceManager->WC);
+	UIManager->SelectFirePlace = EFirePlace::EFP_WC;
 }
 
 void UWLaunch::CreateAnim()
