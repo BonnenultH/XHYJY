@@ -81,7 +81,7 @@ void UWOrbits::CreateRocketSelect()
 	if(CurSelectedOrbit.HTQOrbitType == UIManager->SelectTaskData->HTQOrbitType)
 	{
 		PlayAnimation(Orbit_RightPop);
-		UIManager->bShowOrbit = true;
+	
 	}
 	else
 	{
@@ -93,6 +93,7 @@ void UWOrbits::CreateRocketSelect()
 		}
 		else
 		{
+			UIManager->bShowOrbit = true;
 			UIManager->CreateVDWidget(EWidgetType::EWT_RocketSelect);
 		}
 	}
@@ -109,6 +110,7 @@ void UWOrbits::OrbitInfoFunc(EOrbit Orbit)
 void UWOrbits::RightAnswer()
 {
 	PlayAnimationReverse(Orbit_RightPop);
+	UIManager->bShowOrbit = true;
 	UIManager->CreateVDWidget(EWidgetType::EWT_RocketSelect);
 }
 

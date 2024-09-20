@@ -90,6 +90,7 @@ protected:
 	TMap<ERocketType, FRocketTable*> RocketMap;
 	TMap<EOrbit, FHTQOrbit> OrbitMap;
 	
+	
 	TMap<ERocketType, FDiagramUITable*> DiagramMap;
 	int32 TaskGrade = 100;
 	

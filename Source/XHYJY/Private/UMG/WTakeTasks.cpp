@@ -75,8 +75,7 @@ void UWTakeTasks::InitRightInfo(UItemTask* ItemData)
 
 void UWTakeTasks::InitSelectedInfo(UItemTask* ItemData)
 {
-	HTQ_Image->SetBrushFromTexture(ItemData->Image);
-	HTQ_Image->SetBrushSize(ItemData->Image->GetImportedSize());
+	HTQ_Image->SetBrushFromTexture(ItemData->Image, true);
 	HTQName->SetText(FText::FromString(ItemData->Name));
 	LockFunc->SetText(FText::FromString(ItemData->ForAppFunc));
 	HTQ_Description->SetText(FText::FromString(ItemData->HTQDes));

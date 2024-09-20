@@ -34,6 +34,7 @@ void AUIManager::InitManager()
 	
 	OnUpdateProgress.AddUObject(this, &AUIManager::UpdateProgress);
 	CreateVDWidget(EWidgetType::EWT_HomePage);
+	
 	InitUserFileGender();
 	InitRocketTable();
 	InitTaskTable();
@@ -178,9 +179,9 @@ void AUIManager::CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget)
 		Widget->ReturnWidgetType = CurWidgetType;
 	}
 	
+	Widget->InitWidget();
 	CurWidgetType = WidgetType;
 	WidgetMap.Add(WidgetType, Widget);
-	Widget->InitWidget();
 	Widget->AddToViewport();
 }
 

@@ -66,6 +66,9 @@ protected:
 	UTextBlock* Chosen;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* ToChosen;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* TextBlock_CapacityRange;
+	
 	
 	UPROPERTY(meta=(BindWidget))
 	UHorizontalBox* SeletedBox;

@@ -237,6 +237,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString FirePlaceName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString CapacityRange;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FTaskRocket TaskRocket1;
@@ -369,8 +372,6 @@ public:
 		bRocketRight		= bRight;
 	}
 
-	
-	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ERocketType RocketType = ERocketType::ERT_None;
@@ -410,6 +411,7 @@ public:
 		HTQOrbitType	= Data.TaskTable->HTQOrbitType;
 		FirePlace		= Data.TaskTable->FirePlace;
 		FirePlaceName	= Data.TaskTable->FirePlaceName;
+		CapacityRange   = Data.TaskTable->CapacityRange;
 		
 		RocketArry.Add(Data.TaskTable->TaskRocket1);
 		RocketArry.Add(Data.TaskTable->TaskRocket2);
@@ -448,6 +450,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString FirePlaceName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString CapacityRange;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FTaskRocket> RocketArry;

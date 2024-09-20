@@ -15,6 +15,8 @@ class XHYJY_API UWHoisting : public UBaseWidget
 
 protected:
 	void InitDiagram();
+
+	void InitRocketPartInfos();
 	
 	void LoadLevelAssets();
 
@@ -60,6 +62,11 @@ protected:
 	UButton* Button_ok;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_close;
+
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* RocketPartName;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* TextBlock_RocketPartInfo;
 	
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Instructions;
@@ -74,5 +81,7 @@ protected:
 
 	UVerticalBoxSlot* ImageSlot;
 	UVerticalBoxSlot* TextSlot;
+
+	TMap<ERocketPartsType, FString> RocketPartInfosMap;
 	
 };

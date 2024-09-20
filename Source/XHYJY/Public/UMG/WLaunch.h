@@ -66,11 +66,15 @@ protected:
 	UButton* Button_Again;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_GoHoist;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_WrongGoHoist;
 
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* RightAnswer;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* WrongAnswer;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* WrongAnswer_GoHoist;
 
 	EFirePlace CurFirePlace = EFirePlace::EFP_None;
 	UPROPERTY()

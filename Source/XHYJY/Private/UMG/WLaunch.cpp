@@ -23,6 +23,11 @@ void UWLaunch::InitWidget()
 	Button_Ok->OnClicked.AddDynamic(this, &UWLaunch::CheckFirePlace);
 	Button_Again->OnClicked.AddDynamic(this, &UWLaunch::WrongAgain);
 	Button_GoHoist->OnClicked.AddDynamic(this, &UWLaunch::CreateHoisting);
+	Button_WrongGoHoist->OnClicked.AddDynamic(this, &UWLaunch::CreateHoisting);
+
+	Button_JQ->SetIsEnabled(false);
+	CurButton = Button_JQ;
+	CurFirePlace = EFirePlace::EFP_JQ;
 }
 
 void UWLaunch::ClickedJQ()
@@ -51,14 +56,28 @@ void UWLaunch::ClickedTY()
 
 void UWLaunch::ClickedXC()
 {
+	if(CurButton)
+	{
+		CurButton->SetIsEnabled(true);
+	}
 	ImageBG->SetBrushFromTexture(ResourceManager->XC);
 	
+	CurFirePlace = EFirePlace::EFP_XC;
+	Button_XC->SetIsEnabled(false);
+	CurButton = Button_XC;
 }
 
 void UWLaunch::ClickedWC()
 {
+	if(CurButton)
+	{
+		CurButton->SetIsEnabled(true);
+	}
 	ImageBG->SetBrushFromTexture(ResourceManager->WC);
 	
+	CurFirePlace = EFirePlace::EFP_WC;
+	Button_WC->SetIsEnabled(false);
+	CurButton = Button_WC;
 }
 
 void UWLaunch::CheckFirePlace()
@@ -72,6 +91,8 @@ void UWLaunch::CheckFirePlace()
 			PlayAnimation(WrongAnswer);
 			return;
 		}
+		PlayAnimation(WrongAnswer_GoHoist);
+		return;
 	}
 	PlayAnimation(RightAnswer);
 }

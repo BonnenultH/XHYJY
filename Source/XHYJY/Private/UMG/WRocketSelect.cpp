@@ -49,6 +49,7 @@ void UWRocketSelect::InitRocketView()
 		}
 		Chosen->SetText(FText::FromString(FString::FromInt(0)));
 		ToChosen->SetText(FText::FromString(FString::FromInt(RightRocketArry.Num())));
+		TextBlock_CapacityRange->SetText(FText::FromString(UIManager->SelectTaskData->CapacityRange));
 	}
 	else if(CurMode == ERSMode::ERSM_Price)
 	{
@@ -121,7 +122,7 @@ void UWRocketSelect::CheckSelectRocket()
 		
 		if(bResult)
 		{
-			UIManager->bShowRocket = true;
+			
 			CreateLaunch();
 		}
 		else
@@ -236,5 +237,6 @@ void UWRocketSelect::SelectRocketItem(UObject* ObjItem)
 
 void UWRocketSelect::CreateLaunch()
 {
+	UIManager->bShowRocket = true;
 	UIManager->CreateVDWidget(EWidgetType::EWT_Launch);
 }
