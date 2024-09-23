@@ -73,7 +73,8 @@ public:
 		return TaskGrade;
 	}
 
-	FDiagramUITable* GetDiagramMap(ERocketType RocketType){
+	FDiagramUITable* GetDiagramMap(ERocketType RocketType)
+	{
 		return DiagramMap[RocketType];
 	}
 
@@ -100,7 +101,7 @@ public:
 
 	FProgressDelegate OnUpdateProgress;
 
-	UItemTask* SelectTaskData;
+	UItemTask* SelectTaskItem;
 
 	bool bShowOrbit = false;
 	bool bShowRocket = false;

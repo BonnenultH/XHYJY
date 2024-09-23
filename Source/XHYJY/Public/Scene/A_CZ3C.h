@@ -4,19 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Data/DataType.h"
-#include "Blueprint/UserWidget.h"
-#include "GM/VDPawn.h"
-#include "BaseManager.generated.h"
+#include "A_CZ3C.generated.h"
 
 UCLASS()
-class XHYJY_API ABaseManager : public AActor
+class XHYJY_API AA_CZ3C : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABaseManager();
+	AA_CZ3C();
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,18 +23,4 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void InitManager();
-	
-public:
-	UPROPERTY()
-	AVDPawn* VDPawn;
-	
-	UPROPERTY()
-	AResourceManager* ResourceManager;
-	
-	UPROPERTY()
-	AUIManager* UIManager;
-
-	UPROPERTY()
-	ASceneManager* SceneManager;
 };

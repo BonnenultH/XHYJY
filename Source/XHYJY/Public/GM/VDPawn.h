@@ -34,9 +34,16 @@ public:
 public:
 	UPROPERTY()
 	class AResourceManager* ResourceManager;
-
 	UPROPERTY()
 	class AUIManager* UIManager;
+	UPROPERTY()
+	class ASceneManager* SceneManager;
 
 	S_UserInfo UserInfoData;
+
+	UPROPERTY()
+	class UCameraComponent* Camera;
+
+	UPROPERTY()
+	UStaticMeshComponent* HoistMesh;
 };

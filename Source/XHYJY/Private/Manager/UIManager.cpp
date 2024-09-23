@@ -153,9 +153,9 @@ void AUIManager::InitRocketPartDiagram()
 {
 	TArray<FDiagramUITable*> AllRocketPartsTables;
 	ResourceManager->RocketPartTable->GetAllRows("",AllRocketPartsTables);
-	for(auto Part:AllRocketPartsTables)
+	for(auto Part: AllRocketPartsTables)
 	{
-		DiagramMap.Add(Part->RocketType,Part);
+		DiagramMap.Add(Part->RocketType, Part);
 	}
 }
 

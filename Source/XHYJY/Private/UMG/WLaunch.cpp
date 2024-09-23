@@ -82,7 +82,7 @@ void UWLaunch::ClickedWC()
 
 void UWLaunch::CheckFirePlace()
 {
-	if(CurFirePlace != UIManager->SelectTaskData->FirePlace)
+	if(CurFirePlace != UIManager->SelectTaskItem->FirePlace)
 	{
 		if(ErrorNums != 0)
 		{

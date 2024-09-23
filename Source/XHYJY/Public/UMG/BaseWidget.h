@@ -7,6 +7,7 @@
 #include "GM/VDPawn.h"
 #include "Manager/ResourceManager.h"
 #include "Manager/UIManager.h"
+#include "Manager/SceneManager.h"
 #include "Components/Overlay.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -43,6 +44,9 @@ public:
 
 	UPROPERTY()
 	AUIManager* UIManager;
+
+	UPROPERTY()
+	ASceneManager* SceneManager;
 	
 	EWidgetType ReturnWidgetType;
 

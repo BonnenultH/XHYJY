@@ -348,6 +348,12 @@ public:
 	FPartsAttribute TextPartDiagram;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* DispatchMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bchosen = false;
 	
 };

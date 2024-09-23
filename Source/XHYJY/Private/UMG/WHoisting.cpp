@@ -2,7 +2,6 @@
 
 
 #include "UMG/WHoisting.h"
-#include "Camera/CameraActor.h"
 #include "Components/VerticalBoxSlot.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/LevelStreaming.h"
@@ -11,7 +10,6 @@
 void UWHoisting::InitWidget()
 {
 	Super::InitWidget();
-
 	
 	WBP_PersonTitle->InitWidget();
 	WBP_Timing->InitWidget();
@@ -24,14 +22,14 @@ void UWHoisting::InitWidget()
 	FirePlaceMap.Add(EFirePlace::EFP_WC,"XHYJY_Out_WC");
 	FirePlaceMap.Add(EFirePlace::EFP_XC,"XHYJY_Out_XC");
 	
-	FLatentActionInfo info;
-	info.UUID = FMath::Rand();
-	UGameplayStatics::LoadStreamLevel(GetWorld(), "XHYJY_In", false, true,FLatentActionInfo());
-	UGameplayStatics::LoadStreamLevel(GetWorld(), FirePlaceMap[UIManager->SelectTaskData->FirePlace], false, true,info);
-
+	FLatentActionInfo LevelInfo;
+	LevelInfo.CallbackTarget = this;
+	LevelInfo.Linkage = 0;
+	LevelInfo.ExecutionFunction = FName("OnLevelLoaded");
+	LevelInfo.UUID = FMath::Rand();
 	
-	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UWHoisting::LoadLevelAssets,1.0f, false, 0.001f);
+	UGameplayStatics::LoadStreamLevel(GetWorld(), "XHYJY_In", false, true, FLatentActionInfo());
+	UGameplayStatics::LoadStreamLevel(GetWorld(), FirePlaceMap[UIManager->SelectTaskItem->FirePlace], false, true,LevelInfo);
 
 	Button_OperateInstructions->OnClicked.AddDynamic(this, &UWHoisting::PlayOperateInstructions);
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);
@@ -43,10 +41,10 @@ void UWHoisting::InitWidget()
 }
 
 
-void UWHoisting::LoadLevelAssets()
+void UWHoisting::OnLevelLoaded()
 {
-	ULevelStreaming* LocalLevelOut =FStreamLevelAction::FindAndCacheLevelStreamingObject(FirePlaceMap[UIManager->SelectTaskData->FirePlace], GetWorld());
-	ULevelStreaming* LocalLevelIn =FStreamLevelAction::FindAndCacheLevelStreamingObject("XHYJY_In", GetWorld());
+	ULevelStreaming* LocalLevelOut = FStreamLevelAction::FindAndCacheLevelStreamingObject(FirePlaceMap[UIManager->SelectTaskItem->FirePlace], GetWorld());
+	ULevelStreaming* LocalLevelIn = FStreamLevelAction::FindAndCacheLevelStreamingObject("XHYJY_In", GetWorld());
 	if(LocalLevelOut && LocalLevelIn)
 	{
 		LocalLevelOut->SetShouldBeVisible(true);
@@ -54,9 +52,8 @@ void UWHoisting::LoadLevelAssets()
 		if(ResourceManager->MainLevelSequencePlayer)
         	{
         		ResourceManager->MainLevelSequencePlayer->Play();
-			
-				FTimerHandle TimeAnimDelay;
-				GetWorld()->GetTimerManager().SetTimer(TimeAnimDelay, this, &UWHoisting::GoHoisting, 1.0f, false, ResourceManager->MainLevelSequencePlayer->GetDuration().AsSeconds());
+				ResourceManager->MainLevelSequencePlayer->OnFinished.AddDynamic(this, &UWHoisting::GoHoisting);
+				//GoHoisting();
         	}
 	}
 }
@@ -65,11 +62,11 @@ void UWHoisting::LoadLevelAssets()
 
 void UWHoisting::InitDiagram()
 {
-	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(UIManager->SelectTaskData->GetCheapestRocket());
+	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket());
 	for(int i = 0; i < UIDiagram->RocketParts.Num(); ++i)
 	{
-		UImage* PartImage =NewObject<UImage>(this);
-		UImage* PartText =NewObject<UImage>(this);
+		UImage* PartImage = NewObject<UImage>(this);
+		UImage* PartText = NewObject<UImage>(this);
 		VerticalBox_PartImage->AddChildToVerticalBox(PartImage);
 		VerticalBox_PartText->AddChildToVerticalBox(PartText);
 		ImageSlot = Cast<UVerticalBoxSlot>(PartImage->Slot);
@@ -82,17 +79,15 @@ void UWHoisting::InitDiagram()
 		if(UIDiagram->RocketParts[i].RocketPartsType == ERocketPartsType::ERP_Boosters)
 		{
 			
-			ImageSlot->SetPadding(FMargin(0,-UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart->GetSizeY(),0,0));
+			ImageSlot->SetPadding(FMargin(0,- UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart->GetSizeY(),0,0));
 		}
 		PartImage->SetBrushFromTexture(UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart,true);
 		PartText->SetBrushFromTexture(UIDiagram->RocketParts[i].TextPartDiagram.UnselectedRocketPart, true);
 		RocketPartName->SetText(FText::FromString(UIDiagram->RocketParts[0].RocketPartName));
-		Loadoutprogress->SetText(FText::FromString(FString::FromInt(1/UIDiagram->RocketParts.Num()).Append(L"%")));
-		ProgressBar->SetPercent(1/UIDiagram->RocketParts.Num());
+		Loadoutprogress->SetText(FText::FromString(FString::FromInt(1 / UIDiagram->RocketParts.Num()).Append(L"%")));
+		ProgressBar->SetPercent(1 / UIDiagram->RocketParts.Num());
 		TextBlock_RocketPartInfo->SetText(FText::FromString(RocketPartInfosMap[UIDiagram->RocketParts[0].RocketPartsType]));
 	}
-	
-	
 }
 
 void UWHoisting::InitRocketPartInfos()
@@ -127,10 +122,7 @@ void UWHoisting::PlayErrorPart()
 void UWHoisting::GoHoisting()
 {
 	Hoisting->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-
-	UGameplayStatics::GetAllActorsOfClassWithTag(this, ACameraActor::StaticClass(),"MainCamera",MyPlayerCameras);
-	UGameplayStatics::GetPlayerController(this, 0)->SetViewTarget(MyPlayerCameras[0]);
-	
+	SceneManager->SwitchViewByHoist();
 }
 
 

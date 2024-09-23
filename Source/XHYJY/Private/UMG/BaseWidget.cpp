@@ -10,9 +10,10 @@ void UBaseWidget::InitWidget()
 	Pawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 	if(Pawn)
 	{
-		VDPawn = Pawn;
-		ResourceManager = Pawn->ResourceManager;
-		UIManager = Pawn->UIManager;
+		VDPawn			= Pawn;
+		ResourceManager	= Pawn->ResourceManager;
+		UIManager		= Pawn->UIManager;
+		SceneManager	= Pawn->SceneManager;
 	}
 }
 

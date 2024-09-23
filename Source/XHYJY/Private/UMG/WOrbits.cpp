@@ -26,8 +26,8 @@ void UWOrbits::InitWidget()
 	TLI->OnClicked.AddDynamic(this,&UWOrbits::TLIClicked);
 	TMI->OnClicked.AddDynamic(this,&UWOrbits::TMIClicked);
 
-	HTQName->SetText(FText::FromString(UIManager->SelectTaskData->Name));
-	HTQDes->SetText(FText::FromString(UIManager->SelectTaskData->HTQDes));
+	HTQName->SetText(FText::FromString(UIManager->SelectTaskItem->Name));
+	HTQDes->SetText(FText::FromString(UIManager->SelectTaskItem->HTQDes));
 	
 	Button_RightOk->OnClicked.AddDynamic(this, &UWOrbits::RightAnswer);
 	Button_WrongAgain->OnClicked.AddDynamic(this, &UWOrbits::WrongAnswer);
@@ -78,7 +78,7 @@ void UWOrbits::TMIClicked()
 
 void UWOrbits::CreateRocketSelect()
 {
-	if(CurSelectedOrbit.HTQOrbitType == UIManager->SelectTaskData->HTQOrbitType)
+	if(CurSelectedOrbit.HTQOrbitType == UIManager->SelectTaskItem->HTQOrbitType)
 	{
 		PlayAnimation(Orbit_RightPop);
 	

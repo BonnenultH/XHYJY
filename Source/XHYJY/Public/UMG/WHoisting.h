@@ -17,8 +17,9 @@ protected:
 	void InitDiagram();
 
 	void InitRocketPartInfos();
-	
-	void LoadLevelAssets();
+
+	UFUNCTION()
+	void OnLevelLoaded();
 
 	UFUNCTION()
 	void PlayStartHoist();
@@ -32,6 +33,7 @@ protected:
 	UFUNCTION()
 	void PlayErrorPart();
 
+	UFUNCTION()
 	void GoHoisting();
 	
 public:
@@ -81,8 +83,6 @@ protected:
 	UWidgetAnimation* ErrorPartSelection;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* StartHoist;
-	
-	TArray<AActor*> MyPlayerCameras;
 
 	UVerticalBoxSlot* ImageSlot;
 	UVerticalBoxSlot* TextSlot;

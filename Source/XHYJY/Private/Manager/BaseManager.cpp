@@ -32,9 +32,10 @@ void ABaseManager::InitManager()
 	Pawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 	if(Pawn)
 	{
-		VDPawn = Pawn;
+		VDPawn			= Pawn;
 		ResourceManager = Pawn->ResourceManager;
-		UIManager = Pawn->UIManager;
+		UIManager		= Pawn->UIManager;
+		SceneManager	= Pawn->SceneManager;
 	}
 }
 

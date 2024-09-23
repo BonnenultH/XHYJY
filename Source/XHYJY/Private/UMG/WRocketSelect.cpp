@@ -29,7 +29,7 @@ void UWRocketSelect::InitRocketView()
 	
 	if(CurMode == ERSMode::ERSM_Capacity)
 	{
-		for(auto Rocket : UIManager->SelectTaskData->RocketArry)
+		for(auto Rocket : UIManager->SelectTaskItem->RocketArry)
 		{
 			FRocketTable* RocketData = UIManager->GetRocketData(Rocket.RocketType);
 			UItemRocket* RocketItem = NewObject<UItemRocket>(this);
@@ -49,7 +49,7 @@ void UWRocketSelect::InitRocketView()
 		}
 		Chosen->SetText(FText::FromString(FString::FromInt(0)));
 		ToChosen->SetText(FText::FromString(FString::FromInt(RightRocketArry.Num())));
-		TextBlock_CapacityRange->SetText(FText::FromString(UIManager->SelectTaskData->CapacityRange));
+		TextBlock_CapacityRange->SetText(FText::FromString(UIManager->SelectTaskItem->CapacityRange));
 	}
 	else if(CurMode == ERSMode::ERSM_Price)
 	{
@@ -114,7 +114,7 @@ void UWRocketSelect::CheckSelectRocket()
 		}
 		else
 		{
-			if(SelectedRocketArry[0]->RocketType != UIManager->SelectTaskData->GetCheapestRocket())
+			if(SelectedRocketArry[0]->RocketType != UIManager->SelectTaskItem->GetCheapestRocket())
 			{
 				bResult = false;
 			}
@@ -203,7 +203,7 @@ void UWRocketSelect::SelectPRocketError()
 	
 		for(auto RocketItem : SelectedRocketArry)
 		{
-			if(RocketItem->RocketType != UIManager->SelectTaskData->GetCheapestRocket())
+			if(RocketItem->RocketType != UIManager->SelectTaskItem->GetCheapestRocket())
 			{
 				UWRocketMode* ItemWidget = Cast<UWRocketMode>(RocketListView->GetEntryWidgetFromItem(RocketItem));
 				ItemWidget->BGChanged(2);
