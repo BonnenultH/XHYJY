@@ -96,6 +96,9 @@ public:
 	UTexture2D* RocketWrong;
 
 	UPROPERTY()
+	UTexture2D* TestWarning;
+
+	UPROPERTY()
 	UMaterial* WarningMaterial;
 
 	UPROPERTY()

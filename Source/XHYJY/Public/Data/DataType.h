@@ -35,6 +35,15 @@ enum class ERSMode : uint8
 	ERSM_Price,
 };
 
+UENUM(BlueprintType)
+enum class EAnswer : uint8
+{
+	EA_A,
+	EA_B,
+	EA_C,
+	EA_D,
+};
+
 struct S_UserInfo
 {
 	const WIDECHAR* IDName;
@@ -354,6 +363,31 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FSingleRocketPart>  RocketParts;
+};
+
+USTRUCT(BlueprintType)
+struct FComprehensiveTests : public FTableRowBase
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString TestTitle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString AnswerA;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString AnswerB;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString AnswerC;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString AnswerD;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EAnswer RightAnswer;
+	
 };
 
 UCLASS()

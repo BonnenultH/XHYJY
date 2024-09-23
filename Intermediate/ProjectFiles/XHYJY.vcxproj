@@ -289,6 +289,9 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\BaseWidget.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WComprehensiveTest.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\WHistoryTasks.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -337,6 +340,7 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\ResourceManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\UIManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\BaseWidget.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WComprehensiveTest.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHistoryTasks.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHoisting.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHomePage.h"/>

@@ -81,6 +81,9 @@ AResourceManager::AResourceManager()
 	
 	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
 	WarningMaterial= WarningObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> TestWarningObj(TEXT("'/Game/UMG/ComprehensiveTest/BG_Warning.BG_Warning'"));
+	TestWarning = TestWarningObj.Object;
 	
 }
 
