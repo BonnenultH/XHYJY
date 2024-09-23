@@ -67,6 +67,11 @@ protected:
 	UTextBlock* RocketPartName;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* TextBlock_RocketPartInfo;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* Loadoutprogress;
+
+	UPROPERTY(meta=(BindWidget))
+	UProgressBar* ProgressBar;
 	
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Instructions;
@@ -83,5 +88,7 @@ protected:
 	UVerticalBoxSlot* TextSlot;
 
 	TMap<ERocketPartsType, FString> RocketPartInfosMap;
+
+	TMap<EFirePlace, FName> FirePlaceMap;
 	
 };
