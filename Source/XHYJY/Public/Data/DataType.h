@@ -351,7 +351,7 @@ public:
 	UStaticMesh* DispatchMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UStaticMesh* Mesh;
+	TArray<UStaticMesh*> Mesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bchosen = false;

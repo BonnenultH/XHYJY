@@ -35,7 +35,8 @@ void UWHoisting::InitWidget()
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);
 	Button_close->OnClicked.AddDynamic(this, &UWHoisting::PlayErrorPart);
 	Button_StartHoist->OnClicked.AddDynamic(this, &UWHoisting::PlayStartHoist);
-
+	Button_StartSelectPart->OnClicked.AddDynamic(this, &UWHoisting::PlaySelectPartReverseAnim);
+	
 	InitRocketPartInfos();
 	InitDiagram();
 }
@@ -103,6 +104,9 @@ void UWHoisting::InitRocketPartInfos()
 void UWHoisting::PlayStartHoist()
 {
 	PlayAnimation(StartHoist);
+	FTimerHandle Delaypop;
+	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &UWHoisting::PlaySelectPartAnim, 0.75f);
+	
 }
 void UWHoisting::PlayOperateInstructions()
 {
@@ -113,6 +117,17 @@ void UWHoisting::PlayReverseOperateIns()
 {
 	PlayAnimationReverse(Instructions);
 }
+
+void UWHoisting::PlaySelectPartAnim()
+{
+	PlayAnimation(StartSelectPartAnim);
+}
+
+void UWHoisting::PlaySelectPartReverseAnim()
+{
+	PlayAnimationReverse(StartSelectPartAnim);
+}
+
 
 void UWHoisting::PlayErrorPart()
 {

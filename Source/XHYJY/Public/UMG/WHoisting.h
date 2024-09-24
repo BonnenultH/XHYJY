@@ -29,6 +29,11 @@ protected:
 
 	UFUNCTION()
 	void PlayReverseOperateIns();
+	
+	void PlaySelectPartAnim();
+
+	UFUNCTION()
+	void PlaySelectPartReverseAnim();
 
 	UFUNCTION()
 	void PlayErrorPart();
@@ -64,7 +69,9 @@ protected:
 	UButton* Button_ok;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_close;
-
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_StartSelectPart;
+	
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* RocketPartName;
 	UPROPERTY(meta=(BindWidget))
@@ -83,6 +90,8 @@ protected:
 	UWidgetAnimation* ErrorPartSelection;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* StartHoist;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* StartSelectPartAnim;
 
 	UVerticalBoxSlot* ImageSlot;
 	UVerticalBoxSlot* TextSlot;
