@@ -44,6 +44,9 @@ protected:
 	void GoHoisting();
 
 	void InitDelegateSingle();
+
+	UFUNCTION()
+	void DispearCurSelect();
 	
 	UFUNCTION()
 	void ClickedRocketAttribute(AA_SinglePart* SinglePart);
@@ -78,6 +81,8 @@ protected:
 	UButton* Button_close;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_StartSelectPart;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_CurOk;
 	
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* RocketPartName;
@@ -87,6 +92,9 @@ protected:
 	UTextBlock* Loadoutprogress;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* TextBlock_Part;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* TextBlock_CurPart;
+	
 
 	UPROPERTY(meta=(BindWidget))
 	UProgressBar* ProgressBar;
@@ -101,6 +109,8 @@ protected:
 	UWidgetAnimation* StartHoist;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* StartSelectPartAnim;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* CurSelectPartAnim;
 
 	UVerticalBoxSlot* ImageSlot;
 	UVerticalBoxSlot* TextSlot;

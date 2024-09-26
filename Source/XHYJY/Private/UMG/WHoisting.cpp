@@ -37,9 +37,14 @@ void UWHoisting::InitWidget()
 	Button_close->OnClicked.AddDynamic(this, &UWHoisting::PlayErrorPart);
 	Button_StartHoist->OnClicked.AddDynamic(this, &UWHoisting::PlayStartHoist);
 	Button_StartSelectPart->OnClicked.AddDynamic(this, &UWHoisting::PlaySelectPartReverseAnim);
+	Button_CurOk->OnClicked.AddDynamic(this, &UWHoisting::DispearCurSelect);
+	
+	SceneManager->InitHoistRocketParts();
 	
 	InitRocketPartInfos();
 	InitDiagram();
+	
+	InitDelegateSingle();
 }
 
 
@@ -51,8 +56,7 @@ void UWHoisting::OnLevelLoaded()
 	{
 		LocalLevelOut->SetShouldBeVisible(true);
 		LocalLevelIn->SetShouldBeVisible(true);
-
-		SceneManager->InitHoistRocketParts();
+		
 		
 		if(ResourceManager->MainLevelSequencePlayer)
         	{
@@ -152,6 +156,11 @@ void UWHoisting::PlayErrorPart()
 	PlayAnimationReverse(ErrorPartSelection);
 }
 
+void UWHoisting::DispearCurSelect()
+{
+	PlayAnimationReverse(CurSelectPartAnim);
+}
+
 void UWHoisting::GoHoisting()
 {
 	Hoisting->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
@@ -160,7 +169,6 @@ void UWHoisting::GoHoisting()
 
 void UWHoisting::InitDelegateSingle()
 {
-
 	for(int i = 0 ; i < SceneManager->DispatchParts->SinglePartsArray.Num(); i++)
 	{
 	SceneManager->DispatchParts->SinglePartsArray[i]->MouseRocketClickReturn.AddUObject(this, &UWHoisting::ClickedRocketAttribute);
@@ -168,11 +176,11 @@ void UWHoisting::InitDelegateSingle()
 
 }
 
+
 void UWHoisting::ClickedRocketAttribute(AA_SinglePart* SinglePart)
 {
-	TextBlock_Part->SetText(FText::FromString(SinglePart->RocketPartName));
-	PlayAnimation(StartSelectPartAnim);
-	UE_LOG(LogTemp, Log, TEXT("AAAAAAAAA"))
+	TextBlock_CurPart->SetText(FText::FromString(SinglePart->RocketPartName));
+	PlayAnimation(CurSelectPartAnim);
 }
 
 

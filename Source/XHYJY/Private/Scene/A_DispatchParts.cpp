@@ -42,6 +42,7 @@ void AA_DispatchParts::BeginPlay()
 		SinglePart->RocketPartName = SingleRocketPartArray[i].RocketPartName;
 		SinglePartsArray.Add(SinglePart);
 	}
+	
 }
 
 void AA_DispatchParts::InitMeshArray()
