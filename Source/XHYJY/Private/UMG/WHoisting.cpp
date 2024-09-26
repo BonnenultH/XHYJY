@@ -64,7 +64,7 @@ void UWHoisting::OnLevelLoaded()
 void UWHoisting::InitDiagram()
 {
 	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket());
-	for(int i = 0; i < UIDiagram->RocketParts.Num(); ++i)
+	for(int i = UIDiagram->RocketParts.Num()-1; i >= 0; --i)
 	{
 		UImage* PartImage = NewObject<UImage>(this);
 		UImage* PartText = NewObject<UImage>(this);
@@ -77,18 +77,32 @@ void UWHoisting::InitDiagram()
 			ImageSlot->HorizontalAlignment = EHorizontalAlignment::HAlign_Center;
 			ImageSlot->VerticalAlignment = VAlign_Top;
 		}
+		PartText->SetBrushFromTexture(UIDiagram->RocketParts[i].TextPartDiagram.UnselectedRocketPart, true);
+		PartImage->SetBrushFromTexture(UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart,true);
 		if(UIDiagram->RocketParts[i].RocketPartsType == ERocketPartsType::ERP_Boosters)
 		{
-			
-			ImageSlot->SetPadding(FMargin(0,- UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart->GetSizeY(),0,0));
+			VerticalBox_PartImage->RemoveChild(PartImage);
 		}
-		PartImage->SetBrushFromTexture(UIDiagram->RocketParts[i].ImagePartDiagram.UnselectedRocketPart,true);
-		PartText->SetBrushFromTexture(UIDiagram->RocketParts[i].TextPartDiagram.UnselectedRocketPart, true);
-		RocketPartName->SetText(FText::FromString(UIDiagram->RocketParts[0].RocketPartName));
+		
+		if(i <= UIDiagram->RocketParts.Num()-2 && UIDiagram->RocketParts[i + 1].RocketPartsType == ERocketPartsType::ERP_Boosters)
+		{
+			UImage* PartImageBooster = NewObject<UImage>(this);
+			VerticalBox_PartImage->AddChildToVerticalBox(PartImageBooster);
+			PartImageBooster->SetBrushFromTexture(UIDiagram->RocketParts[i + 1].ImagePartDiagram.UnselectedRocketPart, true);
+			ImageSlot = Cast<UVerticalBoxSlot>(PartImageBooster->Slot);
+			ImageSlot->SetPadding(FMargin(0, - UIDiagram->RocketParts[i + 1].ImagePartDiagram.UnselectedRocketPart->GetSizeY(),0,0));
+		}  
+	}
+		UImage* PartTextDown = NewObject<UImage>(this);
+		VerticalBox_PartText->AddChildToVerticalBox(PartTextDown);
+		PartTextDown->SetBrushFromTexture(ResourceManager->HoistDown, true);
+	
+		SingleRocketPart = UIDiagram->RocketParts[0];
+		TextBlock_Part->SetText(FText::FromString(SingleRocketPart.RocketPartName));
+		RocketPartName->SetText(FText::FromString(SingleRocketPart.RocketPartName));
 		Loadoutprogress->SetText(FText::FromString(FString::FromInt(1 / UIDiagram->RocketParts.Num()).Append(L"%")));
 		ProgressBar->SetPercent(1 / UIDiagram->RocketParts.Num());
-		TextBlock_RocketPartInfo->SetText(FText::FromString(RocketPartInfosMap[UIDiagram->RocketParts[0].RocketPartsType]));
-	}
+		TextBlock_RocketPartInfo->SetText(FText::FromString(RocketPartInfosMap[SingleRocketPart.RocketPartsType]));
 }
 
 void UWHoisting::InitRocketPartInfos()

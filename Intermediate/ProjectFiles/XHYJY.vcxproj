@@ -295,6 +295,9 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ3C.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_DispatchParts.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\UMG\BaseWidget.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -351,6 +354,7 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\UIManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3B.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3C.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_DispatchParts.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\BaseWidget.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WComprehensiveTest.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\WHistoryTasks.h"/>

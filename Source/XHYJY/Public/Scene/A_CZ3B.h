@@ -28,22 +28,23 @@ public:
 
 protected:
 	UFUNCTION()
-	void OnOverlapBox1(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	void OnOverlapBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 
 protected:
+    //逃逸塔
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UBoxComponent* Box;
+	UBoxComponent* EscapeTower;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UBoxComponent* Box0;
+	UBoxComponent* Cowling;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UBoxComponent* Box1;
+	UBoxComponent* CoreOneLevel;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UBoxComponent* Box2;
+	UBoxComponent* CoreTwoLevels;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UBoxComponent* Box3;
+	UBoxComponent* CoreThreeLevels;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UBoxComponent* Box4;
+	UBoxComponent* Rollboosters;
 
 };

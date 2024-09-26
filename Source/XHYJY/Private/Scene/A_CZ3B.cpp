@@ -16,7 +16,7 @@ AA_CZ3B::AA_CZ3B()
 void AA_CZ3B::BeginPlay()
 {
 	Super::BeginPlay();
-	Box1->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapBox1);
+	CoreOneLevel->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapBox);
 }
 
 // Called every frame
@@ -26,7 +26,7 @@ void AA_CZ3B::Tick(float DeltaTime)
 
 }
 
-void AA_CZ3B::OnOverlapBox1(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+void AA_CZ3B::OnOverlapBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor == this)

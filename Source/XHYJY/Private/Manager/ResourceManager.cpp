@@ -79,12 +79,14 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UTexture2D> WCObj(TEXT("'/Game/UMG/Launch/button/WC.WC'"));
 	WC= WCObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
-	WarningMaterial= WarningObj.Object;
-
+	ConstructorHelpers::FObjectFinder<UTexture2D> HoistDownObj(TEXT("'/Game/UMG/Hoisting/ImageDiagram/Down.Down'"));
+	HoistDown = HoistDownObj.Object;
+	
 	ConstructorHelpers::FObjectFinder<UTexture2D> TestWarningObj(TEXT("'/Game/UMG/ComprehensiveTest/BG_Warning.BG_Warning'"));
 	TestWarning = TestWarningObj.Object;
 	
+	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
+	WarningMaterial= WarningObj.Object;
 }
 
 // Called when the game starts or when spawned
