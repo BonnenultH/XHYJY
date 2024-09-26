@@ -8,6 +8,8 @@
 /**
  * 
  */
+
+
 UCLASS()
 class XHYJY_API UWHoisting : public UBaseWidget
 {
@@ -40,6 +42,11 @@ protected:
 
 	UFUNCTION()
 	void GoHoisting();
+
+	void InitDelegateSingle();
+	
+	UFUNCTION()
+	void ClickedRocketAttribute(AA_SinglePart* SinglePart);
 	
 public:
 	virtual void InitWidget() override;
@@ -101,6 +108,7 @@ protected:
 	TMap<ERocketPartsType, FString> RocketPartInfosMap;
 
 	TMap<EFirePlace, FName> FirePlaceMap;
-
+	
 	FSingleRocketPart SingleRocketPart;
+	
 };

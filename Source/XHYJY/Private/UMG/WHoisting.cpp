@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/LevelStreaming.h"
 #include "GameFramework/PlayerController.h"
+#include "Scene/A_DispatchParts.h"
 
 void UWHoisting::InitWidget()
 {
@@ -50,6 +51,9 @@ void UWHoisting::OnLevelLoaded()
 	{
 		LocalLevelOut->SetShouldBeVisible(true);
 		LocalLevelIn->SetShouldBeVisible(true);
+
+		SceneManager->InitHoistRocketParts();
+		
 		if(ResourceManager->MainLevelSequencePlayer)
         	{
         		ResourceManager->MainLevelSequencePlayer->Play();
@@ -152,6 +156,23 @@ void UWHoisting::GoHoisting()
 {
 	Hoisting->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 	SceneManager->SwitchViewByHoist();
+}
+
+void UWHoisting::InitDelegateSingle()
+{
+
+	for(int i = 0 ; i < SceneManager->DispatchParts->SinglePartsArray.Num(); i++)
+	{
+	SceneManager->DispatchParts->SinglePartsArray[i]->MouseRocketClickReturn.AddUObject(this, &UWHoisting::ClickedRocketAttribute);
+	}
+
+}
+
+void UWHoisting::ClickedRocketAttribute(AA_SinglePart* SinglePart)
+{
+	TextBlock_Part->SetText(FText::FromString(SinglePart->RocketPartName));
+	PlayAnimation(StartSelectPartAnim);
+	UE_LOG(LogTemp, Log, TEXT("AAAAAAAAA"))
 }
 
 

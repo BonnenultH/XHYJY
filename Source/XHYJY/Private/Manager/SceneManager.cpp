@@ -2,6 +2,7 @@
 
 
 #include "Manager/SceneManager.h"
+#include "Scene/A_DispatchParts.h"
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -19,4 +20,9 @@ void ASceneManager::SwitchViewByHoist()
 	
 	VDPawn->Camera->SetActive(false);
 	UGameplayStatics::GetPlayerController(this, 0)->SetViewTargetWithBlend(HoistCamera);
+}
+
+void ASceneManager::InitHoistRocketParts()
+{
+	DispatchParts = GetWorld()->SpawnActor<AA_DispatchParts>(FVector(-53.145418,987.363786,280.799904), FRotator(0));
 }

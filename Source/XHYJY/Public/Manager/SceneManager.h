@@ -18,8 +18,12 @@ public:
 
 	void SwitchViewByHoist();
 
+	void InitHoistRocketParts();
+
 public:
 	UPROPERTY()
 	AActor* HoistCamera;
 	
+	UPROPERTY()
+	AA_DispatchParts* DispatchParts;
 };

@@ -67,7 +67,6 @@ void UWTakeTasks::OnSelectTask(UObject* Item)
 void UWTakeTasks::InitRightInfo(UItemTask* ItemData)
 {
 	RightImage->SetBrushFromTexture(ItemData->Image);
-	RightImage->SetBrushSize(ItemData->Image->GetImportedSize());
 	RightName->SetText(FText::FromString(ItemData->Name));
 	RightForAppFunc->SetText(FText::FromString(ItemData->ForAppFunc));
 	RightDes->SetText(FText::FromString(ItemData->HTQDes));
