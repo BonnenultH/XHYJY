@@ -66,12 +66,10 @@ void UWHoisting::OnLevelLoaded()
         	}
 	}
 }
-//部件 (X=-53.145418,Y=987.363786,Z=280.799904) -500 (X=-53.145418,Y=487.363786,Z=280.799904)
-//吊装 (X=39.847913,Y=-43.268047,Z=873.777791)
 
 void UWHoisting::InitDiagram()
 {
-	FDiagramUITable* UIDiagram = UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket());
+	UIDiagram = UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket());
 	for(int i = UIDiagram->RocketParts.Num()-1; i >= 0; --i)
 	{
 		UImage* PartImage = NewObject<UImage>(this);
@@ -104,13 +102,11 @@ void UWHoisting::InitDiagram()
 		UImage* PartTextDown = NewObject<UImage>(this);
 		VerticalBox_PartText->AddChildToVerticalBox(PartTextDown);
 		PartTextDown->SetBrushFromTexture(ResourceManager->HoistDown, true);
-	
-		SingleRocketPart = UIDiagram->RocketParts[0];
-		TextBlock_Part->SetText(FText::FromString(SingleRocketPart.RocketPartName));
-		RocketPartName->SetText(FText::FromString(SingleRocketPart.RocketPartName));
-		Loadoutprogress->SetText(FText::FromString(FString::FromInt(1 / UIDiagram->RocketParts.Num()).Append(L"%")));
-		ProgressBar->SetPercent(1 / UIDiagram->RocketParts.Num());
-		TextBlock_RocketPartInfo->SetText(FText::FromString(RocketPartInfosMap[SingleRocketPart.RocketPartsType]));
+
+	//取ImageTarray的逆序排列然后存到数组里每次去替换
+	//判断是否一致要和当前进行绑定
+
+	HoistingProgress();
 }
 
 void UWHoisting::InitRocketPartInfos()
@@ -123,6 +119,20 @@ void UWHoisting::InitRocketPartInfos()
 	RocketPartInfosMap.Add(ERocketPartsType::ERP_Boosters,TEXT("火箭助推器是一种用于火箭发射时使其迅速飞离发射器并加速达到预定飞行速度的小型火箭。助推器捆绑在火箭芯级第一级，能够增加火箭的运载能力，在燃料耗尽后自动脱落。"));
 }
 
+void UWHoisting::HoistingProgress()
+{
+		int i = 0;
+		CurSingleRocketPart = UIDiagram->RocketParts[i];
+		TextBlock_Part->SetText(FText::FromString(CurSingleRocketPart.RocketPartName));
+		RocketPartName->SetText(FText::FromString(CurSingleRocketPart.RocketPartName));
+		Loadoutprogress->SetText(FText::FromString(FString::FromInt(i / UIDiagram->RocketParts.Num()).Append(L"%")));
+		ProgressBar->SetPercent(i / UIDiagram->RocketParts.Num());
+		TextBlock_RocketPartInfo->SetText(FText::FromString(RocketPartInfosMap[CurSingleRocketPart.RocketPartsType]));
+		
+}
+
+
+
 void UWHoisting::PlayStartHoist()
 {
 	PlayAnimation(StartHoist);
@@ -130,6 +140,8 @@ void UWHoisting::PlayStartHoist()
 	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &UWHoisting::PlaySelectPartAnim, 0.75f);
 	
 }
+
+
 void UWHoisting::PlayOperateInstructions()
 {
 	PlayAnimation(Instructions);

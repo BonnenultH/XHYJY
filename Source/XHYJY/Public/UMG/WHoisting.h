@@ -20,6 +20,8 @@ protected:
 
 	void InitRocketPartInfos();
 
+	void HoistingProgress();
+	
 	UFUNCTION()
 	void OnLevelLoaded();
 
@@ -50,6 +52,7 @@ protected:
 	
 	UFUNCTION()
 	void ClickedRocketAttribute(AA_SinglePart* SinglePart);
+
 	
 public:
 	virtual void InitWidget() override;
@@ -115,10 +118,12 @@ protected:
 	UVerticalBoxSlot* ImageSlot;
 	UVerticalBoxSlot* TextSlot;
 
+	FDiagramUITable* UIDiagram;
+
 	TMap<ERocketPartsType, FString> RocketPartInfosMap;
 
 	TMap<EFirePlace, FName> FirePlaceMap;
 	
-	FSingleRocketPart SingleRocketPart;
+	FSingleRocketPart CurSingleRocketPart;
 	
 };
