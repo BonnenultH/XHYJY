@@ -106,5 +106,6 @@ void UWLaunch::CreateHoisting()
 {
 	UIManager->bShowFirePlace = true;
 	UIManager->CreateVDWidget(EWidgetType::EWT_Hoisting);
+	SceneManager->BindHoistUIDelegate();
 }
 

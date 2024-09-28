@@ -150,7 +150,7 @@ void UWTakeTasks::PlayPoppingAni()
 void UWTakeTasks::CreateOrbits()
 {
 	UIManager->SelectTaskItem = CurItemWidget->GetItemData();
-	
+	SceneManager->InitSingleMesh();
 	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);	
 }
 

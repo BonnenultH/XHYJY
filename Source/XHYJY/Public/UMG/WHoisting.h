@@ -8,7 +8,7 @@
 /**
  * 
  */
-
+DECLARE_DELEGATE(FSelectAnimEnd)
 
 UCLASS()
 class XHYJY_API UWHoisting : public UBaseWidget
@@ -51,7 +51,7 @@ protected:
 	void DispearCurSelect();
 	
 	UFUNCTION()
-	void ClickedRocketAttribute(AA_SinglePart* SinglePart);
+	void GetRocketSingleInfo(AA_SinglePart* SinglePart);
 
 	
 public:
@@ -125,5 +125,7 @@ protected:
 	TMap<EFirePlace, FName> FirePlaceMap;
 	
 	FSingleRocketPart CurSingleRocketPart;
-	
+
+public:
+	FSelectAnimEnd OnAnimEnd;
 };

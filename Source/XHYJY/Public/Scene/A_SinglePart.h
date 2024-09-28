@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "A_SinglePart.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FDelegateRocketClickReturn, AA_SinglePart*)
+DECLARE_MULTICAST_DELEGATE_OneParam(FDelegateRocketClick, AA_SinglePart*)
 
 UCLASS()
 class XHYJY_API AA_SinglePart : public AActor
@@ -29,7 +29,24 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-public:
+	void InitMesh(UStaticMesh* Mesh, ERocketPartsType _RocketPartType, FString  _RocketPartName);
+
+	FString GetSingleMeshName()
+	{
+		return RocketPartName;
+	}
+	
+	ERocketPartsType GetSingleMeshType()
+	{
+		return RocketPartType;
+	}
+
+	UStaticMesh* GetStaticMesh()
+	{
+		return RocketDispatchMesh->GetStaticMesh();
+	}
+
+protected:
 	UPROPERTY()
 	UStaticMeshComponent* RocketDispatchMesh;
 
@@ -37,5 +54,6 @@ public:
 
 	FString  RocketPartName;
 
-	FDelegateRocketClickReturn MouseRocketClickReturn;
+public:
+	FDelegateRocketClick OnRocketClick;
 };

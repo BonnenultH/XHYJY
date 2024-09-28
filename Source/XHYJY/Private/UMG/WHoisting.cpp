@@ -6,7 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/LevelStreaming.h"
 #include "GameFramework/PlayerController.h"
-#include "Scene/A_DispatchParts.h"
+#include "Scene/A_SinglePart.h"
 
 void UWHoisting::InitWidget()
 {
@@ -39,12 +39,9 @@ void UWHoisting::InitWidget()
 	Button_StartSelectPart->OnClicked.AddDynamic(this, &UWHoisting::PlaySelectPartReverseAnim);
 	Button_CurOk->OnClicked.AddDynamic(this, &UWHoisting::DispearCurSelect);
 	
-	SceneManager->InitHoistRocketParts();
-	
+	InitDelegateSingle();
 	InitRocketPartInfos();
 	InitDiagram();
-	
-	InitDelegateSingle();
 }
 
 
@@ -128,7 +125,6 @@ void UWHoisting::HoistingProgress()
 		Loadoutprogress->SetText(FText::FromString(FString::FromInt(i / UIDiagram->RocketParts.Num()).Append(L"%")));
 		ProgressBar->SetPercent(i / UIDiagram->RocketParts.Num());
 		TextBlock_RocketPartInfo->SetText(FText::FromString(RocketPartInfosMap[CurSingleRocketPart.RocketPartsType]));
-		
 }
 
 
@@ -171,6 +167,7 @@ void UWHoisting::PlayErrorPart()
 void UWHoisting::DispearCurSelect()
 {
 	PlayAnimationReverse(CurSelectPartAnim);
+	OnAnimEnd.Execute();
 }
 
 void UWHoisting::GoHoisting()
@@ -181,17 +178,15 @@ void UWHoisting::GoHoisting()
 
 void UWHoisting::InitDelegateSingle()
 {
-	for(int i = 0 ; i < SceneManager->DispatchParts->SinglePartsArray.Num(); i++)
+	for(auto Item:SceneManager->SingleArray)
 	{
-	SceneManager->DispatchParts->SinglePartsArray[i]->MouseRocketClickReturn.AddUObject(this, &UWHoisting::ClickedRocketAttribute);
+		Item->OnRocketClick.AddUObject(this, &UWHoisting::GetRocketSingleInfo);
 	}
-
 }
 
-
-void UWHoisting::ClickedRocketAttribute(AA_SinglePart* SinglePart)
+void UWHoisting::GetRocketSingleInfo(AA_SinglePart* SinglePart)
 {
-	TextBlock_CurPart->SetText(FText::FromString(SinglePart->RocketPartName));
+	TextBlock_CurPart->SetText(FText::FromString(SinglePart->GetSingleMeshName()));
 	PlayAnimation(CurSelectPartAnim);
 }
 

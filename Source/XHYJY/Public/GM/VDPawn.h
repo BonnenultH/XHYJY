@@ -5,7 +5,11 @@
 #include "CoreMinimal.h"
 #include "Data/DataType.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "VDPawn.generated.h"
+
+class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class XHYJY_API AVDPawn : public APawn
@@ -24,6 +28,8 @@ protected:
 	
 	void InitManagers();
 
+	void Move(const FInputActionValue& Value);
+
 
 public:	
 	// Called every frame
@@ -31,6 +37,13 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInputMappingContext* DefaultMappingContext;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInputAction* MoveAction;
 
 public:
 	UPROPERTY()
@@ -42,9 +55,9 @@ public:
 
 	S_UserInfo UserInfoData;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	class UCameraComponent* Camera;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UStaticMeshComponent* HoistMesh;
 };

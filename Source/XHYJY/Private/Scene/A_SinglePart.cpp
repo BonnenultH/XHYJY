@@ -24,7 +24,7 @@ void AA_SinglePart::BeginPlay()
 void AA_SinglePart::NotifyActorOnClicked(FKey ButtonPressed)
 {
 	Super::NotifyActorOnClicked(ButtonPressed);
-	MouseRocketClickReturn.Broadcast(this);
+	OnRocketClick.Broadcast(this);
 }
 
 
@@ -34,4 +34,14 @@ void AA_SinglePart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+void AA_SinglePart::InitMesh(UStaticMesh* Mesh, ERocketPartsType _RocketPartType, FString _RocketPartName)
+{
+	RocketDispatchMesh->SetStaticMesh(Mesh);
+	RocketPartType = _RocketPartType;
+	RocketPartName = _RocketPartName;
+}
+
+
+
 
