@@ -49,6 +49,9 @@ void ASceneManager::CheckClickMesh()
 	UCineCameraComponent* Camera = HoistCamera->GetComponentByClass<UCineCameraComponent>();
 	Camera->SetActive(false);
 	VDPawn->HoistMesh->SetStaticMesh(CurSingleMesh->GetStaticMesh());
+	VDPawn->SetActorLocation(FVector(-46248.157897,-40384.774796,1573.511028));
+	VDPawn->SetActorRotation(FRotator(0,90,0));
+	
 	UGameplayStatics::GetPlayerController(this, 0)->SetViewTargetWithBlend(VDPawn, 1);
 }
 

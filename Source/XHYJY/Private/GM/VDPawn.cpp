@@ -20,9 +20,7 @@ AVDPawn::AVDPawn()
 void AVDPawn::BeginPlay()
 {
 	Super::BeginPlay();
-
-	SetActorLocation(FVector(-46248.157897,-40384.774796,1573.511028));
-	SetActorRotation(FRotator(0,0,0));
+	
 	
 	UserInfoData.IDName			= L"不可思议的佳佳";
 	UserInfoData.Accomplishment = L"型号研究院高级研究员";
@@ -53,7 +51,7 @@ void AVDPawn::Move(const FInputActionValue& Value)
 	FVector MovementVector = Value.Get<FVector>();
 	UE_LOG(LogTemp, Log, TEXT("X : %f, Y : %f, Z : %f"), MovementVector.X, MovementVector.Y, MovementVector.Z);
 		
-	SetActorLocation(FVector(GetActorLocation().X + MovementVector.Y, GetActorLocation().Y - MovementVector.X,
+	SetActorLocation(FVector(GetActorLocation().X + MovementVector.Y, GetActorLocation().Y + MovementVector.X,
 		GetActorLocation().Z + MovementVector.Z));			
 }
 
