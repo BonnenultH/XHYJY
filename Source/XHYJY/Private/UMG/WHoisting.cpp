@@ -38,6 +38,8 @@ void UWHoisting::InitWidget()
 	Button_StartHoist->OnClicked.AddDynamic(this, &UWHoisting::PlayStartHoist);
 	Button_StartSelectPart->OnClicked.AddDynamic(this, &UWHoisting::PlaySelectPartReverseAnim);
 	Button_CurOk->OnClicked.AddDynamic(this, &UWHoisting::DispearCurSelect);
+
+	Button_ClickAssembly->OnClicked.AddDynamic(this, &UWHoisting::ClickedAssembly);
 	
 	InitDelegateSingle();
 	InitRocketPartInfos();
@@ -99,9 +101,7 @@ void UWHoisting::InitDiagram()
 		UImage* PartTextDown = NewObject<UImage>(this);
 		VerticalBox_PartText->AddChildToVerticalBox(PartTextDown);
 		PartTextDown->SetBrushFromTexture(ResourceManager->HoistDown, true);
-
-	//取ImageTarray的逆序排列然后存到数组里每次去替换
-	//判断是否一致要和当前进行绑定
+	
 
 	HoistingProgress();
 }
@@ -188,6 +188,11 @@ void UWHoisting::GetRocketSingleInfo(AA_SinglePart* SinglePart)
 {
 	TextBlock_CurPart->SetText(FText::FromString(SinglePart->GetSingleMeshName()));
 	PlayAnimation(CurSelectPartAnim);
+}
+
+void UWHoisting::ClickedAssembly()
+{
+	UIManager->CreateVDWidget(EWidgetType::EWT_ComprehensiveTest);
 }
 
 

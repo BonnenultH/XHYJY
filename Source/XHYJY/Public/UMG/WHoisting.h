@@ -53,7 +53,8 @@ protected:
 	UFUNCTION()
 	void GetRocketSingleInfo(AA_SinglePart* SinglePart);
 
-	
+	UFUNCTION()
+	void ClickedAssembly();
 public:
 	virtual void InitWidget() override;
 

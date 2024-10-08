@@ -19,6 +19,8 @@ enum class EWidgetType:uint8
 	EWT_RocketSelect,
 	EWT_Launch,
 	EWT_Hoisting,
+	EWT_ComprehensiveTest,
+	EWT_BookLaunch,
 };
 
 enum class EGender:uint8

@@ -52,6 +52,9 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UDataTable> RocketPartTableObj(TEXT("'/Game/UMG/DataTable/RocketPartDiagram.RocketPartDiagram'"));
 	RocketPartTable= RocketPartTableObj.Object;
 
+	ConstructorHelpers::FObjectFinder<UDataTable> ComprehensiveTestObj(TEXT("'/Game/UMG/DataTable/ComprehensiveTest.ComprehensiveTest'"));
+	ComprehensiveTest= ComprehensiveTestObj.Object;
+	
 	ConstructorHelpers::FObjectFinder<UTexture2D> CapacityIconObj(TEXT("'/Game/UMG/Child/RocketMode/Tabel.Tabel'"));
 	CapacityIcon= CapacityIconObj.Object;
 
@@ -81,6 +84,9 @@ AResourceManager::AResourceManager()
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> HoistDownObj(TEXT("'/Game/UMG/Hoisting/ImageDiagram/Down.Down'"));
 	HoistDown = HoistDownObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> TestBGObj(TEXT("'/Game/UMG/ComprehensiveTest/BG.BG'"));
+	TestBG = TestBGObj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> TestWarningObj(TEXT("'/Game/UMG/ComprehensiveTest/BG_Warning.BG_Warning'"));
 	TestWarning = TestWarningObj.Object;
@@ -126,6 +132,8 @@ void AResourceManager::InitRSWidgetMap()
 	RSWidgetMap.Add(EWidgetType::EWT_RocketSelect,LoadWidgetFile(TEXT("'/Game/UMG/WBP_RocketSelect.WBP_RocketSelect_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_Launch,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Launch.WBP_Launch_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_Hoisting, LoadWidgetFile(TEXT("'/Game/UMG/WBP_Hoisting.WBP_Hoisting_C'")));
+	RSWidgetMap.Add(EWidgetType::EWT_ComprehensiveTest, LoadWidgetFile(TEXT("'/Game/UMG/WBP_ComprehensiveTest.WBP_ComprehensiveTest_C'")));
+	
 }
 
 void AResourceManager::InitMediaResource()

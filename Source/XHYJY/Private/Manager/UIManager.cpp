@@ -39,6 +39,7 @@ void AUIManager::InitManager()
 	InitRocketTable();
 	InitTaskTable();
 	InitOrbitInfo();
+	InitQuestionTable();
 	InitRocketPartDiagram();
 }
 
@@ -127,6 +128,7 @@ void AUIManager::InitRocketTable()
 	
 }
 
+
 void AUIManager::InitOrbitInfo()
 {
 	FHTQOrbit OrbitGEO(EOrbit::EO_GEO, TEXT("即轨道倾角i=0°的地球同步轨道，距地面约36000公里的圆轨道。卫星与地面的相对位置保持不变，轨道周期与地球自转周期一致。典型航天器：通信、对地观测、导航、预警、气象等民用和军用卫星。"), TEXT("GEO轨道"));
@@ -147,6 +149,17 @@ void AUIManager::InitOrbitInfo()
 	OrbitMap.Add(OrbitSSO.HTQOrbitType, OrbitSSO);
 	OrbitMap.Add(OrbitTLI.HTQOrbitType, OrbitTLI);
 	OrbitMap.Add(OrbitTMI.HTQOrbitType, OrbitTMI);
+}
+
+void AUIManager::InitQuestionTable()
+{
+	TArray<FComprehensiveTests*> AllTests;
+	ResourceManager->ComprehensiveTest->GetAllRows<FComprehensiveTests>("", AllTests);
+	for(auto Test : AllTests)
+	{
+		TestsAry.Add(*Test);
+	}
+	
 }
 
 void AUIManager::InitRocketPartDiagram()

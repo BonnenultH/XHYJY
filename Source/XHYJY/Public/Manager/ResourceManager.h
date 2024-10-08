@@ -58,6 +58,9 @@ public:
 
 	UPROPERTY()
 	UDataTable* RocketPartTable;
+
+	UPROPERTY()
+	UDataTable* ComprehensiveTest;
 	
 	UPROPERTY()
 	UTexture2D* SelectBG;
@@ -97,6 +100,9 @@ public:
 
 	UPROPERTY()
 	UTexture2D* HoistDown;
+
+	UPROPERTY()
+	UTexture2D* TestBG;
 	
 	UPROPERTY()
 	UTexture2D* TestWarning;

@@ -32,6 +32,8 @@ protected:
 
 	void InitOrbitInfo();
 
+	void InitQuestionTable();
+	
 	void InitRocketPartDiagram();
 
 	UFUNCTION()
@@ -91,13 +93,14 @@ protected:
 	TMap<ERocketType, FRocketTable*> RocketMap;
 	TMap<EOrbit, FHTQOrbit> OrbitMap;
 	
-	
 	TMap<ERocketType, FDiagramUITable*> DiagramMap;
 	int32 TaskGrade = 100;
 	
 public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;
+
+	TArray<FComprehensiveTests> TestsAry;
 
 	FProgressDelegate OnUpdateProgress;
 
