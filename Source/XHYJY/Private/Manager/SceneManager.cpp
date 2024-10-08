@@ -7,7 +7,11 @@
 #include "Kismet/GameplayStatics.h"
 #include "Manager/UIManager.h"
 #include "CineCameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Scene/A_SinglePart.h"
+#include "Components/TimelineComponent.h"
+#include "Components/TimelineComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "UMG/WHoisting.h"
 
 class UCineCameraComponent;
@@ -53,6 +57,8 @@ void ASceneManager::CheckClickMesh()
 	VDPawn->SetActorRotation(FRotator(0,90,0));
 	
 	UGameplayStatics::GetPlayerController(this, 0)->SetViewTargetWithBlend(VDPawn, 1);
+	CurSingleMesh->AttachToComponent(VDPawn->MySpringArm, FAttachmentTransformRules::KeepWorldTransform);
+	
 }
 
 void ASceneManager::SwitchViewByHoist()
@@ -71,4 +77,5 @@ void ASceneManager::BindHoistUIDelegate()
 	UWHoisting* Widget = Cast<UWHoisting>(UIManager->WidgetMap[UIManager->CurWidgetType]);
 	Widget->OnAnimEnd.BindUObject(this, &ASceneManager::CheckClickMesh);
 }
+
 

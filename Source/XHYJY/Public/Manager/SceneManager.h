@@ -2,6 +2,8 @@
 
 #pragma once
 
+
+#include "Components/TimelineComponent.h"
 #include "Manager/BaseManager.h"
 #include "SceneManager.generated.h"
 
@@ -34,7 +36,7 @@ protected:
 	int32 ClickedNum = 0;
 	UPROPERTY()
 	AA_SinglePart* CurSingleMesh;
-	
+
 public:
 	UPROPERTY()
 	AActor* HoistCamera;

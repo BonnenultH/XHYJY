@@ -16,7 +16,7 @@ void UWRocketSelect::InitWidget()
 	
 	UIManager->OnUpdateProgress.Broadcast();
 	Button_Ok->OnClicked.AddDynamic(this, &UWRocketSelect::CheckSelectRocket);
-
+	InitHintInfos();
 	InitRocketView();
 	PlayAnimation(ShowTwoSlide);
 }
@@ -50,6 +50,7 @@ void UWRocketSelect::InitRocketView()
 		Chosen->SetText(FText::FromString(FString::FromInt(0)));
 		ToChosen->SetText(FText::FromString(FString::FromInt(RightRocketArry.Num())));
 		TextBlock_CapacityRange->SetText(FText::FromString(UIManager->SelectTaskItem->CapacityRange));
+		TextBlock_HintInfo->SetText(FText::FromString(HintInfoMap[ERSMode::ERSM_Capacity]));
 	}
 	else if(CurMode == ERSMode::ERSM_Price)
 	{
@@ -69,8 +70,10 @@ void UWRocketSelect::InitRocketView()
 		}
 		Chosen->SetText(FText::FromString(FString::FromInt(0)));
 		ToChosen->SetText(FText::FromString(FString::FromInt(1)));
+		TextBlock_HintInfo->SetText(FText::FromString(HintInfoMap[ERSMode::ERSM_Price]));
 	}
 }
+
 
 void UWRocketSelect::CheckSelectRocket()
 {
@@ -233,6 +236,12 @@ void UWRocketSelect::SelectRocketItem(UObject* ObjItem)
 	{
 		SeletedBoxArry[SelectedRocketArry.Num() - 1]->SetBrushFromTexture(ResourceManager->CheckBar, true);
 	}
+}
+
+void UWRocketSelect::InitHintInfos()
+{
+	HintInfoMap.Add(ERSMode::ERSM_Capacity,TEXT("运载能力筛选：运载能力是我们为火箭运载性能虚拟的一个指标，不同航天器的质量与目标轨道不同，需求的运载能力也不一样。"));
+	HintInfoMap.Add(ERSMode::ERSM_Price, TEXT("经济适用筛选：运输火箭的发射成本非常高昂，通过提升火箭发射的经济效益，可以降低发射任务阶段中的支出，火箭参数中的“相对价格”代表着发射该火箭所需的虚拟费用以供参考，下面需要聪明的你来选择出最具经济性的运载火箭。"));
 }
 
 void UWRocketSelect::CreateLaunch()

@@ -30,6 +30,8 @@ void AVDPawn::BeginPlay()
 	
 	CreateManagers();
 	InitManagers();
+
+	SetActorLocation(FVector(-46248.157897,-40384.774796,1573.511028));
 }
 
 void AVDPawn::CreateManagers()

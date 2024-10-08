@@ -19,6 +19,8 @@ class XHYJY_API UWRocketSelect : public UBaseWidget
 protected:
 	void InitRocketView();
 
+	void InitHintInfos();
+	
 	UFUNCTION()
 	void CheckSelectRocket();
 
@@ -68,6 +70,8 @@ protected:
 	UTextBlock* ToChosen;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* TextBlock_CapacityRange;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* TextBlock_HintInfo;
 	
 	
 	UPROPERTY(meta=(BindWidget))
@@ -79,6 +83,7 @@ protected:
 	TArray<UImage*> SeletedBoxArry;
 	TArray<FTaskRocket> RightRocketArry;
 	TArray<UItemRocket*> SelectedRocketArry;
+	TMap<ERSMode, FString> HintInfoMap;
 	FTimerHandle TimerHandle;
 
 	ERSMode CurMode = ERSMode::ERSM_Capacity;

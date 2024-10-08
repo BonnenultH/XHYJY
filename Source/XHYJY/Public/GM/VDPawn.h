@@ -60,4 +60,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UStaticMeshComponent* HoistMesh;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	class USpringArmComponent* MySpringArm;
 };
