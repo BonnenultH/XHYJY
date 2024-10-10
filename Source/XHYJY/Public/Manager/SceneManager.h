@@ -5,6 +5,7 @@
 
 #include "Components/TimelineComponent.h"
 #include "Manager/BaseManager.h"
+#include "Scene/BaseCZActor.h"
 #include "SceneManager.generated.h"
 
 class AA_SinglePart;
@@ -22,24 +23,55 @@ protected:
 
 	void CheckClickMesh();
 
+	void DelayAttach();
+
+	void DelaySelect();
+
 public:
 	void InitManager() override;
 
 	void InitSingleMesh();
 
+	void InitTargetRocket();
+
 	void SwitchViewByHoist();
 
+	void SwitchViewByFront();
+
 	void BindHoistUIDelegate();
+
+	void SetSelectable(bool bSelect)
+	{
+		bSelectable = bSelect;
+	}
+	
+	bool GetSelectable()
+	{
+		return bSelectable;
+	}
+	
+	void AssemblySuccess();
+	
 protected:
 	FVector SinglePartLocation = FVector(-46243.709164,-37700.620589,409.999977);
 	FDiagramUITable* UIDiagram;
 	int32 ClickedNum = 0;
 	UPROPERTY()
 	AA_SinglePart* CurSingleMesh;
+	bool bSelectable = false;
+	UPROPERTY()
+
+	ABaseCZActor* TargetRocket;
+
+	TMap<ERocketType, UClass*> TargetRocketBPMap;
 
 public:
 	UPROPERTY()
 	AActor* HoistCamera;
+
+	UPROPERTY()
+	AActor* FrontCamera;
+	
 	UPROPERTY()
 	TArray<AA_SinglePart*> SingleArray;
 };

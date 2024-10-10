@@ -59,8 +59,7 @@ public:
 	class UCameraComponent* Camera;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* HoistMesh;
-
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	class USpringArmComponent* MySpringArm;
+
+	bool bMove = false;
 };

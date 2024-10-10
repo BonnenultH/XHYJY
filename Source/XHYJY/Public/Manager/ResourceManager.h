@@ -108,6 +108,22 @@ public:
 	UTexture2D* TestWarning;
 
 	UPROPERTY()
+	UTexture2D* S;
+
+	UPROPERTY()
+	UTexture2D* A;
+
+	UPROPERTY()
+	UTexture2D* B;
+
+	UPROPERTY()
+	UTexture2D* C;
+
+	UPROPERTY()
+	UTexture2D* D;
+	
+
+	UPROPERTY()
 	UMaterial* WarningMaterial;
 
 	UPROPERTY()

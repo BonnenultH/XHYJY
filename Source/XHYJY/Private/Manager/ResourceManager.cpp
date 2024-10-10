@@ -93,6 +93,17 @@ AResourceManager::AResourceManager()
 	
 	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
 	WarningMaterial= WarningObj.Object;
+
+	ConstructorHelpers::FObjectFinder<UTexture2D> SObj(TEXT("'/Game/UMG/BookLaunch/S.S'"));
+	S= SObj.Object;
+	ConstructorHelpers::FObjectFinder<UTexture2D> AObj(TEXT("'/Game/UMG/BookLaunch/A.A'"));
+	A= AObj.Object;
+	ConstructorHelpers::FObjectFinder<UTexture2D> BObj(TEXT("'/Game/UMG/BookLaunch/B.B'"));
+	B= BObj.Object;
+	ConstructorHelpers::FObjectFinder<UTexture2D> CObj(TEXT("'/Game/UMG/BookLaunch/C.C'"));
+	C= CObj.Object;
+	ConstructorHelpers::FObjectFinder<UTexture2D> DObj(TEXT("'/Game/UMG/BookLaunch/D.D'"));
+	D= DObj.Object;
 }
 
 // Called when the game starts or when spawned
@@ -133,7 +144,8 @@ void AResourceManager::InitRSWidgetMap()
 	RSWidgetMap.Add(EWidgetType::EWT_Launch,LoadWidgetFile(TEXT("'/Game/UMG/WBP_Launch.WBP_Launch_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_Hoisting, LoadWidgetFile(TEXT("'/Game/UMG/WBP_Hoisting.WBP_Hoisting_C'")));
 	RSWidgetMap.Add(EWidgetType::EWT_ComprehensiveTest, LoadWidgetFile(TEXT("'/Game/UMG/WBP_ComprehensiveTest.WBP_ComprehensiveTest_C'")));
-	
+	RSWidgetMap.Add(EWidgetType::EWT_BookLaunch, LoadWidgetFile(TEXT("'/Game/UMG/WBP_BookLaunch.WBP_BookLaunch_C'")));
+
 }
 
 void AResourceManager::InitMediaResource()

@@ -110,7 +110,7 @@ public:
 	bool bShowRocket = false;
 	bool bShowFirePlace = false;
 	
-	float	ManagerMinute = 2;
+	float	ManagerMinute = 8;
 	float	ManagerSecond = 0;
 	bool	bTimeStart = false;
 };

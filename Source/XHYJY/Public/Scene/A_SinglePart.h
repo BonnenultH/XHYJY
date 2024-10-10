@@ -25,6 +25,7 @@ protected:
 	UFUNCTION()
 	virtual void NotifyActorOnClicked(FKey ButtonPressed) override;
 
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -46,6 +47,10 @@ public:
 		return RocketDispatchMesh->GetStaticMesh();
 	}
 
+	void AbleRotatorSelf();
+	
+	void AbleUpSelf();
+	
 protected:
 	UPROPERTY()
 	UStaticMeshComponent* RocketDispatchMesh;
@@ -54,6 +59,8 @@ protected:
 
 	FString  RocketPartName;
 
+	bool bAbleRotator = false;
+	bool bAbleUp = false;
 public:
 	FDelegateRocketClick OnRocketClick;
 };

@@ -19,8 +19,6 @@ protected:
 	void InitDiagram();
 
 	void InitRocketPartInfos();
-
-	void HoistingProgress();
 	
 	UFUNCTION()
 	void OnLevelLoaded();
@@ -34,7 +32,9 @@ protected:
 	UFUNCTION()
 	void PlayReverseOperateIns();
 	
-	void PlaySelectPartAnim();
+	void CameraMove();
+
+	void DelayAssembly();
 
 	UFUNCTION()
 	void PlaySelectPartReverseAnim();
@@ -55,8 +55,18 @@ protected:
 
 	UFUNCTION()
 	void ClickedAssembly();
+
+	UFUNCTION()
+	void GoTest();
+
 public:
 	virtual void InitWidget() override;
+	
+	void HoistingProgress();
+
+	void PlaySelectPartAnim();
+
+	void PlaySelectWrong();
 
 protected:
 	UPROPERTY(meta=(BindWidget))
@@ -87,6 +97,9 @@ protected:
 	UButton* Button_StartSelectPart;
 	UPROPERTY(meta=(BindWidget))
 	UButton* Button_CurOk;
+	UPROPERTY(meta=(BindWidget))
+	UButton* Button_GoTest;
+	
 	
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* RocketPartName;
@@ -102,7 +115,6 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 	UProgressBar* ProgressBar;
-	
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* Instructions;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
@@ -116,16 +128,15 @@ protected:
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* CurSelectPartAnim;
 
-	UVerticalBoxSlot* ImageSlot;
-	UVerticalBoxSlot* TextSlot;
-
 	FDiagramUITable* UIDiagram;
-
 	TMap<ERocketPartsType, FString> RocketPartInfosMap;
-
 	TMap<EFirePlace, FName> FirePlaceMap;
-	
 	FSingleRocketPart CurSingleRocketPart;
+	float CurProgress = 0;
+	UPROPERTY()
+	UOverlay* Overlay;
+	TArray<UImage*> PartImageArry;
+	TArray<UImage*> PartTextArry;
 
 public:
 	FSelectAnimEnd OnAnimEnd;

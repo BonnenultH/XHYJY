@@ -21,7 +21,6 @@ void AVDPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	
 	UserInfoData.IDName			= L"不可思议的佳佳";
 	UserInfoData.Accomplishment = L"型号研究院高级研究员";
 	UserInfoData.Grades			= L"720";
@@ -30,8 +29,8 @@ void AVDPawn::BeginPlay()
 	
 	CreateManagers();
 	InitManagers();
-
 	SetActorLocation(FVector(-46248.157897,-40384.774796,1573.511028));
+	SetActorRotation(FRotator(0,90,0));
 }
 
 void AVDPawn::CreateManagers()
@@ -50,9 +49,12 @@ void AVDPawn::InitManagers()
 
 void AVDPawn::Move(const FInputActionValue& Value)
 {
-	FVector MovementVector = Value.Get<FVector>();
-	UE_LOG(LogTemp, Log, TEXT("X : %f, Y : %f, Z : %f"), MovementVector.X, MovementVector.Y, MovementVector.Z);
-		
+	if(!bMove)
+	{
+		return;	
+	}
+	
+	FVector MovementVector = Value.Get<FVector>() * 5;
 	SetActorLocation(FVector(GetActorLocation().X + MovementVector.Y, GetActorLocation().Y + MovementVector.X,
 		GetActorLocation().Z + MovementVector.Z));			
 }
@@ -80,7 +82,6 @@ void AVDPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVDPawn::Move);
-
 	}
 }
 

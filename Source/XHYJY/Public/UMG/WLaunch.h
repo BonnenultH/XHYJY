@@ -79,5 +79,4 @@ protected:
 	EFirePlace CurFirePlace = EFirePlace::EFP_None;
 	UPROPERTY()
 	UButton* CurButton;
-	
 };
