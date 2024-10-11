@@ -122,9 +122,13 @@ void AResourceManager::InitManager()
 {
 	Super::InitManager();
 	GenderMaterialInstance = GetWorld()->GetParameterCollectionInstance(GenderMaterial);
-
+	
 	LevelSequence = LoadObject<ULevelSequence>(this,TEXT("'/Game/Model/Sequence/JZ_Sequence.JZ_Sequence'"));
 	MainLevelSequencePlayer = MainLevelSequencePlayer->CreateLevelSequencePlayer(GetWorld(), LevelSequence, FMovieSceneSequencePlaybackSettings(),currentLevelSequenceActor);
+
+	LevelEndingSequence = LoadObject<ULevelSequence>(this, TEXT("'/Game/Model/Sequence/CZ_Sequence.CZ_Sequence'")); 
+	EndingLevelSequencePlayer = EndingLevelSequencePlayer->CreateLevelSequencePlayer(GetWorld(), LevelEndingSequence, FMovieSceneSequencePlaybackSettings(),EndLevelSequenceActor);
+
 }
 
 TSubclassOf<UUserWidget> AResourceManager::LoadWidgetFile(FString Path)

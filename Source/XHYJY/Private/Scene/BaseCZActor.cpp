@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Manager/ResourceManager.h"
 #include "Manager/SceneManager.h"
+#include "Scene/A_SinglePart.h"
 #include "Manager/UIManager.h"
 #include "Scene/A_SinglePart.h"
 #include "UMG/WHoisting.h"
@@ -39,15 +40,21 @@ void ABaseCZActor::HoistSuccess()
 {
 	VDPawn->bMove = false;
 	SceneManager->SwitchViewByFront();
-
+	UWHoisting* Widget = Cast<UWHoisting>(UIManager->WidgetMap[UIManager->CurWidgetType]);
+	Widget->PlaySelectRight();
 	FTimerHandle TimeHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimeHandle,this, &ABaseCZActor::DelaySwitchView,5);
+	GetWorld()->GetTimerManager().SetTimer(TimeHandle,this, &ABaseCZActor::DelaySwitchView,3.5);
 }
 
 void ABaseCZActor::DelaySwitchView()
 {
-	SceneManager->SwitchViewByHoist();
 	UWHoisting* Widget = Cast<UWHoisting>(UIManager->WidgetMap[UIManager->CurWidgetType]);
+	if(Widget->GetCurProgress() >= UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket())->RocketParts.Num())
+	{
+		Widget->HoistingProgress();
+		return;
+	}
+	SceneManager->SwitchViewByHoist();
 	Widget->HoistingProgress();
 	Widget->PlaySelectPartAnim();
 }

@@ -159,6 +159,7 @@ void UWHoisting::HoistingProgress()
 {
 	if(CurProgress >= UIDiagram->RocketParts.Num())
 	{
+		CurProgress++;
 		PlayAnimation(Tests);
 		return;
 	}
@@ -197,12 +198,20 @@ void UWHoisting::PlayReverseOperateIns()
 
 void UWHoisting::PlaySelectPartAnim()
 {
+	if(CurProgress <= UIDiagram->RocketParts.Num())
+	{
 	PlayAnimation(StartSelectPartAnim);
+	}
 }
 
 void UWHoisting::PlaySelectWrong()
 {
 	PlayAnimation(ErrorPartSelection);
+}
+
+void UWHoisting::PlaySelectRight()
+{
+	PlayAnimation(SuccessHoist);
 }
 
 void UWHoisting::CameraMove()
@@ -245,6 +254,7 @@ void UWHoisting::InitDelegateSingle()
 void UWHoisting::GetRocketSingleInfo(AA_SinglePart* SinglePart)
 {
 	TextBlock_CurPart->SetText(FText::FromString(SinglePart->GetSingleMeshName()));
+	TextBlock_SuccessPart->SetText(FText::FromString(SinglePart->GetSingleMeshName()));
 	PlayAnimation(CurSelectPartAnim);
 }
 
@@ -252,6 +262,11 @@ void UWHoisting::ClickedAssembly()
 {
 	SceneManager->AssemblySuccess();
 	UIManager->MinusGrade(15);
+	for(auto Single : SceneManager->SingleArray)
+	{
+		Single->SetActorHiddenInGame(true);
+	}
+	
 	FTimerHandle Delaypop;
 	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &UWHoisting::DelayAssembly, 1);
 }

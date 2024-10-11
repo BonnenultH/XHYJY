@@ -68,6 +68,13 @@ public:
 
 	void PlaySelectWrong();
 
+	void PlaySelectRight();
+
+	int32 GetCurProgress()
+	{
+		return CurProgress;
+	}
+
 protected:
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
@@ -111,6 +118,8 @@ protected:
 	UTextBlock* TextBlock_Part;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* TextBlock_CurPart;
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* TextBlock_SuccessPart;
 	
 
 	UPROPERTY(meta=(BindWidget))
@@ -127,6 +136,8 @@ protected:
 	UWidgetAnimation* StartSelectPartAnim;
 	UPROPERTY(Transient, meta=(BindWidgetAnim))
 	UWidgetAnimation* CurSelectPartAnim;
+	UPROPERTY(Transient, meta=(BindWidgetAnim))
+	UWidgetAnimation* SuccessHoist;
 
 	FDiagramUITable* UIDiagram;
 	TMap<ERocketPartsType, FString> RocketPartInfosMap;

@@ -39,6 +39,9 @@ protected:
 	void SelectWrong();
 
 	void ShowNextQue();
+
+	UFUNCTION()
+	void CreateBook();
 	
 
 public:

@@ -3,6 +3,7 @@
 
 #include "Scene/A_CZ3B.h"
 #include "Components/BoxComponent.h"
+#include "Scene/A_SinglePart.h"
 
 // Sets default values
 AA_CZ3B::AA_CZ3B()
@@ -16,7 +17,14 @@ AA_CZ3B::AA_CZ3B()
 void AA_CZ3B::BeginPlay()
 {
 	Super::BeginPlay();
-	CoreOneLevel->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapBox);
+	Cowling->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapCowlingBox);
+	CoreOneLevel->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapCoreOneLevelBox);
+	CoreTwoLevels->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapCoreTwoLevelsBox);
+	CoreThreeLevels->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapCoreThreeLevelsBox);
+	Rollboosters->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapRollboostersBox);
+	Rollboosters2->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapRollboostersBox);
+	Rollboosters3->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapRollboostersBox);
+	Rollboosters4->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ3B::OnOverlapRollboostersBox);
 }
 
 // Called every frame
@@ -26,16 +34,93 @@ void AA_CZ3B::Tick(float DeltaTime)
 
 }
 
-void AA_CZ3B::OnOverlapBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+void AA_CZ3B::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor == this)
+	if(OtherActor && OtherActor != this)
 	{
-		return;
+		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
+		if(SingleActor)
+		{
+			CheckMeshCollsion(SingleActor, CowlingC, ERocketPartsType::ERP_Cowling);
+		}
 	}
-
-	UE_LOG(LogTemp, Log, TEXT("触发了！"))
 }
+
+void AA_CZ3B::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(OtherActor && OtherActor != this)
+	{
+		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
+		if(SingleActor)
+		{
+			CheckMeshCollsion(SingleActor, CoreOneLevelC, ERocketPartsType::ERP_CoreOneLevel);
+		}
+	}
+}
+
+void AA_CZ3B::OnOverlapCoreTwoLevelsBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(OtherActor && OtherActor != this)
+	{
+		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
+		if(SingleActor)
+		{
+			CheckMeshCollsion(SingleActor, CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
+		}
+	}
+}
+
+void AA_CZ3B::OnOverlapCoreThreeLevelsBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(OtherActor && OtherActor != this)
+	{
+		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
+		if(SingleActor)
+		{
+			CheckMeshCollsion(SingleActor, CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
+		}
+	}
+}
+
+void AA_CZ3B::OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(OtherActor && OtherActor != this)
+	{
+		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
+		if(SingleActor)
+		{
+			TArray<UStaticMeshComponent*> MeshArry;
+			MeshArry.Add(RollboostersC);
+			MeshArry.Add(RollboostersC2);
+			MeshArry.Add(RollboostersC3);
+			MeshArry.Add(RollboostersC4);
+			CheckMeshCollsion(SingleActor, MeshArry, ERocketPartsType::ERP_Boosters);
+		}
+	}
+}
+
+void AA_CZ3B::ShowAllMesh()
+{
+	Super::ShowAllMesh();
+
+	RollboostersC->SetHiddenInGame(false);
+	RollboostersC2->SetHiddenInGame(false);
+	RollboostersC3->SetHiddenInGame(false);
+	RollboostersC4->SetHiddenInGame(false);
+	CoreThreeLevelsC->SetHiddenInGame(false);
+	CoreTwoLevelsC->SetHiddenInGame(false);
+	CoreOneLevelC->SetHiddenInGame(false);
+	CowlingC->SetHiddenInGame(false);
+	
+}
+
+
+
 
 
 

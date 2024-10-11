@@ -129,9 +129,17 @@ public:
 	UPROPERTY()
 	class ULevelSequence* LevelSequence;
 
+	class ULevelSequence* LevelEndingSequence;
+
 	UPROPERTY()
 	class ULevelSequencePlayer* MainLevelSequencePlayer;
 
+	class ULevelSequencePlayer* EndingLevelSequencePlayer;
+
 	class ALevelSequenceActor * currentLevelSequenceActor = nullptr;
+
+	class ALevelSequenceActor * EndLevelSequenceActor = nullptr;
+
+	
 	
 };

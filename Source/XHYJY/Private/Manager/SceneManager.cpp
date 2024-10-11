@@ -15,6 +15,8 @@ void ASceneManager::InitManager()
 	Super::InitManager();
 	UClass* MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3C/CZ3C_Actor.CZ3C_Actor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3C, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3B, MyActorClass);
 	
 }
 
@@ -52,6 +54,7 @@ void ASceneManager::CheckClickMesh()
 		UE_LOG(LogTemp, Log, TEXT("检查错误！"))
 		UWHoisting* Widget = Cast<UWHoisting>(UIManager->WidgetMap[UIManager->CurWidgetType]);
 		Widget->PlaySelectWrong();
+		
 		FTimerHandle Delaypop;
 		GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &ASceneManager::DelaySelect, 3.5f);
 		return;

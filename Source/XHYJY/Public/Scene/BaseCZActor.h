@@ -43,5 +43,7 @@ public:
 
 	UPROPERTY()
 	class ASceneManager* SceneManager;
+	
+	
 
 };

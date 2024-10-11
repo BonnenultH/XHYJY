@@ -119,10 +119,22 @@ void UWComprehensiveTest::ShowNextQue()
 {
 	if(QuesNum >= 2)
 	{
-		UIManager->CreateVDWidget(EWidgetType::EWT_BookLaunch);
+		Border_BG->SetBrushFromTexture(ResourceManager->TestBG);
+		
+		if(ResourceManager->EndingLevelSequencePlayer)
+		{
+			ResourceManager->EndingLevelSequencePlayer->Play();
+			ResourceManager->EndingLevelSequencePlayer->OnFinished.AddDynamic(this, &UWComprehensiveTest::CreateBook);
+		}
+		
 		return;
 	}
 	
 	QuesNum++;
 	InitQuestions();
+}
+
+void UWComprehensiveTest::CreateBook()
+{
+	UIManager->CreateVDWidget(EWidgetType::EWT_BookLaunch);
 }
