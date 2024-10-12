@@ -4,60 +4,49 @@
 
 #include "CoreMinimal.h"
 #include "Scene/BaseCZActor.h"
-#include "A_CZ1.generated.h"
+#include "A_CZ2D.generated.h"
 
-class UBoxComponent;
 /**
  * 
  */
 UCLASS()
-class XHYJY_API AA_CZ1 : public ABaseCZActor
+class XHYJY_API AA_CZ2D : public ABaseCZActor
 {
 	GENERATED_BODY()
-	
 
 protected:
-
-	virtual void BeginPlay() override;
-	
 	UFUNCTION()
-	void OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	void OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	void OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	void OnOverlapCoreTwoLevelsBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	UFUNCTION()
-	void OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	
 public:
+	virtual void BeginPlay() override;
+
 	virtual void ShowAllMesh() override;
-	
+
+
 protected:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* Cowling;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CowlingC;
+	UStaticMeshComponent* CowlingS;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* CoreOneLevel;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CoreOneLevelC;
+	UStaticMeshComponent* CoreOneLevelS;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* CoreTwoLevels;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CoreTwoLevelsC;
-	
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* CoreThreeLevels;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CoreThreeLevelsC;
+	UStaticMeshComponent* CoreTwoLevelsS;
 	
 };

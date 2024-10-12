@@ -292,10 +292,22 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ1.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ2D.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ2F.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ3B.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ3C.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ5.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ7.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_SinglePart.cpp">
@@ -362,8 +374,12 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\SceneManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Manager\UIManager.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ1.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ2D.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ2F.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3B.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3C.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ5.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ7.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_SinglePart.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\BaseCZActor.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\UMG\BaseWidget.h"/>
