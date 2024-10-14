@@ -298,13 +298,22 @@
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ2F.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ3A.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ3B.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ3C.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ4C.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ5.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ5B.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\XHYJY\Private\Scene\A_CZ7.cpp">
@@ -376,9 +385,12 @@
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ1.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ2D.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ2F.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3A.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3B.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ3C.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ4C.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ5.h"/>
+    <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ5B.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_CZ7.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\A_SinglePart.h"/>
     <ClInclude Include="..\..\Source\XHYJY\Public\Scene\BaseCZActor.h"/>

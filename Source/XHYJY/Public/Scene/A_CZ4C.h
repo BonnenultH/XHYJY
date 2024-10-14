@@ -4,76 +4,58 @@
 
 #include "CoreMinimal.h"
 #include "Scene/BaseCZActor.h"
-#include "A_CZ2F.generated.h"
+#include "A_CZ4C.generated.h"
 
 /**
  * 
  */
 
 class UBoxComponent;
-
 UCLASS()
-class XHYJY_API AA_CZ2F : public ABaseCZActor
+class XHYJY_API AA_CZ4C : public ABaseCZActor
 {
 	GENERATED_BODY()
 
 
-	protected:
-	UFUNCTION()
-	void OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnOverlapCoreTwoLevelsBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void BeginPlay() override;
 	
 	UFUNCTION()
-	void OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	void OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	UFUNCTION()
+	void OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
 public:
-	virtual void BeginPlay() override;
-
 	virtual void ShowAllMesh() override;
-
-
+	
 protected:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* Cowling;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CowlingS;
+	UStaticMeshComponent* CowlingC;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* CoreOneLevel;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CoreOneLevelS;
+	UStaticMeshComponent* CoreOneLevelC;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* CoreTwoLevels;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CoreTwoLevelsS;
+	UStaticMeshComponent* CoreTwoLevelsC;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters;
+	UBoxComponent* CoreThreeLevels;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS;
-
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters2;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS2;
-
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters3;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS3;
-
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters4;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS4;
+	UStaticMeshComponent* CoreThreeLevelsC;
 };

@@ -4,19 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Scene/BaseCZActor.h"
-#include "A_CZ2F.generated.h"
+#include "A_CZ5B.generated.h"
 
 /**
  * 
  */
-
 class UBoxComponent;
 
 UCLASS()
-class XHYJY_API AA_CZ2F : public ABaseCZActor
+class XHYJY_API AA_CZ5B : public ABaseCZActor
 {
 	GENERATED_BODY()
-
 
 	protected:
 	UFUNCTION()
@@ -25,10 +23,6 @@ class XHYJY_API AA_CZ2F : public ABaseCZActor
 
 	UFUNCTION()
 	void OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnOverlapCoreTwoLevelsBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 	UFUNCTION()
@@ -53,11 +47,6 @@ protected:
 	UStaticMeshComponent* CoreOneLevelS;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* CoreTwoLevels;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* CoreTwoLevelsS;
-	
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBoxComponent* Rollboosters;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UStaticMeshComponent* RollboostersS;
@@ -76,4 +65,5 @@ protected:
 	UBoxComponent* Rollboosters4;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UStaticMeshComponent* RollboostersS4;
+	
 };

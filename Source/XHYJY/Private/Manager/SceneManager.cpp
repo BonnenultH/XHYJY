@@ -17,7 +17,22 @@ void ASceneManager::InitManager()
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3C, MyActorClass);
 	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3B, MyActorClass);
-	
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-1/CZ1Actor.CZ1Actor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_1, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5/CZ-5Actor.CZ-5Actor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_5, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-7/CZ-7Actor.CZ-7Actor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_7, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-2D/CZ-2DActor.CZ-2DActor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_2D, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-2F/CZ-2FActor.CZ-2FActor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_2F, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3A/CZ-3AActor.CZ-3AActor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3A, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-4C/CZ_4CActor.CZ_4CActor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_4C, MyActorClass);
+	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5B/CZ_5BActor.CZ_5BActor_C'"));
+	TargetRocketBPMap.Add(ERocketType::ERT_CZ_5B, MyActorClass);
 }
 
 void ASceneManager::InitSingleMesh()
