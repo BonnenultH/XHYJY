@@ -6,6 +6,7 @@
 #include "Data/DataType.h"
 #include "GameFramework/Pawn.h"
 #include "InputActionValue.h"
+#include "GameFramework/Character.h"
 #include "VDPawn.generated.h"
 
 class UInputMappingContext;

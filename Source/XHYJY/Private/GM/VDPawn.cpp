@@ -8,6 +8,7 @@
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 AVDPawn::AVDPawn()
@@ -31,6 +32,7 @@ void AVDPawn::BeginPlay()
 	InitManagers();
 	SetActorLocation(FVector(-46248.157897,-40384.774796,1573.511028));
 	SetActorRotation(FRotator(0,90,0));
+	
 }
 
 void AVDPawn::CreateManagers()
@@ -49,14 +51,16 @@ void AVDPawn::InitManagers()
 
 void AVDPawn::Move(const FInputActionValue& Value)
 {
+	FVector MovementVector = Value.Get<FVector>();
+	
 	if(!bMove)
 	{
 		return;	
 	}
 	
-	FVector MovementVector = Value.Get<FVector>() * 5;
-	SetActorLocation(FVector(GetActorLocation().X + MovementVector.Y, GetActorLocation().Y + MovementVector.X,
-		GetActorLocation().Z + MovementVector.Z));			
+	AddMovementInput(UKismetMathLibrary::GetRightVector(GetControlRotation()), MovementVector.Y);
+	AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), MovementVector.X);
+	AddMovementInput(UKismetMathLibrary::GetUpVector(GetControlRotation()), MovementVector.Z);
 }
 
 // Called every frame
