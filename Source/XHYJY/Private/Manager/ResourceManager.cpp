@@ -121,6 +121,7 @@ void AResourceManager::Tick(float DeltaTime)
 void AResourceManager::InitManager()
 {
 	Super::InitManager();
+
 	GenderMaterialInstance = GetWorld()->GetParameterCollectionInstance(GenderMaterial);
 	
 	LevelSequence = LoadObject<ULevelSequence>(this,TEXT("'/Game/Model/Sequence/JZ_Sequence.JZ_Sequence'"));

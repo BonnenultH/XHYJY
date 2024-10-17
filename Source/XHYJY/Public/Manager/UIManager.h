@@ -100,7 +100,7 @@ public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;
 
-	TArray<FComprehensiveTests> TestsAry;
+	TArray<FComprehensiveTests*> TestsAry;
 
 	FProgressDelegate OnUpdateProgress;
 
