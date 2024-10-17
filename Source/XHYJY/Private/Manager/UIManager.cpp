@@ -157,7 +157,7 @@ void AUIManager::InitQuestionTable()
 	ResourceManager->ComprehensiveTest->GetAllRows<FComprehensiveTests>("", AllTests);
 	for(auto Test : AllTests)
 	{
-		TestsAry.Add(Test);
+		TestsAry.Add(*Test);
 	}
 	
 }
