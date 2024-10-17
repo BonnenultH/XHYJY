@@ -25,7 +25,8 @@ protected:
 	UFUNCTION()
 	virtual void NotifyActorOnClicked(FKey ButtonPressed) override;
 
-
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

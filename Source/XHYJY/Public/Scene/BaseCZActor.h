@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "BaseCZActor.generated.h"
 
+
+class UBoxComponent;
 UCLASS()
 class XHYJY_API ABaseCZActor : public AActor
 {

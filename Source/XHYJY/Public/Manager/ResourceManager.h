@@ -140,6 +140,27 @@ public:
 
 	class ALevelSequenceActor * EndLevelSequenceActor = nullptr;
 
-	
+	UPROPERTY()
+	USoundWave* BGMSound;
+
+	UPROPERTY()
+	USoundWave* WrongSelection;
+
+	UPROPERTY()
+	USoundWave* FactoryOpen;
+
+	UPROPERTY()
+	USoundWave* FactoryBG;
+
+	UPROPERTY()
+	USoundWave* Scan;
+
+	UPROPERTY()
+	USoundWave* AnswerRight;
+	UPROPERTY()
+	USoundWave* AnswerWrong;
+
+	UPROPERTY()
+	USoundWave* FactoryEnd;
 	
 };

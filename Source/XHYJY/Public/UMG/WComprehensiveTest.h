@@ -42,7 +42,14 @@ protected:
 
 	UFUNCTION()
 	void CreateBook();
-	
+
+	void PlanScanSound();
+
+	void PlayRightSound();
+
+	void PlayWrongSound();
+
+	void PlayEndingSound();
 
 public:
 	virtual void InitWidget() override;

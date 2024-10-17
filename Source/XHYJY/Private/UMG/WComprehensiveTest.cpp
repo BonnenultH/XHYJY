@@ -2,6 +2,8 @@
 
 
 #include "UMG/WComprehensiveTest.h"
+#include "Kismet/GameplayStatics.h"
+
 
 void UWComprehensiveTest::InitWidget()
 {
@@ -18,7 +20,8 @@ void UWComprehensiveTest::InitWidget()
 	Button_B->OnClicked.AddDynamic(this, &UWComprehensiveTest::ClickedButtonB);
 	Button_C->OnClicked.AddDynamic(this, &UWComprehensiveTest::ClickedButtonC);
 	Button_D->OnClicked.AddDynamic(this, &UWComprehensiveTest::ClickedButtonD);
-	
+
+	PlanScanSound();
 	FTimerHandle TimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle,this, &UWComprehensiveTest::InitTroubles,2.0f,false);
 	
@@ -73,13 +76,15 @@ void UWComprehensiveTest::CheckSelectRight(UTextBlock* CurButton, EAnswer Button
 	
 	if(UIManager->TestsAry[QuesNum].RightAnswer == ButtonType)
 	{
-		CurButton->SetColorAndOpacity(FSlateColor(FLinearColor::Yellow));
+		CurButton->SetColorAndOpacity(FSlateColor(FLinearColor::Green));
+		PlayRightSound();
 		FTimerHandle DelayShowNext;
 		GetWorld()->GetTimerManager().SetTimer(DelayShowNext,this, &UWComprehensiveTest::SelectRight,0.5f,false);
 	}
 	else
 	{
 		CurButton->SetColorAndOpacity(FSlateColor(FLinearColor::Red));
+		PlayWrongSound();
 		FTimerHandle DelayWrong;
 		GetWorld()->GetTimerManager().SetTimer(DelayWrong,this, &UWComprehensiveTest::SelectWrong, 0.5f, false);
 	}
@@ -123,6 +128,7 @@ void UWComprehensiveTest::ShowNextQue()
 		
 		if(ResourceManager->EndingLevelSequencePlayer)
 		{
+			PlayEndingSound();
 			ResourceManager->EndingLevelSequencePlayer->Play();
 			ResourceManager->EndingLevelSequencePlayer->OnFinished.AddDynamic(this, &UWComprehensiveTest::CreateBook);
 		}
@@ -137,4 +143,24 @@ void UWComprehensiveTest::ShowNextQue()
 void UWComprehensiveTest::CreateBook()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_BookLaunch);
+}
+
+void UWComprehensiveTest::PlanScanSound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->Scan);
+}
+
+void UWComprehensiveTest::PlayRightSound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->AnswerRight);
+}
+
+void UWComprehensiveTest::PlayWrongSound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->AnswerWrong);
+}
+
+void UWComprehensiveTest::PlayEndingSound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->FactoryEnd);
 }

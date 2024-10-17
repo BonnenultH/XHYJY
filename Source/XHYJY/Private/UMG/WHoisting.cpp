@@ -62,6 +62,8 @@ void UWHoisting::OnLevelLoaded()
 		
 		if(ResourceManager->MainLevelSequencePlayer)
         {
+			SceneManager->PlayBGMSound();
+			SceneManager->PlayFactorySound();
         	ResourceManager->MainLevelSequencePlayer->Play();
 			ResourceManager->MainLevelSequencePlayer->OnFinished.AddDynamic(this, &UWHoisting::GoHoisting);
         }
@@ -239,8 +241,10 @@ void UWHoisting::DispearCurSelect()
 
 void UWHoisting::GoHoisting()
 {
+	SceneManager->StartbHoistBGM();
 	Hoisting->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 	SceneManager->SwitchViewByHoist();
+	SceneManager->PlayHoistBG();
 }
 
 void UWHoisting::InitDelegateSingle()
@@ -279,6 +283,8 @@ void UWHoisting::DelayAssembly()
 
 void UWHoisting::GoTest()
 {
-	 UIManager->CreateVDWidget(EWidgetType::EWT_ComprehensiveTest);
+	SceneManager->StopbHoistBGM();
+	SceneManager->PlayHoistBG();
+	UIManager->CreateVDWidget(EWidgetType::EWT_ComprehensiveTest);
 }
 

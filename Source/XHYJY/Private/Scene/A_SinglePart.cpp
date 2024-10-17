@@ -37,6 +37,12 @@ void AA_SinglePart::NotifyActorOnClicked(FKey ButtonPressed)
 	}
 }
 
+void AA_SinglePart::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+	UE_LOG(LogTemp, Log, TEXT("我撞到了"))
+}
+
 
 // Called every frame
 void AA_SinglePart::Tick(float DeltaTime)

@@ -28,6 +28,7 @@ protected:
 	void DelaySelect();
 
 public:
+	
 	void InitManager() override;
 
 	void InitSingleMesh();
@@ -40,6 +41,11 @@ public:
 
 	void BindHoistUIDelegate();
 
+	void PlayBGMSound();
+	void PlayFactorySound();
+	void PlayHoistBG();
+
+
 	void SetSelectable(bool bSelect)
 	{
 		bSelectable = bSelect;
@@ -51,7 +57,22 @@ public:
 	}
 	
 	void AssemblySuccess();
+
+	void SetbStartUIBGM()
+	{
+		bStartUIBGM = false;
+	}
+
+	void StartbHoistBGM()
+	{
+		bHoist = true;
+	}
+	void StopbHoistBGM()
+	{
+		bHoist = false;
+	}
 	
+
 protected:
 	FVector SinglePartLocation = FVector(-46243.709164,-37700.620589,409.999977);
 	FDiagramUITable* UIDiagram;
@@ -65,6 +86,11 @@ protected:
 
 	TMap<ERocketType, UClass*> TargetRocketBPMap;
 
+	bool bStartUIBGM = true;
+	bool bHoist = false;
+	UAudioComponent* AudioComponent;
+
+
 public:
 	UPROPERTY()
 	AActor* HoistCamera;
@@ -74,4 +100,6 @@ public:
 	
 	UPROPERTY()
 	TArray<AA_SinglePart*> SingleArray;
+
+	
 };

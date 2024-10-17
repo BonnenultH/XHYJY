@@ -2,7 +2,10 @@
 
 
 #include "Manager/SceneManager.h"
+
+#include "AssetTypeActions/AssetDefinition_SoundBase.h"
 #include "Camera/CameraActor.h"
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Manager/UIManager.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -33,6 +36,8 @@ void ASceneManager::InitManager()
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_4C, MyActorClass);
 	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5B/CZ_5BActor.CZ_5BActor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_5B, MyActorClass);
+
+	PlayBGMSound();
 }
 
 void ASceneManager::InitSingleMesh()
@@ -46,6 +51,7 @@ void ASceneManager::InitSingleMesh()
 		SinglePart->OnRocketClick.AddUObject(this, &ASceneManager::SingleMeshClick);
 		SingleArray.Add(SinglePart);
 	}
+	
 }
 
 void ASceneManager::InitTargetRocket()
@@ -96,6 +102,36 @@ void ASceneManager::DelayAttach()
 void ASceneManager::DelaySelect()
 {
 	SetSelectable(true);
+}
+
+void ASceneManager::PlayBGMSound()
+{
+	if(bStartUIBGM)
+	{
+		AudioComponent = UGameplayStatics::SpawnSound2D(this, ResourceManager->BGMSound);
+	}
+	else
+	{
+		AudioComponent->Stop();
+	}
+}
+
+
+void ASceneManager::PlayFactorySound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->FactoryOpen);
+}
+
+void ASceneManager::PlayHoistBG()
+{
+	if(bHoist)
+	{
+		AudioComponent = UGameplayStatics::SpawnSound2D(this, ResourceManager->FactoryBG);
+	}
+	else
+	{
+		AudioComponent->Stop();
+	}
 }
 
 void ASceneManager::AssemblySuccess()

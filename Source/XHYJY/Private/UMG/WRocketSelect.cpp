@@ -3,6 +3,7 @@
 
 #include "UMG/WRocketSelect.h"
 #include "Components/Spacer.h"
+#include "Kismet/GameplayStatics.h"
 #include "UMG/Child/WRocketMode.h"
 
 
@@ -85,6 +86,7 @@ void UWRocketSelect::CheckSelectRocket()
 		{
 			// 选错了
 			bResult = false;
+			
 		}
 		else
 		{
@@ -106,6 +108,7 @@ void UWRocketSelect::CheckSelectRocket()
 		else
 		{
 			SelectRocketError();
+			PlayWrongSound();
 		}
 	}
 	else if(CurMode == ERSMode::ERSM_Price)
@@ -131,12 +134,14 @@ void UWRocketSelect::CheckSelectRocket()
 		else
 		{
 			SelectPRocketError();
+			PlayWrongSound();
 		}
 	}
 }
 
 void UWRocketSelect::SelectRocketError()
 {
+	
 	if(ErrorNums != 0)
 	{
 		UIManager->MinusGrade(10);
@@ -192,6 +197,7 @@ void UWRocketSelect::ReInitialRocketView()
 
 void UWRocketSelect::SelectPRocketError()
 {
+	
 	if(ErrorNums != 0)
 	{
 		UIManager->MinusGrade(10);
@@ -248,4 +254,9 @@ void UWRocketSelect::CreateLaunch()
 {
 	UIManager->bShowRocket = true;
 	UIManager->CreateVDWidget(EWidgetType::EWT_Launch);
+}
+
+void UWRocketSelect::PlayWrongSound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->WrongSelection);
 }

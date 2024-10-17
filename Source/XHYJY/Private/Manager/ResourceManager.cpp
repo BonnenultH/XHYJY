@@ -104,6 +104,30 @@ AResourceManager::AResourceManager()
 	C= CObj.Object;
 	ConstructorHelpers::FObjectFinder<UTexture2D> DObj(TEXT("'/Game/UMG/BookLaunch/D.D'"));
 	D= DObj.Object;
+
+	 ConstructorHelpers::FObjectFinder<USoundWave> BGMSoundUI(TEXT("'/Game/Sound/UIbgm.UIbgm'"));
+	 BGMSound = BGMSoundUI.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> WrongAnswerObj(TEXT("'/Game/Sound/WrongRocketselection.WrongRocketselection'"));
+	WrongSelection= WrongAnswerObj.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> FactoryObj(TEXT("'/Game/Sound/factoryopen.factoryopen'"));
+	FactoryOpen= FactoryObj.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> FactoryBGObj(TEXT("'/Game/Sound/Factorybackgroundsound.Factorybackgroundsound'"));
+	FactoryBG= FactoryBGObj.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> ScanObj(TEXT("'/Game/Sound/Scan.Scan'"));
+	Scan= ScanObj.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> AnswerRightObj(TEXT("'/Game/Sound/rightanswer.rightanswer'"));
+	AnswerRight= AnswerRightObj.Object;
+	ConstructorHelpers::FObjectFinder<USoundWave> AnswerWrongObj(TEXT("'/Game/Sound/wronganswer.wronganswer'"));
+	AnswerWrong= AnswerWrongObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<USoundWave> FactoryEndObj(TEXT("'/Game/Sound/factoryend.factoryend'"));
+	FactoryEnd= FactoryEndObj.Object;
+
 }
 
 // Called when the game starts or when spawned
