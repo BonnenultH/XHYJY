@@ -6,9 +6,9 @@
 #include "AssetTypeActions/AssetDefinition_SoundBase.h"
 #include "Camera/CameraActor.h"
 #include "Components/AudioComponent.h"
+#include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Manager/UIManager.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Scene/A_SinglePart.h"
 #include "Scene/A_CZ3C.h"
 #include "UMG/WHoisting.h"
@@ -66,6 +66,7 @@ void ASceneManager::InitTargetRocket()
 void ASceneManager::SingleMeshClick(AA_SinglePart* SinglePart)
 {
 	CurSingleMesh = SinglePart;
+	TempMesh = SinglePart;
 }
 
 void ASceneManager::CheckClickMesh()
@@ -83,25 +84,37 @@ void ASceneManager::CheckClickMesh()
 
 	UE_LOG(LogTemp, Log, TEXT("检查正确！"))
 	ClickedNum++;
+	VDPawn->bMove = false;
 	CurSingleMesh->AbleRotatorSelf();
 	CurSingleMesh->AbleUpSelf();
 	FVector MeshLocation = CurSingleMesh->GetActorLocation();
-	VDPawn->SetActorLocation(FVector(MeshLocation.X,MeshLocation.Y - 1500, 1200));
+	VDPawn->SetActorLocation(FVector(MeshLocation.X,MeshLocation.Y, 1200));
 	
 	UGameplayStatics::GetPlayerController(this, 0)->SetViewTargetWithBlend(VDPawn, 1);
 	FTimerHandle Delaypop;
-	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &ASceneManager::DelayAttach, 0.5f);
+	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &ASceneManager::DelayAttach, 1.0f);
 }
 
 void ASceneManager::DelayAttach()
 {
-	CurSingleMesh->AttachToComponent(VDPawn->MySpringArm, FAttachmentTransformRules::KeepWorldTransform);
+	//CurSingleMesh->AttachToComponent(VDPawn->MyBox, FAttachmentTransformRules::KeepWorldTransform);
+	VDPawn->MyMesh->SetStaticMesh(CurSingleMesh->GetStaticMesh());
+	VDPawn->RocketPartType = CurSingleMesh->GetSingleMeshType();
+	CurSingleMesh->SetActorHiddenInGame(true);
+	CurSingleMesh->SetActorEnableCollision(false);
 	VDPawn->bMove = true;
+	FTimerHandle DelayDestrouSingle;
+	GetWorld()->GetTimerManager().SetTimer(DelayDestrouSingle, this, &ASceneManager::DestroySingle, 3.0f);
 }
 
 void ASceneManager::DelaySelect()
 {
 	SetSelectable(true);
+}
+
+void ASceneManager::DestroySingle()
+{
+	TempMesh->Destroy();
 }
 
 void ASceneManager::PlayBGMSound()

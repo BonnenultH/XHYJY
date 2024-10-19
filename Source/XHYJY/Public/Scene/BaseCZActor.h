@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "BaseCZActor.generated.h"
 
-
+class AVDPawn;
 class UBoxComponent;
 UCLASS()
 class XHYJY_API ABaseCZActor : public AActor
@@ -24,9 +24,8 @@ protected:
 	
 	void HoistSuccess();
 	void DelaySwitchView();
-	void CheckMeshCollsion(class AA_SinglePart* SingleActor, UStaticMeshComponent* TargetMesh, ERocketPartsType RightMeshType);
-	void CheckMeshCollsion(class AA_SinglePart* SingleActor, TArray<UStaticMeshComponent*> TargetMeshArry, ERocketPartsType RightMeshType);
-
+	void CheckMeshCollsion(UStaticMeshComponent* TargetMesh, ERocketPartsType RightMeshType);
+	void CheckMeshCollsion(TArray<UStaticMeshComponent*> TargetMeshArry, ERocketPartsType RightMeshType);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -35,7 +34,7 @@ public:
 
 public:
 	UPROPERTY()
-	class AVDPawn* VDPawn;
+	AVDPawn* VDPawn;
 	
 	UPROPERTY()
 	class AResourceManager* ResourceManager;

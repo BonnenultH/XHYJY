@@ -31,6 +31,7 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 
+	
 
 public:	
 	// Called every frame
@@ -62,5 +63,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	class USpringArmComponent* MySpringArm;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	class UBoxComponent* MyBox;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UStaticMeshComponent* MyMesh;
+
+	ERocketPartsType RocketPartType = ERocketPartsType::ERP_None;
+	
 	bool bMove = false;
 };

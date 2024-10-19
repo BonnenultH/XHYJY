@@ -59,25 +59,28 @@ void ABaseCZActor::DelaySwitchView()
 	Widget->PlaySelectPartAnim();
 }
 
-void ABaseCZActor::CheckMeshCollsion(AA_SinglePart* SingleActor, UStaticMeshComponent* TargetMesh, ERocketPartsType RightMeshType)
+void ABaseCZActor::CheckMeshCollsion(UStaticMeshComponent* TargetMesh, ERocketPartsType RightMeshType)
 {
-	if(SingleActor->GetSingleMeshType() == RightMeshType)
+	if(VDPawn->RocketPartType == RightMeshType)
 	{
-		SingleActor->Destroy();
+		VDPawn->MyMesh->SetStaticMesh(nullptr);
 		TargetMesh->SetHiddenInGame(false);
+		TargetMesh->SetCollisionObjectType(ECC_PhysicsBody);
 		HoistSuccess();
 	}
 }
 
-void ABaseCZActor::CheckMeshCollsion(AA_SinglePart* SingleActor, TArray<UStaticMeshComponent*> TargetMeshArry,
+void ABaseCZActor::CheckMeshCollsion(TArray<UStaticMeshComponent*> TargetMeshArry,
 	ERocketPartsType RightMeshType)
 {
-	if(SingleActor->GetSingleMeshType() == RightMeshType)
+	if(VDPawn->RocketPartType == RightMeshType)
 	{
-		SingleActor->Destroy();
+		
+		VDPawn->MyMesh->SetStaticMesh(nullptr);
 		for(auto Mesh : TargetMeshArry)
 		{
 			Mesh->SetHiddenInGame(false);
+			Mesh->SetCollisionObjectType(ECC_PhysicsBody);
 		}
 		HoistSuccess();
 	}

@@ -22,11 +22,7 @@ void AA_CZ5B::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CowlingS, ERocketPartsType::ERP_Cowling);
-		}
+		CheckMeshCollsion(CowlingS, ERocketPartsType::ERP_Cowling);
 	}
 }
 
@@ -35,11 +31,8 @@ void AA_CZ5B::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent,
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreOneLevelS, ERocketPartsType::ERP_CoreOneLevel);
-		}
+		CheckMeshCollsion(CoreOneLevelS, ERocketPartsType::ERP_CoreOneLevel);
+		
 	}
 }
 
@@ -49,16 +42,13 @@ void AA_CZ5B::OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent,
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			TArray<UStaticMeshComponent*> MeshArry;
-			MeshArry.Add(RollboostersS);
-			MeshArry.Add(RollboostersS2);
-			MeshArry.Add(RollboostersS3);
-			MeshArry.Add(RollboostersS4);
-			CheckMeshCollsion(SingleActor, MeshArry, ERocketPartsType::ERP_Boosters);
-		}
+		TArray<UStaticMeshComponent*> MeshArry;
+		MeshArry.Add(RollboostersS);
+		MeshArry.Add(RollboostersS2);
+		MeshArry.Add(RollboostersS3);
+		MeshArry.Add(RollboostersS4);
+		CheckMeshCollsion(MeshArry, ERocketPartsType::ERP_Boosters);
+	
 	}
 }
 

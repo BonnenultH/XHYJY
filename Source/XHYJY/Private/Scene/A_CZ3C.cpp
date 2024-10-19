@@ -37,11 +37,9 @@ void AA_CZ3C::OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreOneStageC, ERocketPartsType::ERP_CoreOneLevel);
-		}
+		UE_LOG(LogTemp, Log, TEXT("碰到我了"))
+		CheckMeshCollsion(CoreOneStageC, ERocketPartsType::ERP_CoreOneLevel);
+		
 	}
 }
 
@@ -50,14 +48,12 @@ void AA_CZ3C::OnOverlapRBBox(UPrimitiveComponent* OverlappedComponent, AActor* O
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			TArray<UStaticMeshComponent*> MeshArry;
-			MeshArry.Add(RollBooster1C);
-			MeshArry.Add(RollBooster2C);
-			CheckMeshCollsion(SingleActor, MeshArry, ERocketPartsType::ERP_Boosters);
-		}
+		
+		TArray<UStaticMeshComponent*> MeshArry;
+		MeshArry.Add(RollBooster1C);
+		MeshArry.Add(RollBooster2C);
+		CheckMeshCollsion(MeshArry, ERocketPartsType::ERP_Boosters);
+		
 	}
 }
 
@@ -66,11 +62,8 @@ void AA_CZ3C::OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* 
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CowlingC, ERocketPartsType::ERP_Cowling);
-		}
+		CheckMeshCollsion(CowlingC, ERocketPartsType::ERP_Cowling);
+		
 	}
 }
 
@@ -79,11 +72,7 @@ void AA_CZ3C::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreThreeStageC, ERocketPartsType::ERP_CoreThreeLevels);
-		}
+		CheckMeshCollsion(CoreThreeStageC, ERocketPartsType::ERP_CoreThreeLevels);
 	}
 }
 
@@ -92,11 +81,9 @@ void AA_CZ3C::OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreTwoStageC, ERocketPartsType::ERP_CoreTwoLevels);
-		}
+		
+		CheckMeshCollsion(CoreTwoStageC, ERocketPartsType::ERP_CoreTwoLevels);
+		
 	}
 }
 

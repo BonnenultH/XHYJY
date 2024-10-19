@@ -24,8 +24,6 @@ protected:
 
 	UFUNCTION()
 	virtual void NotifyActorOnClicked(FKey ButtonPressed) override;
-
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 	
 public:	
 	// Called every frame
@@ -53,8 +51,7 @@ public:
 	void AbleUpSelf();
 	
 protected:
-	UPROPERTY()
-	UStaticMeshComponent* RocketDispatchMesh;
+	
 
 	ERocketPartsType RocketPartType = ERocketPartsType::ERP_None;
 
@@ -63,5 +60,8 @@ protected:
 	bool bAbleRotator = false;
 	bool bAbleUp = false;
 public:
+	UPROPERTY()
+	UStaticMeshComponent* RocketDispatchMesh;
+	
 	FDelegateRocketClick OnRocketClick;
 };

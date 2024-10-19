@@ -27,6 +27,8 @@ protected:
 
 	void DelaySelect();
 
+	void DestroySingle();
+
 public:
 	
 	void InitManager() override;
@@ -79,6 +81,8 @@ protected:
 	int32 ClickedNum = 0;
 	UPROPERTY()
 	AA_SinglePart* CurSingleMesh;
+
+	AA_SinglePart* TempMesh;
 	bool bSelectable = false;
 	UPROPERTY()
 

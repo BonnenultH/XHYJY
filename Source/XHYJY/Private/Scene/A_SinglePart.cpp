@@ -37,20 +37,13 @@ void AA_SinglePart::NotifyActorOnClicked(FKey ButtonPressed)
 	}
 }
 
-void AA_SinglePart::NotifyActorBeginOverlap(AActor* OtherActor)
-{
-	Super::NotifyActorBeginOverlap(OtherActor);
-	UE_LOG(LogTemp, Log, TEXT("我撞到了"))
-}
-
-
 // Called every frame
 void AA_SinglePart::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if(bAbleRotator)
 	{
-		FRotator NewRotator = FRotator(GetActorRotation().Pitch + 2, GetActorRotation().Yaw, GetActorRotation().Roll);
+		FRotator NewRotator = FRotator(GetActorRotation().Pitch + 5, GetActorRotation().Yaw, GetActorRotation().Roll);
 		SetActorRotation(NewRotator);
 		if(GetActorRotation().Pitch > 89)
 		{
@@ -61,12 +54,13 @@ void AA_SinglePart::Tick(float DeltaTime)
 
 	if(bAbleUp)
 	{
-		FVector NewLocation = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 10);
+		FVector NewLocation = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 20);
 		SetActorLocation(NewLocation);
 		if(GetActorLocation().Z > 1199)
 		{
 			SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, 1200));
 			bAbleUp = false;
+			
 		}
 	}
 	

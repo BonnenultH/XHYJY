@@ -39,11 +39,7 @@ void AA_CZ3B::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CowlingC, ERocketPartsType::ERP_Cowling);
-		}
+		CheckMeshCollsion(CowlingC, ERocketPartsType::ERP_Cowling);
 	}
 }
 
@@ -55,7 +51,7 @@ void AA_CZ3B::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent,
 		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
 		if(SingleActor)
 		{
-			CheckMeshCollsion(SingleActor, CoreOneLevelC, ERocketPartsType::ERP_CoreOneLevel);
+			CheckMeshCollsion(CoreOneLevelC, ERocketPartsType::ERP_CoreOneLevel);
 		}
 	}
 }
@@ -65,11 +61,7 @@ void AA_CZ3B::OnOverlapCoreTwoLevelsBox(UPrimitiveComponent* OverlappedComponent
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
-		}
+		CheckMeshCollsion(CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
 	}
 }
 
@@ -78,11 +70,7 @@ void AA_CZ3B::OnOverlapCoreThreeLevelsBox(UPrimitiveComponent* OverlappedCompone
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
-		}
+		CheckMeshCollsion(CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
 	}
 }
 
@@ -91,16 +79,14 @@ void AA_CZ3B::OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent,
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			TArray<UStaticMeshComponent*> MeshArry;
-			MeshArry.Add(RollboostersC);
-			MeshArry.Add(RollboostersC2);
-			MeshArry.Add(RollboostersC3);
-			MeshArry.Add(RollboostersC4);
-			CheckMeshCollsion(SingleActor, MeshArry, ERocketPartsType::ERP_Boosters);
-		}
+		
+		TArray<UStaticMeshComponent*> MeshArry;
+		MeshArry.Add(RollboostersC);
+		MeshArry.Add(RollboostersC2);
+		MeshArry.Add(RollboostersC3);
+		MeshArry.Add(RollboostersC4);
+		CheckMeshCollsion(MeshArry, ERocketPartsType::ERP_Boosters);
+		
 	}
 }
 

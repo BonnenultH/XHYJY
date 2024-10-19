@@ -21,11 +21,7 @@ void AA_CZ3A::OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreOneLevelC, ERocketPartsType::ERP_CoreOneLevel);
-		}
+		CheckMeshCollsion(CoreOneLevelC, ERocketPartsType::ERP_CoreOneLevel);
 	}
 }
 
@@ -34,11 +30,7 @@ void AA_CZ3A::OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* 
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CowlingC, ERocketPartsType::ERP_Cowling);
-		}
+		CheckMeshCollsion(CowlingC, ERocketPartsType::ERP_Cowling);
 	}
 }
 
@@ -47,11 +39,7 @@ void AA_CZ3A::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
-		}
+		CheckMeshCollsion(CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
 	}
 }
 
@@ -60,11 +48,7 @@ void AA_CZ3A::OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if(OtherActor && OtherActor != this)
 	{
-		AA_SinglePart* SingleActor = Cast<AA_SinglePart>(OtherActor);
-		if(SingleActor)
-		{
-			CheckMeshCollsion(SingleActor, CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
-		}
+		CheckMeshCollsion(CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
 	}
 }
 
