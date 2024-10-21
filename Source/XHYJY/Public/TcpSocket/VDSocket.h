@@ -2,30 +2,30 @@
 
 #pragma once
 
-#include "Sockets.h"
-#include "Networking.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Socket.generated.h"
+#include "VDSocket.generated.h"
 
 UCLASS()
-class XHYJY_API ASocket : public AActor
+class XHYJY_API AVDSocket : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ASocket();
+	AVDSocket();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	
 	void CreateSocket();
 
-	void StopSocket();
+	void CloseSocket();
+
+	
 
 public:	
 	// Called every frame
@@ -33,5 +33,5 @@ public:
 
 public:
 	bool bConnect = false;
-	FSocket* _Socket;
+	FSocket* _TcpSocket; 
 };
