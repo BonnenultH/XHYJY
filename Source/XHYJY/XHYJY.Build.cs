@@ -9,7 +9,7 @@ public class XHYJY : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" ,"MediaAssets", "UMG", "LevelSequence", 
-			"MovieScene", "CinematicCamera", "InputCore", "EnhancedInput", "Sockets"});
+			"MovieScene", "CinematicCamera", "InputCore", "EnhancedInput", "Sockets", "Networking"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "MediaAssets", "AIModule" });
 

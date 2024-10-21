@@ -4,23 +4,35 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Socket.generated.h"
+#include "VDSocket.generated.h"
 
 UCLASS()
-class XHYJY_API ASocket : public AActor
+class XHYJY_API AVDSocket : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ASocket();
+	AVDSocket();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void CreateSocket();
+
+	void CloseSocket();
+	
+	void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+protected:
+	bool bConnect = false;
+
+
+public:
+	FSocket* _TcpSocket; 
 };
