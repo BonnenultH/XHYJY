@@ -6,6 +6,49 @@
 #include "GameFramework/Actor.h"
 #include "DataType.generated.h"
 
+enum class EActionCode
+{
+			None,
+			ClintIP,
+			ClientScene,
+			GetCustomerInfo,
+			SetReportVRLog,
+			GetQuestionList,
+			UpdateQuestionSolutionList,
+			GetSpaceOrbitsList,
+			GetRocketsList,
+			GetCraftsList,
+			GetSpaceCraftFirePlace,
+			GameStart,
+			GameStop,
+			GameRePlay,
+			GameClose,
+			Ready,
+			Fire,
+			RocketSucceed,
+			RocketDefeat,
+			GetRocketModle,
+			SetRocketModle,
+			GetTimer,
+			SetTimer,
+			GetMessage,
+			SetMessage,
+			GetSystemValue,
+			SetSystemValue,
+			GetFuelValue,
+			SetFuelValue,
+			GetStructValue,
+			SetStructValue,
+			GetPowerValue,
+			SetPowerValue,
+			GetControlValue,
+			SetControlValue,
+			GetCurrentRocketData,
+			CraftPosition,
+			VoiceSync
+	
+};
+
 
 enum class EWidgetType:uint8
 {
@@ -132,6 +175,39 @@ enum class ERocketPartsType : uint8
 	ERP_CoreOneLevel,
 	ERP_Boosters,
 };
+
+
+struct PlayerVO
+{
+	LONG PlayerId;
+	
+	const WIDECHAR* Nickname;
+	
+	const WIDECHAR* Accomplishment;
+
+	const WIDECHAR* Gender;
+	//积分
+	int32 Score;
+
+	int32 Craftnum;
+};
+
+struct CraftDataVO 
+{
+	const WIDECHAR* CraftModel;
+	//时间格式是：2024-10-22
+	const WIDECHAR* FinishTime;
+
+	int32 Grade;
+};
+
+struct TicketBillVO 
+{
+	PlayerVO Player;
+	
+	TArray<CraftDataVO> History;
+};
+
 
 USTRUCT(BlueprintType)
 struct FRocketTable : public FTableRowBase
@@ -523,3 +599,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 };
+
+
