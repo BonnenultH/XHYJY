@@ -28,6 +28,8 @@ protected:
 
 	bool SendData(EActionCode Action, FString Data);
 
+	void ReceiveSocket();
+
 	FString StringFromBinaryArray(const TArray<uint8>& BinaryArray)
 	{
 		return FString(ANSI_TO_TCHAR(reinterpret_cast<const char*>(BinaryArray.GetData())));
@@ -45,6 +47,8 @@ public:
 	bool bConnect = false;
 	FSocket* _TcpSocket;
 	FString _ClientIP = L"192.168.15.17";
+
+	FString MyData = "";
 	
 	uint32 size;
 	TArray<uint8> ReceiveData;

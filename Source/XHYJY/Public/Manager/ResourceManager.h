@@ -142,6 +142,10 @@ public:
 
 	UPROPERTY()
 	USoundWave* BGMSound;
+	UPROPERTY()
+	USoundWave* StartGame;
+	UPROPERTY()
+	USoundWave* Menu;
 
 	UPROPERTY()
 	USoundWave* WrongSelection;

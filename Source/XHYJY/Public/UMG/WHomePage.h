@@ -17,6 +17,8 @@ class XHYJY_API UWHomePage : public UBaseWidget
 protected:
 	UFUNCTION()
 	void CreatUserFile();
+
+	void PlayStartGameSound();
 	
 public:
 	virtual void InitWidget() override;

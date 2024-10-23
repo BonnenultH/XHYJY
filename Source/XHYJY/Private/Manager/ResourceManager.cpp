@@ -105,9 +105,15 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UTexture2D> DObj(TEXT("'/Game/UMG/BookLaunch/D.D'"));
 	D= DObj.Object;
 
-	 ConstructorHelpers::FObjectFinder<USoundWave> BGMSoundUI(TEXT("'/Game/Sound/UIbgm.UIbgm'"));
-	 BGMSound = BGMSoundUI.Object;
+	ConstructorHelpers::FObjectFinder<USoundWave> BGMSoundUI(TEXT("'/Game/Sound/UIbgm.UIbgm'"));
+	BGMSound = BGMSoundUI.Object;
 
+	ConstructorHelpers::FObjectFinder<USoundWave> StartGameOBj(TEXT("'/Game/Sound/Startgame.Startgame'"));
+	StartGame = StartGameOBj.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> MenuObj(TEXT("'/Game/Sound/Menu.Menu'"));
+	Menu = MenuObj.Object;
+		
 	ConstructorHelpers::FObjectFinder<USoundWave> WrongAnswerObj(TEXT("'/Game/Sound/WrongRocketselection.WrongRocketselection'"));
 	WrongSelection= WrongAnswerObj.Object;
 

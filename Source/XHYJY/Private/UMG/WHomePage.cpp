@@ -3,6 +3,7 @@
 
 #include "UMG/WHomePage.h"
 #include "MediaPlayer.h"
+#include "Kismet/GameplayStatics.h"
 
 void UWHomePage::InitWidget()
 {
@@ -19,7 +20,13 @@ void UWHomePage::InitWidget()
 
 void UWHomePage::CreatUserFile()
 {
+	PlayStartGameSound();
 	UIManager->CreateVDWidget(EWidgetType::EWT_UserFile);
+}
+
+void UWHomePage::PlayStartGameSound()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->StartGame);
 }
 
 

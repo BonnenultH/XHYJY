@@ -33,20 +33,12 @@ void AVDSocket::CreateSocket()
 {
 	TSharedPtr<FInternetAddr> Addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
 	bool bIsValid = false;
-	FString _ServerIp = L"192.168.15.17";
-	int32 Port = 8912;
+	FString _ServerIp = L"192.168.15.16";
+	int32 Port = 9527;
 	Addr->SetIp(*_ServerIp, bIsValid);
 	Addr->SetPort(Port);
 
 	_TcpSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, "TCPClient", false);
-
-	// _TcpSocket = FTcpSocketBuilder(TEXT("TcpClient"))
-	// 				.AsReusable()
-	// 				.AsBlocking()
-	// 				.BoundToAddress()
-	// 				.BoundToPort(8431)
-	//				.WithReceiveBufferSize(2048)
-	//				.WithSendBufferSize(2048);
 
 	// _TcpSocket->SetNonBlocking(true);
 	// _TcpSocket->SetMulticastLoopback(true);
@@ -59,6 +51,7 @@ void AVDSocket::CreateSocket()
 		UE_LOG(LogTemp, Log, TEXT("链接成功"));
 
 		SendData(EActionCode::ClintIP, _ClientIP);
+		SendData(EActionCode::GetCustomerInfo, MyData);
 	}
 	else
 	{
@@ -74,27 +67,54 @@ void AVDSocket::CloseSocket()
 		ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(_TcpSocket);
 		_TcpSocket =nullptr;
 	}
-	
 }
 
 bool AVDSocket::SendData(EActionCode Action, FString Data)
 {
 	TArray<uint8> DataArray;
 	
-	// 将枚举值转换为整数
 	int32 action = static_cast<int32>(Action);	
 	int32 dataAmount = sizeof(action) + FCString::Strlen(*Data);
 	
+	// DataArray.Add(reinterpret_cast<const uint8>(&dataAmount));
+	// DataArray.Add(reinterpret_cast<const uint8>(&action));
+	// DataArray.Add(reinterpret_cast<const uint8>(TCHAR_TO_UTF8(*Data)));
+
 	DataArray.Append(reinterpret_cast<const uint8*>(&dataAmount), sizeof(dataAmount));
 	DataArray.Append(reinterpret_cast<const uint8*>(&action), sizeof(action));
 	DataArray.Append(reinterpret_cast<const uint8*>(TCHAR_TO_UTF8(*Data)), FCString::Strlen(*Data));
-
 	
-	// 发送数据
 	int32 BytesSent = 0;
 	_TcpSocket->Send(DataArray.GetData(), DataArray.Num(), BytesSent);
 	
 	return true;
+}
+
+void AVDSocket::ReceiveSocket()
+{
+	if (!_TcpSocket || !bConnect) return;
+	if (ReceiveData.Num() <= 0)	return;
+	
+	// 获取第5个到第8个字节的子数组   
+	 TArray<uint8> Sub58Array;
+	
+	 Sub58Array.Append(ReceiveData.GetData(), 4);
+	
+	int32 Value = *(reinterpret_cast<int32*>(Sub58Array.GetData()));
+	EActionCode actionCode  = (EActionCode)Value;
+
+	
+	if(actionCode == EActionCode::GameStart)
+	{
+		GameStart();
+		UE_LOG(LogTemp, Log, TEXT("GAME START!!"))
+	}
+	else if(actionCode == EActionCode::GameStop)
+	{
+		GameEnd();
+		UE_LOG(LogTemp, Log, TEXT("GAME END!!"))
+	}
+	
 }
 
 // Called every frame
@@ -114,8 +134,6 @@ void AVDSocket::Tick(float DeltaTime)
 	// 		UE_LOG(LogTemp, Log, TEXT("收到的数据：%s"), *MyString)
 	// 	}
 	// }
-
-	
 	
 	if(_TcpSocket->HasPendingData(size))
 	{
@@ -128,27 +146,6 @@ void AVDSocket::Tick(float DeltaTime)
 	}
 
 	
-	if (!_TcpSocket || !bConnect) return;
-	if (ReceiveData.Num() <= 0)	return;
-	
-	// 获取第5个到第8个字节的子数组   
-	TArray<uint8> Sub58Array;
-	Sub58Array.Append(ReceiveData.GetData() + 4, 4);
-	// 将子数组转换为int32
-	int32 Value = *(reinterpret_cast<int32*>(Sub58Array.GetData()));
-	EActionCode actionCode  = (EActionCode)Value;
-		
-		
-	if(actionCode == EActionCode::GameStart)
-	{
-		GameStart();
-		UE_LOG(LogTemp, Log, TEXT("GAME START!!"))
-	}
-	else if(actionCode == EActionCode::GameStop)
-	{
-		GameEnd();
-		UE_LOG(LogTemp, Log, TEXT("GAME END!!"))
-	}
 }
 
 void AVDSocket::GameStart()
