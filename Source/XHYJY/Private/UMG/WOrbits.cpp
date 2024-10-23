@@ -3,6 +3,7 @@
 
 #include "UMG/WOrbits.h"
 
+#include "Kismet/GameplayStatics.h"
 
 
 void UWOrbits::InitWidget()
@@ -101,6 +102,7 @@ void UWOrbits::CreateRocketSelect()
 
 void UWOrbits::OrbitInfoFunc(EOrbit Orbit)
 {
+	UGameplayStatics::PlaySound2D(this, ResourceManager->Button);
 	Left_Orbit->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 	OrbitName->SetText(FText::FromString(UIManager->GetOrbit(Orbit).HTQOrbitName));
 	OrbitInfo->SetText(FText::FromString(UIManager->GetOrbit(Orbit).HTQOrbitInfo));

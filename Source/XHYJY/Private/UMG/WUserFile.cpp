@@ -3,6 +3,8 @@
 
 #include "UMG/WUserFile.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UWUserFile::InitWidget()
 {
 	Super::InitWidget();
@@ -32,14 +34,17 @@ void UWUserFile::InitUserFileInfo()
 void UWUserFile::CreatHistoryTasks()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_HistoryTasks, true);
+	PlaySoundButton();
 }
 
 void UWUserFile::CreatRules()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_Rules, true);
+	PlaySoundButton();
 }
 
 void UWUserFile::CreatTakeTasks()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_TakeTasks);
+	PlaySoundButton();
 }

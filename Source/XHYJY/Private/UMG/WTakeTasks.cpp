@@ -3,6 +3,7 @@
 
 #include "UMG/WTakeTasks.h"
 #include "Components/ListView.h"
+#include "Kismet/GameplayStatics.h"
 #include "UMG/Child/WItemTask.h"
 
 
@@ -82,6 +83,8 @@ void UWTakeTasks::InitSelectedInfo(UItemTask* ItemData)
 
 void UWTakeTasks::OnSelectedSatellite()
 {
+	PlaySoundFirstCategory();
+
 	if(Satellite->GetVisibility() == ESlateVisibility::Collapsed)
 	{
 		Satellite->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
@@ -93,52 +96,74 @@ void UWTakeTasks::OnSelectedSatellite()
 
 	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].AllDataArry;
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedNavigation()
 {
+	PlaySoundButton();
+
 	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
 	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_Navigation];
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedCommunication()
 {
+	PlaySoundButton();
+
 	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
 	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_Communication];
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedRemoteSensing()
 {
+	PlaySoundButton();
+
 	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
 	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_RemoteSensing];
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedScientificExploration()
 {
+	PlaySoundButton();
+
 	TMap<EHSCategory, TArray<FHTQData>> TempDataMap = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_Satellite].SecondDataMap;
 	TArray<FHTQData> AllData = TempDataMap[EHSCategory::EHSC_ScientificExploration];
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedSpaceship()
 {
+	PlaySoundFirstCategory();
+
 	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_SpaceShip].AllDataArry;
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedDeepSpaceProbes()
 {
+	PlaySoundFirstCategory();
+
 	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_DeepSpaceProbes].AllDataArry;
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::OnSelectedSpaceStation()
 {
+	PlaySoundFirstCategory();
+
 	TArray<FHTQData> AllData = UIManager->GetCategoryData().FirstDataMap[EHFCategory::EHFC_SpaceStation].AllDataArry;
 	UpdateView(AllData);
+
 }
 
 void UWTakeTasks::PlayPoppingAni()
@@ -149,13 +174,17 @@ void UWTakeTasks::PlayPoppingAni()
 
 void UWTakeTasks::CreateOrbits()
 {
+	PlaySoundTakeTask();
+	
 	UIManager->SelectTaskItem = CurItemWidget->GetItemData();
 	SceneManager->InitSingleMesh();
-	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);	
+	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);
 }
 
 void UWTakeTasks::UnSelect()
 {
+	PlaySoundReselect();
+	
 	PlayAnimationReverse(Ani_showInfo);
 }
 
@@ -170,6 +199,21 @@ void UWTakeTasks::UpdateView(TArray<FHTQData> AllDataArry)
 	}
 	
 	Right->SetVisibility(ESlateVisibility::Collapsed);
+}
+
+void UWTakeTasks::PlaySoundFirstCategory()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->Menu);
+}
+
+void UWTakeTasks::PlaySoundTakeTask()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->TakeTasksSound);
+}
+
+void UWTakeTasks::PlaySoundReselect()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->Return);
 }
 
 

@@ -39,7 +39,6 @@ protected:
 public:
 	virtual void InitWidget() override;
 
-
 protected:
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;

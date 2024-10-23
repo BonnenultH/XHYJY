@@ -59,6 +59,12 @@ protected:
 
 	void UpdateView(TArray<FHTQData> AllDataArry);
 
+	void PlaySoundFirstCategory();
+
+	void PlaySoundTakeTask();
+
+	void PlaySoundReselect();
+
 public:
 	virtual void InitWidget() override;
 

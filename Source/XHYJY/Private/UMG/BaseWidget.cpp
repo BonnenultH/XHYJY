@@ -22,3 +22,18 @@ void UBaseWidget::CountErrorNums()
 	ErrorNums -= 1;
 }
 
+void UBaseWidget::PlaySoundButton()
+{
+	UGameplayStatics::PlaySound2D(this,ResourceManager->Button);
+}
+
+void UBaseWidget::PlaySoundWrong()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->WrongSelection);
+}
+
+void UBaseWidget::PlaySoundRight()
+{
+	UGameplayStatics::PlaySound2D(this, ResourceManager->RightSelection);
+}
+

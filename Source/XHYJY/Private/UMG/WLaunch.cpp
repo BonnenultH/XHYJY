@@ -32,6 +32,8 @@ void UWLaunch::InitWidget()
 
 void UWLaunch::ClickedJQ()
 {
+	PlaySoundButton();
+	
 	if(CurButton)
 	{
 		CurButton->SetIsEnabled(true);
@@ -44,6 +46,8 @@ void UWLaunch::ClickedJQ()
 
 void UWLaunch::ClickedTY()
 {
+	PlaySoundButton();
+	
 	if(CurButton)
 	{
 		CurButton->SetIsEnabled(true);
@@ -56,6 +60,8 @@ void UWLaunch::ClickedTY()
 
 void UWLaunch::ClickedXC()
 {
+	PlaySoundButton();
+	
 	if(CurButton)
 	{
 		CurButton->SetIsEnabled(true);
@@ -69,6 +75,8 @@ void UWLaunch::ClickedXC()
 
 void UWLaunch::ClickedWC()
 {
+	PlaySoundButton();
+	
 	if(CurButton)
 	{
 		CurButton->SetIsEnabled(true);
@@ -82,6 +90,7 @@ void UWLaunch::ClickedWC()
 
 void UWLaunch::CheckFirePlace()
 {
+		
 	if(CurFirePlace != UIManager->SelectTaskItem->FirePlace)
 	{
 		if(ErrorNums != 0)

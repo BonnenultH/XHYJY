@@ -113,10 +113,22 @@ AResourceManager::AResourceManager()
 
 	ConstructorHelpers::FObjectFinder<USoundWave> MenuObj(TEXT("'/Game/Sound/Menu.Menu'"));
 	Menu = MenuObj.Object;
-		
+
+	ConstructorHelpers::FObjectFinder<USoundWave> ButtonObj(TEXT("'/Game/Sound/button.button'"));
+	Button = ButtonObj.Object;
+	
+	ConstructorHelpers::FObjectFinder<USoundWave> ReturnObj(TEXT("'/Game/Sound/Page_close.Page_close'"));
+	Return = ReturnObj.Object;
+
+	ConstructorHelpers::FObjectFinder<USoundWave> TakeTasksSoundObj(TEXT("'/Game/Sound/Mission_start.Mission_start'"));
+	TakeTasksSound = TakeTasksSoundObj.Object;
+	
 	ConstructorHelpers::FObjectFinder<USoundWave> WrongAnswerObj(TEXT("'/Game/Sound/WrongRocketselection.WrongRocketselection'"));
 	WrongSelection= WrongAnswerObj.Object;
 
+	ConstructorHelpers::FObjectFinder<USoundWave> RightSelectionObj(TEXT("'/Game/Sound/rightanswer.rightanswer'"));
+	RightSelection= RightSelectionObj.Object;
+	
 	ConstructorHelpers::FObjectFinder<USoundWave> FactoryObj(TEXT("'/Game/Sound/factoryopen.factoryopen'"));
 	FactoryOpen= FactoryObj.Object;
 

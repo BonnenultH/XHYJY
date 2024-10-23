@@ -35,6 +35,13 @@ public:
 
 	virtual void CountErrorNums();
 
+	void PlaySoundButton();
+
+	void PlaySoundWrong();
+
+	void PlaySoundRight();
+	
+
 public:
 	UPROPERTY()
 	AVDPawn* VDPawn;

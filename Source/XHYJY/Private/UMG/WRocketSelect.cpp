@@ -103,12 +103,13 @@ void UWRocketSelect::CheckSelectRocket()
 	
 		if(bResult)
 		{
+			PlaySoundRight();
 			SelectRocketRight();
 		}
 		else
 		{
+			PlaySoundWrong();
 			SelectRocketError();
-			PlayWrongSound();
 		}
 	}
 	else if(CurMode == ERSMode::ERSM_Price)
@@ -128,13 +129,13 @@ void UWRocketSelect::CheckSelectRocket()
 		
 		if(bResult)
 		{
-			
+			PlaySoundRight();
 			CreateLaunch();
 		}
 		else
 		{
+			PlaySoundWrong();
 			SelectPRocketError();
-			PlayWrongSound();
 		}
 	}
 }
@@ -166,6 +167,7 @@ void UWRocketSelect::SelectRocketError()
 	else
 	{
 		// 选对了
+	
 		SelectRocketRight();
 	}
 }
@@ -222,6 +224,7 @@ void UWRocketSelect::SelectPRocketError()
 	else
 	{
 		// 选对了
+	
 		CreateLaunch();
 	}
 }
@@ -254,9 +257,4 @@ void UWRocketSelect::CreateLaunch()
 {
 	UIManager->bShowRocket = true;
 	UIManager->CreateVDWidget(EWidgetType::EWT_Launch);
-}
-
-void UWRocketSelect::PlayWrongSound()
-{
-	UGameplayStatics::PlaySound2D(this, ResourceManager->WrongSelection);
 }

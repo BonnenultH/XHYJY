@@ -33,8 +33,6 @@ protected:
 	void SelectPRocketError();
 	
 	void CreateLaunch();
-
-	void PlayWrongSound();
 	
 	UFUNCTION(BlueprintCallable)
 	void SelectRocketItem(UObject* ObjItem);

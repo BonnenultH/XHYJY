@@ -146,9 +146,17 @@ public:
 	USoundWave* StartGame;
 	UPROPERTY()
 	USoundWave* Menu;
+	UPROPERTY()
+	USoundWave* Button;
+	UPROPERTY()
+	USoundWave* Return;
+	UPROPERTY()
+	USoundWave* TakeTasksSound;
 
 	UPROPERTY()
 	USoundWave* WrongSelection;
+	UPROPERTY()
+	USoundWave* RightSelection;
 
 	UPROPERTY()
 	USoundWave* FactoryOpen;

@@ -3,6 +3,8 @@
 
 #include "UMG/WRules.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UWRules::InitWidget()
 {
 	Super::InitWidget();
@@ -15,9 +17,11 @@ void UWRules::InitWidget()
 void UWRules::ReturnUserFile()
 {
 	UIManager->CreateVDWidget(ReturnWidgetType);
+	UGameplayStatics::PlaySound2D(this,ResourceManager->Return);
 }
 
 void UWRules::CreateTakeTasks()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_TakeTasks);
+	UGameplayStatics::PlaySound2D(this,ResourceManager->Button);
 }
