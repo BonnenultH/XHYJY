@@ -17,6 +17,7 @@ void ABaseManager::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	
 }
 
 // Called every frame
