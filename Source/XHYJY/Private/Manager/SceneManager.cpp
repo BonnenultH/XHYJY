@@ -119,6 +119,7 @@ void ASceneManager::DelayAttach()
 	VDPawn->RocketPartType = CurSingleMesh->GetSingleMeshType();
 	CurSingleMesh->SetActorHiddenInGame(true);
 	CurSingleMesh->SetActorEnableCollision(false);
+	VDPawn->BoxExtentUpdate();
 	VDPawn->bMove = true;
 }
 

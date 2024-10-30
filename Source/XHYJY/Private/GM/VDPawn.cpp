@@ -5,10 +5,10 @@
 #include "Manager/ResourceManager.h"
 #include "Manager/UIManager.h"
 #include "Manager/SceneManager.h"
-#include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Components/AudioComponent.h"
+#include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -102,4 +102,13 @@ void AVDPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVDPawn::Move);
 	}
 }
+
+void AVDPawn::BoxExtentUpdate()
+{
+	FVector MyBoxExtent;
+	MyBoxExtent = (MyMesh->GetStaticMesh()->GetBounds().GetBox().GetSize())/2;
+	FVector RotatorBox = FVector(MyBoxExtent.Y,MyBoxExtent.Z,MyBoxExtent.X);
+	MyBox->SetBoxExtent(RotatorBox);
+}
+
 
