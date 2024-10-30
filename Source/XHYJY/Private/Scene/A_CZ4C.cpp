@@ -45,7 +45,7 @@ void AA_CZ4C::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if(OtherActor && OtherActor != this)
 	{
-		CheckMeshCollsion(CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
+		CheckMeshCollsion(CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
 	}
 }
 
@@ -54,7 +54,7 @@ void AA_CZ4C::OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor
 {
 	if(OtherActor && OtherActor != this)
 	{
-		CheckMeshCollsion(CoreThreeLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
+		CheckMeshCollsion(CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
 	}
 }
 

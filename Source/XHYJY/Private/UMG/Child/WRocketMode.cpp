@@ -37,6 +37,7 @@ void UWRocketMode::SelectMode(ERSMode Mode)
 	else if(Mode == ERSMode::ERSM_Price)
 	{
 		Category->SetText(FText::FromString(TEXT("经济能力")));
+		CarryingCapacity->SetText(FText::FromString(FString::FromInt(ItemData->Price)));
 		ProgressBar->SetVisibility(ESlateVisibility::Collapsed);
 		LogoImage->SetBrushFromTexture(ResourceManager->PriceIcon,true);
 	}
