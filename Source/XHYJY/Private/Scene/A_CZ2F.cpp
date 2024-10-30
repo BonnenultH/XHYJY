@@ -18,6 +18,7 @@ void AA_CZ2F::BeginPlay()
 	Rollboosters2->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ2F::OnOverlapRollboostersBox);
 	Rollboosters3->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ2F::OnOverlapRollboostersBox);
 	Rollboosters4->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ2F::OnOverlapRollboostersBox);
+	EscapeBox->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ2F::OnOverlapTowerBox);
 
 
 	RollboostersS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
@@ -27,6 +28,7 @@ void AA_CZ2F::BeginPlay()
 	CoreTwoLevelsS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	CoreOneLevelS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	CowlingS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	EscapeBoxS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 }
 
 void AA_CZ2F::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -70,6 +72,15 @@ void AA_CZ2F::OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent,
 	}
 }
 
+void AA_CZ2F::OnOverlapTowerBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(OtherActor && OtherActor != this)
+	{
+		CheckMeshCollsion(EscapeBoxS, ERocketPartsType::ERP_EscapeTower);
+	}
+}
+
 void AA_CZ2F::ShowAllMesh()
 {
 	Super::ShowAllMesh();
@@ -81,4 +92,5 @@ void AA_CZ2F::ShowAllMesh()
 	CoreTwoLevelsS->SetHiddenInGame(false);
 	CoreOneLevelS->SetHiddenInGame(false);
 	CowlingS->SetHiddenInGame(false);
+	EscapeBoxS->SetHiddenInGame(false);
 }

@@ -21,14 +21,14 @@ void AVDSocket::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CreateSocket();
+//	CreateSocket();
 	
 }
 
 void AVDSocket::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
-	CloseSocket();
+//	CloseSocket();
 }
 
 void AVDSocket::CreateSocket()
@@ -134,7 +134,7 @@ void AVDSocket::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if(_TcpSocket->HasPendingData(size))
+	/*if(_TcpSocket->HasPendingData(size))
 	{
 		BytesRead = 0;
 		_TcpSocket->Recv(ReceiveArry,sizeof(ReceiveArry),BytesRead);
@@ -172,6 +172,7 @@ void AVDSocket::Tick(float DeltaTime)
 			UE_LOG(LogTemp, Log, TEXT("GAME END!!"))
 		}
 	}
+	*/
 	
 }
 

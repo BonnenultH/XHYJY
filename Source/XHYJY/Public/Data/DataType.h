@@ -63,8 +63,22 @@ enum class EActionCode
 
 enum class ECraft:uint8
 {
-	DongFangHong,
 	BeiDouGEO,
+	BeiDouMEO,
+	BeiDouIGSO,
+	DongFangHong,
+	QueQiao,
+	GaoFenSiHao,
+	FengYunSihao,
+	XiHe,
+	LuDiTanCe,
+	ShenZhou,
+	MengTian,
+	ChangESiHao,
+	TianZhou,
+	WenTian,
+	TianHe,
+	TianWen,
 };
 
 enum class EWidgetType:uint8
