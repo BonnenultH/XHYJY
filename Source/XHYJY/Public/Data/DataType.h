@@ -228,7 +228,7 @@ struct CraftDataVO
 {
 	int32 grade;
 	
-	std::wstring craftModel;
+	std::string craftModel;
 	//时间格式是：2024-10-22
 	std::string finishTime;
 };

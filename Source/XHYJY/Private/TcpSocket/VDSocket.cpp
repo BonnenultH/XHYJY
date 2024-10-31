@@ -6,6 +6,8 @@
 #include "SocketSubsystem.h"
 #include "Data/DataType.h"
 #include "Common/TcpSocketBuilder.h"
+#include "GM/VDPawn.h"
+#include "Kismet/GameplayStatics.h"
 #include "ThirdParty/json-develop/single_include/nlohmann/json.hpp"
 
 // Sets default values
@@ -112,7 +114,7 @@ void AVDSocket::SendData()
 
 	nlohmann::json ReportJson;
 	CraftDataVO MyCraft;
-	MyCraft.craftModel = L"东方红一号";
+	MyCraft.craftModel = "BeiDouGEO";
 	MyCraft.grade = 80;
 	ReportJson["craft"]["craftModel"] = MyCraft.craftModel;
 	ReportJson["craft"]["grade"] = MyCraft.grade;
@@ -204,26 +206,40 @@ void AVDSocket::AnalysisCustomerInfo()
 				
 			std::string nickname =player["nickname"].get<std::string>();
 			auto Mynickname = stringToWstring(nickname);
-				
+
+			AVDPawn* Pawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+			Pawn->UserInfoData.IDName = Mynickname.c_str();
+			
 			std::string accomplishment = player["accomplishment"].get<std::string>();
 			auto Myaccomplishment = stringToWstring(accomplishment);
+			Pawn->UserInfoData.Accomplishment = Myaccomplishment.c_str();
+			
 			std::string sex = player["sex"].get<std::string>();
 			auto Mysex = stringToWstring(sex);
 			if(Mysex == L"男")
 			{
 				UE_LOG(LogTemp, Log, TEXT("TRUEEEEE !! BOYYYYY"))
+				Pawn->UserInfoData.Gender = EGender::EG_Man;
 			}
+			else
+			{
+				Pawn->UserInfoData.Gender = EGender::EG_Woman;
+			}
+			
 			int32 score = player["score"].get<int32>();
+			Pawn->UserInfoData.Grades = std::to_wstring(score).c_str();
+			
 			int32 craftNumber = player["craftNumber"].get<int32>();
-				
+			Pawn->UserInfoData.HTQNumbers = std::to_wstring(craftNumber).c_str();
+			
 			TArray<CraftDataVO> TestArry;
 			nlohmann::json history = JsonStr["history"];
 			for (nlohmann::json jsonobj : history)
 			{
 				CraftDataVO Tempobj;
 					
-				Tempobj.craftModel = jsonobj["craftModel"].get<std::wstring>();
-				//auto MycraftModel = stringToWstring(Tempobj.craftModel);
+				Tempobj.craftModel = jsonobj["craftModel"].get<std::string>();
+				auto MycraftModel = stringToWstring(Tempobj.craftModel);
 				Tempobj.finishTime = jsonobj["finishTime"].get<std::string>();
 				Tempobj.grade      = jsonobj["grade"].get<int32>();
 				
@@ -233,6 +249,7 @@ void AVDSocket::AnalysisCustomerInfo()
 		}
 	}
 }
+
 
 void AVDSocket::GameStart()
 {

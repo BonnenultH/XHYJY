@@ -3,6 +3,7 @@
 
 #include "UMG/WBookLaunch.h"
 
+
 void UWBookLaunch::InitWidget()
 {
 	Super::InitWidget();
@@ -33,11 +34,26 @@ void UWBookLaunch::InitWidget()
 	}
 
 	FString TimeStr;
-	TimeStr = FString::SanitizeFloat(8 - UIManager->ManagerMinute);
+	TimeStr = TimeFormat(8.0 - UIManager->ManagerMinute);
 	TimeStr.Append(":");
-	TimeStr.Append(FString::SanitizeFloat(59 - UIManager->ManagerSecond));
+	TimeStr.Append(TimeFormat(59.0 - UIManager->ManagerSecond));
 	TextBlock_Time->SetText(FText::FromString(TimeStr));
 	TextBlock_HTQ->SetText(FText::FromString(UIManager->SelectTaskItem->Name));
 	TextBlock_Rocket->SetText(FText::FromString(UIManager->GetRocketData(UIManager->SelectTaskItem->GetCheapestRocket())->RocketCNName));
 	TextBlock_Fireplace->SetText(FText::FromString(UIManager->SelectTaskItem->FirePlaceName));
+}
+
+FString  UWBookLaunch::TimeFormat(float Time)
+{
+	FString Formatstr;
+	if(Time < 10)
+	{
+	Formatstr = FString::SanitizeFloat(Time).Left(1);
+	Formatstr.InsertAt(0,TEXT("0"));
+	}
+	else
+	{
+	Formatstr = FString::SanitizeFloat(Time).Left(2);
+	}
+	return  Formatstr;
 }

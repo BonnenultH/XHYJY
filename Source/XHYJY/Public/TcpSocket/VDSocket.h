@@ -29,9 +29,7 @@ protected:
 	void CloseSocket();
 
 	bool SendData(EActionCode Action, FString Data);
-
-	void SendData();
-
+	
 	void AnalysisCustomerInfo();
 
 	void SendReportLog();
@@ -48,6 +46,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void GameStart();
+
+	void SendData();
 
 	void GameEnd();
 

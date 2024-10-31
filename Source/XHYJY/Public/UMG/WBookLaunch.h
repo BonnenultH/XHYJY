@@ -14,6 +14,9 @@ class XHYJY_API UWBookLaunch : public UBaseWidget
 {
 	GENERATED_BODY()
 
+protected:
+	FString TimeFormat(float Time);
+
 public:
 	virtual void InitWidget() override;
 

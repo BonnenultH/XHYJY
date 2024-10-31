@@ -4,6 +4,7 @@
 #include "UMG/WTakeTasks.h"
 #include "Components/ListView.h"
 #include "Kismet/GameplayStatics.h"
+#include "TcpSocket/VDSocket.h"
 #include "UMG/Child/WItemTask.h"
 
 
@@ -303,6 +304,12 @@ void UWTakeTasks::CreateOrbits()
 	UIManager->SelectTaskItem = CurItemWidget->GetItemData();
 	SceneManager->InitSingleMesh();
 	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);
+
+	TArray<AActor*> MySockets;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	MyTCPSocket->SendData();
+	
 }
 
 void UWTakeTasks::UnSelect()
