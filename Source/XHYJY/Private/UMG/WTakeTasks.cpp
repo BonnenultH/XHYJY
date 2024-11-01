@@ -308,7 +308,7 @@ void UWTakeTasks::CreateOrbits()
 	TArray<AActor*> MySockets;
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
 	AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
-	MyTCPSocket->SendData();
+//	MyTCPSocket->SendData();
 	
 }
 

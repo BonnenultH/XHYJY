@@ -28,7 +28,7 @@ void AA_CZ5B::BeginPlay()
 void AA_CZ5B::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CowlingS, ERocketPartsType::ERP_Cowling);
 	}
@@ -37,7 +37,7 @@ void AA_CZ5B::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AAct
 void AA_CZ5B::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreOneLevelS, ERocketPartsType::ERP_CoreOneLevel);
 		
@@ -48,7 +48,7 @@ void AA_CZ5B::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent,
 void AA_CZ5B::OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		TArray<UStaticMeshComponent*> MeshArry;
 		MeshArry.Add(RollboostersS);

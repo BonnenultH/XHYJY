@@ -4,6 +4,7 @@
 #include "Scene/A_CZ5.h"
 
 #include "Components/BoxComponent.h"
+#include "GM/VDPawn.h"
 #include "Scene/A_SinglePart.h"
 
 void AA_CZ5::BeginPlay()
@@ -13,16 +14,16 @@ void AA_CZ5::BeginPlay()
 	Cowling->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapCowlingBox);
 	CoreOneLevel->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapCoreOneLevelBox);
 	CoreTwoLevels->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapCoreTwoLevelsBox);
-	Rollboosters->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollboostersBox);
-	Rollboosters2->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollboostersBox);
-	Rollboosters3->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollboostersBox);
-	Rollboosters4->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollboostersBox);
+	RollBoosters->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollBoostersBox);
+	RollBooster2->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollBoostersBox);
+	RollBooster3->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollBoostersBox);
+	RollBooster4->OnComponentBeginOverlap.AddDynamic(this, &AA_CZ5::OnOverlapRollBoostersBox);
 
 
-	RollboostersS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	RollboostersS2->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	RollboostersS3->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	RollboostersS4->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	RollBoostersS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	RollBoostersS2->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	RollBoostersS3->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	RollBoostersS4->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	CoreTwoLevelsS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	CoreOneLevelS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	CowlingS->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
@@ -32,7 +33,7 @@ void AA_CZ5::BeginPlay()
 void AA_CZ5::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CowlingS, ERocketPartsType::ERP_Cowling);
 	}
@@ -41,7 +42,7 @@ void AA_CZ5::OnOverlapCowlingBox(UPrimitiveComponent* OverlappedComponent, AActo
 void AA_CZ5::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreOneLevelS, ERocketPartsType::ERP_CoreOneLevel);
 	}
@@ -50,22 +51,22 @@ void AA_CZ5::OnOverlapCoreOneLevelBox(UPrimitiveComponent* OverlappedComponent, 
 void AA_CZ5::OnOverlapCoreTwoLevelsBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreTwoLevelsS, ERocketPartsType::ERP_CoreTwoLevels);
 	}
 }
 
-void AA_CZ5::OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+void AA_CZ5::OnOverlapRollBoostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		TArray<UStaticMeshComponent*> MeshArry;
-		MeshArry.Add(RollboostersS);
-		MeshArry.Add(RollboostersS2);
-		MeshArry.Add(RollboostersS3);
-		MeshArry.Add(RollboostersS4);
+		MeshArry.Add(RollBoostersS);
+		MeshArry.Add(RollBoostersS2);
+		MeshArry.Add(RollBoostersS3);
+		MeshArry.Add(RollBoostersS4);
 		CheckMeshCollsion(MeshArry, ERocketPartsType::ERP_Boosters);
 	}
 }
@@ -74,10 +75,10 @@ void AA_CZ5::ShowAllMesh()
 {
 	Super::ShowAllMesh();
 	
-	RollboostersS->SetHiddenInGame(false);
-	RollboostersS2->SetHiddenInGame(false);
-	RollboostersS3->SetHiddenInGame(false);
-	RollboostersS4->SetHiddenInGame(false);
+	RollBoostersS->SetHiddenInGame(false);
+	RollBoostersS2->SetHiddenInGame(false);
+	RollBoostersS3->SetHiddenInGame(false);
+	RollBoostersS4->SetHiddenInGame(false);
 	CoreTwoLevelsS->SetHiddenInGame(false);
 	CoreOneLevelS->SetHiddenInGame(false);
 	CowlingS->SetHiddenInGame(false);

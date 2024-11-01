@@ -50,21 +50,18 @@ void ABaseCZActor::HoistSuccess()
 void ABaseCZActor::DelaySwitchView()
 {
 	UWHoisting* Widget = Cast<UWHoisting>(UIManager->WidgetMap[UIManager->CurWidgetType]);
-	if(Widget->GetCurProgress() >= UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket())->RocketParts.Num())
+	if(Widget->GetCurProgress() < UIManager->GetDiagramMap(UIManager->SelectTaskItem->GetCheapestRocket())->RocketParts.Num())
 	{
-		Widget->HoistingProgress();
-		return;
+	   SceneManager->SwitchViewByHoist();
+	   Widget->PlaySelectPartAnim();
 	}
-	SceneManager->SwitchViewByHoist();
 	Widget->HoistingProgress();
-	Widget->PlaySelectPartAnim();
 }
 
 void ABaseCZActor::CheckMeshCollsion(UStaticMeshComponent* TargetMesh, ERocketPartsType RightMeshType)
 {
 	if(VDPawn->RocketPartType == RightMeshType)
 	{
-		//UGameplayStatics::PlaySound2D(this,ResourceManager->RocketConnection);
 		VDPawn->MyMesh->SetStaticMesh(nullptr);
 		TargetMesh->SetHiddenInGame(false);
 		TargetMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
@@ -77,7 +74,6 @@ void ABaseCZActor::CheckMeshCollsion(TArray<UStaticMeshComponent*> TargetMeshArr
 {
 	if(VDPawn->RocketPartType == RightMeshType)
 	{
-		//UGameplayStatics::PlaySound2D(this,ResourceManager->RocketConnection);
 		VDPawn->MyMesh->SetStaticMesh(nullptr);
 		for(auto Mesh : TargetMeshArry)
 		{

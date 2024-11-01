@@ -43,9 +43,9 @@ void AA_CZ3C::Tick(float DeltaTime)
 void AA_CZ3C::OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
-		UE_LOG(LogTemp, Log, TEXT("碰到我了"))
+		
 		CheckMeshCollsion(CoreOneStageC, ERocketPartsType::ERP_CoreOneLevel);
 		
 	}
@@ -54,7 +54,7 @@ void AA_CZ3C::OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor
 void AA_CZ3C::OnOverlapRBBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		TArray<UStaticMeshComponent*> MeshArry;
 		MeshArry.Add(RollBooster1C);
@@ -67,7 +67,7 @@ void AA_CZ3C::OnOverlapRBBox(UPrimitiveComponent* OverlappedComponent, AActor* O
 void AA_CZ3C::OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CowlingC, ERocketPartsType::ERP_Cowling);
 		
@@ -77,7 +77,7 @@ void AA_CZ3C::OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* 
 void AA_CZ3C::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreThreeStageC, ERocketPartsType::ERP_CoreThreeLevels);
 	}
@@ -86,7 +86,7 @@ void AA_CZ3C::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AAct
 void AA_CZ3C::OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		
 		CheckMeshCollsion(CoreTwoStageC, ERocketPartsType::ERP_CoreTwoLevels);

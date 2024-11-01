@@ -24,7 +24,7 @@ void AA_CZ1::BeginPlay()
 void AA_CZ1::OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreOneLevelC, ERocketPartsType::ERP_CoreOneLevel);
 	}
@@ -34,7 +34,7 @@ void AA_CZ1::OnOverlapCOneSBox(UPrimitiveComponent* OverlappedComponent, AActor*
 void AA_CZ1::OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CowlingC, ERocketPartsType::ERP_Cowling);
 	}
@@ -43,7 +43,7 @@ void AA_CZ1::OnOverlapCowBox(UPrimitiveComponent* OverlappedComponent, AActor* O
 void AA_CZ1::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreThreeLevelsC, ERocketPartsType::ERP_CoreThreeLevels);
 	}
@@ -52,7 +52,7 @@ void AA_CZ1::OnOverlapCThreeSBox(UPrimitiveComponent* OverlappedComponent, AActo
 void AA_CZ1::OnOverlapCTwoSBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(OtherActor && OtherActor != this)
+	if(OtherActor && OtherActor != this && OtherActor == VDPawn)
 	{
 		CheckMeshCollsion(CoreTwoLevelsC, ERocketPartsType::ERP_CoreTwoLevels);
 	}

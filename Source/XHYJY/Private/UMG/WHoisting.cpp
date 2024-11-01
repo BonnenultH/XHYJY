@@ -161,7 +161,6 @@ void UWHoisting::HoistingProgress()
 {
 	if(CurProgress >= UIDiagram->RocketParts.Num())
 	{
-		CurProgress++;
 		RightDiagram->SetVisibility(ESlateVisibility::Collapsed);
 		PlayAnimation(Tests);
 		return;
@@ -221,7 +220,6 @@ void UWHoisting::PlaySelectWrong()
 void UWHoisting::PlaySelectRight()
 {
 	UGameplayStatics::PlaySound2D(this, ResourceManager->RocketConnection);
-
 	PlayAnimation(SuccessHoist);
 }
 

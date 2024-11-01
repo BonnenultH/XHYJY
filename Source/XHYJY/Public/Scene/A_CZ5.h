@@ -31,7 +31,7 @@ protected:
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 	UFUNCTION()
-	void OnOverlapRollboostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	void OnOverlapRollBoostersBox(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 public:
@@ -59,23 +59,23 @@ protected:
 	UStaticMeshComponent* CoreTwoLevelsS;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters;
+	UBoxComponent* RollBoosters;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS;
+	UStaticMeshComponent* RollBoostersS;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters2;
+	UBoxComponent* RollBooster2;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS2;
+	UStaticMeshComponent* RollBoostersS2;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters3;
+	UBoxComponent* RollBooster3;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS3;
+	UStaticMeshComponent* RollBoostersS3;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBoxComponent* Rollboosters4;
+	UBoxComponent* RollBooster4;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UStaticMeshComponent* RollboostersS4;
+	UStaticMeshComponent* RollBoostersS4;
 	
 };
