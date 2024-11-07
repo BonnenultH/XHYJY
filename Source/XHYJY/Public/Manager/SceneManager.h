@@ -37,6 +37,8 @@ public:
 
 	void InitSingleMesh();
 
+	void FindNeedMesh();
+
 	void InitTargetRocket();
 
 	void InitDZJ();
@@ -104,6 +106,10 @@ protected:
 	UAudioComponent* AudioComponent;
 
 
+	UPROPERTY()
+	TArray<AActor*> YSCArry;
+	UPROPERTY()
+	TArray<AActor*> DZJArray;
 public:
 	UPROPERTY()
 	AActor* HoistCamera;

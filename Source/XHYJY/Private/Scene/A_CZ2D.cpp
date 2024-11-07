@@ -4,6 +4,7 @@
 #include "Scene/A_CZ2D.h"
 
 #include "Components/BoxComponent.h"
+#include "GM/VDPawn.h"
 #include "Scene/A_SinglePart.h"
 
 void AA_CZ2D::BeginPlay()

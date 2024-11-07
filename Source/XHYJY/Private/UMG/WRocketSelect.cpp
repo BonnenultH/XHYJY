@@ -80,6 +80,12 @@ void UWRocketSelect::CheckSelectRocket()
 {
 	bool bResult = true;
 
+	int delay = 0;
+	while( delay < 10000)
+	{
+		delay++;
+	}
+	
 	if(CurMode == ERSMode::ERSM_Capacity)
 	{
 		if(SelectedRocketArry.Num() != RightRocketArry.Num())

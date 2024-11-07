@@ -4,7 +4,7 @@
 #include "Scene/A_CZ3A.h"
 
 #include "Components/BoxComponent.h"
-#include "Scene/A_SinglePart.h"
+#include "GM/VDPawn.h"
 
 void AA_CZ3A::BeginPlay()
 {

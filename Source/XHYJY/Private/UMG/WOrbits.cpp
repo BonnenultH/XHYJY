@@ -81,6 +81,12 @@ void UWOrbits::TMIClicked()
 void UWOrbits::CreateRocketSelect()
 {
 	PlaySoundButton();
+
+	int delay = 0;
+	while( delay <10000)
+	{
+		delay++;
+	}
 	
 	if(CurSelectedOrbit.HTQOrbitType == UIManager->SelectTaskItem->HTQOrbitType)
 	{
@@ -105,6 +111,7 @@ void UWOrbits::CreateRocketSelect()
 
 void UWOrbits::OrbitInfoFunc(EOrbit Orbit, UButton* Button)
 {
+	
 	if(CurButton)
 	{
 		CurButton->SetIsEnabled(true);

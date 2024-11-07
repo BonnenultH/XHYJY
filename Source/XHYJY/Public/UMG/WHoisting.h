@@ -21,7 +21,7 @@ protected:
 	void InitRocketPartInfos();
 	
 	UFUNCTION()
-	void OnLevelLoaded();
+	void OnLevelLoaded(int32 Linkage);
 
 	UFUNCTION()
 	void PlayStartHoist();

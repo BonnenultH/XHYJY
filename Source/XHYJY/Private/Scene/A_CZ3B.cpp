@@ -3,6 +3,7 @@
 
 #include "Scene/A_CZ3B.h"
 #include "Components/BoxComponent.h"
+#include "GM/VDPawn.h"
 #include "Scene/A_SinglePart.h"
 
 // Sets default values

@@ -3,6 +3,7 @@
 
 #include "Scene/A_CZ3C.h"
 #include "Components/BoxComponent.h"
+#include "GM/VDPawn.h"
 #include "Scene/A_SinglePart.h"
 
 

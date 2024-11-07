@@ -4,6 +4,7 @@
 #include "Scene/A_CZ2F.h"
 
 #include "Components/BoxComponent.h"
+#include "GM/VDPawn.h"
 #include "Scene/A_SinglePart.h"
 
 

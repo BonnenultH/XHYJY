@@ -2,8 +2,6 @@
 
 
 #include "Manager/SceneManager.h"
-
-#include "AssetTypeActions/AssetDefinition_SoundBase.h"
 #include "Camera/CameraActor.h"
 #include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
@@ -23,10 +21,9 @@ void ASceneManager::InitManager()
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3C, MyActorClass);
 	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3B, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3BG2, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3BG3, MyActorClass);
+	
 	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-1/CZ1Actor.CZ1Actor_C'"));
 	TargetRocketBPMap.Add(ERocketType::ERT_CZ_1, MyActorClass);
 	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5/CZ-5Actor.CZ-5Actor_C'"));
@@ -57,26 +54,31 @@ void ASceneManager::InitSingleMesh()
 		SinglePart->InitMesh(Item.DispatchMesh, Item.RocketPartsType, Item.RocketPartName);
 		SinglePart->OnRocketClick.AddUObject(this, &ASceneManager::SingleMeshClick);
 		SingleArray.Add(SinglePart);
+		
 	}
+	
+}
+
+void ASceneManager::FindNeedMesh()
+{
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"YSC", YSCArry);
+	AActor* YSCarray = YSCArry[0];
+	UClass* MyClass = TargetRocketBPMap[UIManager->SelectTaskItem->GetCheapestRocket()];
+	TargetRocket = Cast<ABaseCZActor>(GetWorld()->SpawnActor<AActor>(MyClass,FVector::ZeroVector,FRotator::ZeroRotator));
+
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"DZJ", DZJArray);
+	DZJMesh = DZJArray[0];
 	
 }
 
 void ASceneManager::InitTargetRocket()
 {
-	TArray<AActor*> YSCArry;
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"YSC", YSCArry);
-	UClass* MyClass = TargetRocketBPMap[UIManager->SelectTaskItem->GetCheapestRocket()];
-	TargetRocket = GetWorld()->SpawnActor<ABaseCZActor>(MyClass,FVector::ZeroVector,FRotator::ZeroRotator);
 	TargetRocket->AttachToActor(YSCArry[0], FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void ASceneManager::InitDZJ()
 {
-	TArray<AActor*> DZJArray;
-	UGameplayStatics::GetAllActorsOfClassWithTag(this, AStaticMeshActor::StaticClass(), "DZJ", DZJArray);
-	DZJMesh = DZJArray[0];
 	DZJOrignLocation = DZJMesh->GetActorLocation();
-	
 }
 
 void ASceneManager::SingleMeshClick(AA_SinglePart* SinglePart)
@@ -89,7 +91,7 @@ void ASceneManager::CheckClickMesh()
 	if(CurSingleMesh->GetSingleMeshType() != UIDiagram->RocketParts[ClickedNum].RocketPartsType)
 	{
 		PlaySoundWrong();
-		UE_LOG(LogTemp, Log, TEXT("检查错误！"))
+		
 		UWHoisting* Widget = Cast<UWHoisting>(UIManager->WidgetMap[UIManager->CurWidgetType]);
 		Widget->PlaySelectWrong();
 		
@@ -99,7 +101,6 @@ void ASceneManager::CheckClickMesh()
 	}
 
 	PlaySoundRight();
-	UE_LOG(LogTemp, Log, TEXT("检查正确！"))
 	ClickedNum++;
 	UGameplayStatics::PlaySound2D(this, ResourceManager->HoistUp);
 	

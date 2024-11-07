@@ -20,19 +20,19 @@ void UWHoisting::InitWidget()
 
 	UIManager->OnUpdateProgress.Broadcast();
 
-	FirePlaceMap.Add(EFirePlace::EFP_JQ,"XHYJY_Out_JQ");
-	FirePlaceMap.Add(EFirePlace::EFP_TY,"XHYJY_Out_TY");
-	FirePlaceMap.Add(EFirePlace::EFP_WC,"XHYJY_Out_WC");
-	FirePlaceMap.Add(EFirePlace::EFP_XC,"XHYJY_Out_XC");
+	FirePlaceMap.Add(EFirePlace::EFP_JQ,TEXT("XHYJY_Out_JQ"));
+	FirePlaceMap.Add(EFirePlace::EFP_TY,TEXT("XHYJY_Out_TY"));
+	FirePlaceMap.Add(EFirePlace::EFP_WC,TEXT("XHYJY_Out_WC"));
+	FirePlaceMap.Add(EFirePlace::EFP_XC,TEXT("XHYJY_Out_XC"));
 	
 	FLatentActionInfo LevelInfo;
 	LevelInfo.CallbackTarget = this;
 	LevelInfo.Linkage = 0;
-	LevelInfo.ExecutionFunction = FName("OnLevelLoaded");
+	LevelInfo.ExecutionFunction = TEXT("OnLevelLoaded");
 	LevelInfo.UUID = FMath::Rand();
 	
-	UGameplayStatics::LoadStreamLevel(GetWorld(), "XHYJY_In", false, true, FLatentActionInfo());
-	UGameplayStatics::LoadStreamLevel(GetWorld(), FirePlaceMap[UIManager->SelectTaskItem->FirePlace], false, true,LevelInfo);
+	UGameplayStatics::LoadStreamLevel(GetWorld(), TEXT("XHYJY_In"), false, true, LevelInfo);
+	UGameplayStatics::LoadStreamLevel(GetWorld(), FirePlaceMap[UIManager->SelectTaskItem->FirePlace], false, true,FLatentActionInfo());
 
 	Button_OperateInstructions->OnClicked.AddDynamic(this, &UWHoisting::PlayOperateInstructions);
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);
@@ -50,15 +50,15 @@ void UWHoisting::InitWidget()
 }
 
 
-void UWHoisting::OnLevelLoaded()
+void UWHoisting::OnLevelLoaded(int32 Linkage)
 {
 	ULevelStreaming* LocalLevelOut = FStreamLevelAction::FindAndCacheLevelStreamingObject(FirePlaceMap[UIManager->SelectTaskItem->FirePlace], GetWorld());
-	ULevelStreaming* LocalLevelIn = FStreamLevelAction::FindAndCacheLevelStreamingObject("XHYJY_In", GetWorld());
+	ULevelStreaming* LocalLevelIn = FStreamLevelAction::FindAndCacheLevelStreamingObject(TEXT("XHYJY_In"), GetWorld());
 	if(LocalLevelOut && LocalLevelIn)
 	{
 		LocalLevelOut->SetShouldBeVisible(true);
 		LocalLevelIn->SetShouldBeVisible(true);
-		SceneManager->InitTargetRocket();
+		
 		
 		if(ResourceManager->MainLevelSequencePlayer)
         {
@@ -66,6 +66,7 @@ void UWHoisting::OnLevelLoaded()
 			SceneManager->PlayFactorySound();
         	ResourceManager->MainLevelSequencePlayer->Play();
 			ResourceManager->MainLevelSequencePlayer->OnFinished.AddDynamic(this, &UWHoisting::GoHoisting);
+			
         }
 	}
 }
@@ -195,6 +196,7 @@ void UWHoisting::PlayOperateInstructions()
 	PlaySoundButton();
 	
 	PlayAnimation(Instructions);
+	SceneManager->SetSelectable(false);
 }
 
 void UWHoisting::PlayReverseOperateIns()
@@ -202,6 +204,7 @@ void UWHoisting::PlayReverseOperateIns()
 	PlaySoundButton();
 	
 	PlayAnimationReverse(Instructions);
+	SceneManager->SetSelectable(true);
 }
 
 void UWHoisting::PlaySelectPartAnim()
@@ -245,6 +248,12 @@ void UWHoisting::DispearCurSelect()
 {
 	PlaySoundButton();
 	
+	int delay = 0;
+	while( delay < 10000)
+	{
+		delay++;
+	}
+	
 	PlayAnimationReverse(CurSelectPartAnim);
 	FTimerHandle Delaypop;
 	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &UWHoisting::CameraMove, 0.75f);
@@ -252,9 +261,12 @@ void UWHoisting::DispearCurSelect()
 
 void UWHoisting::GoHoisting()
 {
-	SceneManager->InitDZJ();
+	SceneManager->FindNeedMesh();
+	
+	SceneManager->InitTargetRocket();
 	SceneManager->StartbHoistBGM();
 	Hoisting->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	SceneManager->InitDZJ();
 	SceneManager->SwitchViewByHoist();
 	SceneManager->PlayHoistBG();
 }
@@ -284,6 +296,11 @@ void UWHoisting::ClickedAssembly()
 	{
 		Single->SetActorHiddenInGame(true);
 	}
+	if(VDPawn->MyMesh)
+	{
+		VDPawn->MyMesh->DetachFromParent();
+	}
+	SceneManager->DZJReturnLocation();
 	
 	FTimerHandle Delaypop;
 	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &UWHoisting::DelayAssembly, 1);
