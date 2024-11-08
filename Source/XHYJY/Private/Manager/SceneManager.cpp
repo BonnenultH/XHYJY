@@ -5,7 +5,6 @@
 #include "Camera/CameraActor.h"
 #include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
-#include "Engine/StaticMeshActor.h"
 #include "Kismet/GameplayStatics.h"
 #include "Manager/UIManager.h"
 #include "Scene/A_SinglePart.h"
@@ -16,30 +15,122 @@
 void ASceneManager::InitManager()
 {
 	Super::InitManager();
+
+	UClass* CZ3CActor;
+	UClass* CZ3BActor;
+	UClass* CZ1Actor;
+	UClass* CZ5Actor;
+	UClass* CZ7Actor;
+	UClass* CZ2DActor;
+
+	do
+	{
+		
+		CZ3CActor = LoadClass<AA_CZ3C>(nullptr, TEXT("/Script/Engine.Blueprint'/Game/Model/Rockets/CZ-3C/CZ3C_Actor.CZ3C_Actor_C'"));
+		
+	}while(!CZ3CActor);
+	if(CZ3CActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_3C, CZ3CActor);
+	}
+
+	do
+	{
+		CZ3BActor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
+		
+	}while(!CZ3BActor);
+	if(CZ3BActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_3B, CZ3BActor);
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_3BG2, CZ3BActor);
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_3BG3, CZ3BActor);
+	}
 	
-	UClass* MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3C/CZ3C_Actor.CZ3C_Actor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3C, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3B/CZ3B_Actor.CZ3B_Actor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3B, MyActorClass);
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3BG2, MyActorClass);
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3BG3, MyActorClass);
+	do
+	{
+		CZ1Actor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-1/CZ1Actor.CZ1Actor_C'"));
+		
+	}while(!CZ1Actor);
+	if(CZ1Actor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_1, CZ1Actor);
+	}
 	
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-1/CZ1Actor.CZ1Actor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_1, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5/CZ-5Actor.CZ-5Actor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_5, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-7/CZ-7Actor.CZ-7Actor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_7, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-2D/CZ-2DActor.CZ-2DActor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_2D, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-2F/CZ-2FActor.CZ-2FActor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_2F, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3A/CZ-3AActor.CZ-3AActor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_3A, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-4C/CZ_4CActor.CZ_4CActor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_4C, MyActorClass);
-	MyActorClass = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5B/CZ_5BActor.CZ_5BActor_C'"));
-	TargetRocketBPMap.Add(ERocketType::ERT_CZ_5B, MyActorClass);
+	do
+	{
+		CZ5Actor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5/CZ-5Actor.CZ-5Actor_C'"));
+		
+	}while(!CZ5Actor);
+	if(CZ5Actor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_5, CZ5Actor);
+	}
+	
+	do
+	{
+		CZ7Actor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-7/CZ-7Actor.CZ-7Actor_C'"));
+		
+	}while(!CZ7Actor);
+	if(CZ7Actor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_7, CZ7Actor);
+	}
+
+	do
+	{
+		CZ2DActor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-2D/CZ-2DActor.CZ-2DActor_C'"));
+		
+	}while(!CZ2DActor);
+	if(CZ2DActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_2D, CZ2DActor);
+	}
+	
+	UClass* CZ2FActor;
+	UClass* CZ3AActor;
+	UClass* CZ4CActor;
+	UClass* CZ5BActor;
+
+	do
+	{
+		CZ2FActor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-2F/CZ-2FActor.CZ-2FActor_C'"));
+		
+	}while(!CZ2FActor);
+	if(CZ2FActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_2F, CZ2FActor);
+	}
+
+	do
+	{
+		CZ3AActor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-3A/CZ-3AActor.CZ-3AActor_C'"));
+		
+	}while(!CZ3AActor);
+	if(CZ3AActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_3A, CZ3AActor);
+	}
+	
+	do
+	{
+		CZ4CActor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-4C/CZ_4CActor.CZ_4CActor_C'"));
+		
+	}while(!CZ4CActor);
+	if(CZ4CActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_4C, CZ4CActor);
+	}
+
+	do
+	{
+		CZ5BActor = LoadClass<AActor>(nullptr, TEXT("Blueprint'/Game/Model/Rockets/CZ-5B/CZ_5BActor.CZ_5BActor_C'"));
+		
+	}while(!CZ5BActor);
+	if(CZ5BActor)
+	{
+		TargetRocketBPMap.Add(ERocketType::ERT_CZ_5B, CZ5BActor);
+	}
+	
 
 	PlayBGMSound();
 }
@@ -61,19 +152,38 @@ void ASceneManager::InitSingleMesh()
 
 void ASceneManager::FindNeedMesh()
 {
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"YSC", YSCArry);
-	AActor* YSCarray = YSCArry[0];
 	UClass* MyClass = TargetRocketBPMap[UIManager->SelectTaskItem->GetCheapestRocket()];
 	TargetRocket = Cast<ABaseCZActor>(GetWorld()->SpawnActor<AActor>(MyClass,FVector::ZeroVector,FRotator::ZeroRotator));
 
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"DZJ", DZJArray);
-	DZJMesh = DZJArray[0];
+	
+	do
+	{
+		UGameplayStatics::GetAllActorsWithTag(GetWorld(),TEXT("YSC"), YscArry);
+	}
+	while (!YscArry[0]);
+	
+	do
+	{
+		UGameplayStatics::GetAllActorsWithTag(GetWorld(),TEXT("DZJ"), DZJArray);
+		DZJMesh = DZJArray[0];
+	}
+	while (!DZJMesh);
+	
 	
 }
 
 void ASceneManager::InitTargetRocket()
 {
-	TargetRocket->AttachToActor(YSCArry[0], FAttachmentTransformRules::KeepRelativeTransform);
+	if(!YscArry[0])
+	{
+		do
+		{
+			UGameplayStatics::GetAllActorsWithTag(GetWorld(),"YSC", YscArry);
+			;
+		}
+		while (!YscArry[0]);
+	}
+	TargetRocket->AttachToActor(*YscArry.GetData(), FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void ASceneManager::InitDZJ()

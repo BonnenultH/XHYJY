@@ -31,8 +31,7 @@ void UWHoisting::InitWidget()
 	LevelInfo.ExecutionFunction = TEXT("OnLevelLoaded");
 	LevelInfo.UUID = FMath::Rand();
 	
-	UGameplayStatics::LoadStreamLevel(GetWorld(), TEXT("XHYJY_In"), false, true, LevelInfo);
-	UGameplayStatics::LoadStreamLevel(GetWorld(), FirePlaceMap[UIManager->SelectTaskItem->FirePlace], false, true,FLatentActionInfo());
+	UGameplayStatics::LoadStreamLevel(GetWorld(), FirePlaceMap[UIManager->SelectTaskItem->FirePlace], false, true,LevelInfo);
 
 	Button_OperateInstructions->OnClicked.AddDynamic(this, &UWHoisting::PlayOperateInstructions);
 	Button_ok->OnClicked.AddDynamic(this, &UWHoisting::PlayReverseOperateIns);

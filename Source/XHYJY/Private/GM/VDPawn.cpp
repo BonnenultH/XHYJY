@@ -31,6 +31,7 @@ void AVDPawn::BeginPlay()
 	UserInfoData.Gender			= EGender::EG_Woman;
 	
 	CreateManagers();
+
 	InitManagers();
 	SetActorLocation(FVector(-46248.157897,-40384.774796,1573.511028));
 	SetActorRotation(FRotator(0,90,0));

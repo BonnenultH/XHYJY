@@ -92,10 +92,12 @@ protected:
 	UPROPERTY()
 	AA_SinglePart* CurSingleMesh;
 	bool bSelectable = false;
-	UPROPERTY()
 
+	UPROPERTY()
 	ABaseCZActor* TargetRocket;
-	
+
+
+	UPROPERTY()
 	AActor* DZJMesh;
 	FVector DZJOrignLocation;
 	
@@ -107,7 +109,7 @@ protected:
 
 
 	UPROPERTY()
-	TArray<AActor*> YSCArry;
+	TArray<AActor*> YscArry;
 	UPROPERTY()
 	TArray<AActor*> DZJArray;
 public:

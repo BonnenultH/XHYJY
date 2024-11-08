@@ -29,6 +29,9 @@ void UWTakeTasks::InitWidget()
 	Button_Ok->OnClicked.AddDynamic(this, &UWTakeTasks::PlayPoppingAni);
 	Button_StartOrbits->OnClicked.AddDynamic(this, &UWTakeTasks::CreateOrbits);
 	Button_Reselect->OnClicked.AddDynamic(this, &UWTakeTasks::UnSelect);
+
+
+	UGameplayStatics::LoadStreamLevel(GetWorld(), TEXT("XHYJY_In"), false, false, FLatentActionInfo());
 }
 
 void UWTakeTasks::InitTaskView()
