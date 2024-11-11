@@ -177,12 +177,18 @@ void AResourceManager::InitManager()
 	Super::InitManager();
 
 	GenderMaterialInstance = GetWorld()->GetParameterCollectionInstance(GenderMaterial);
-	
+	do
+	{
 	LevelSequence = LoadObject<ULevelSequence>(this,TEXT("'/Game/Model/Sequence/JZ_Sequence.JZ_Sequence'"));
 	MainLevelSequencePlayer = MainLevelSequencePlayer->CreateLevelSequencePlayer(GetWorld(), LevelSequence, FMovieSceneSequencePlaybackSettings(),currentLevelSequenceActor);
+	}while (!MainLevelSequencePlayer);
 
-	LevelEndingSequence = LoadObject<ULevelSequence>(this, TEXT("'/Game/Model/Sequence/CZ_Sequence.CZ_Sequence'")); 
+	do
+	{
+	LevelEndingSequence = LoadObject<ULevelSequence>(this, TEXT("/Script/LevelSequence.LevelSequence'/Game/Model/Sequence/CZ_Sequence.CZ_Sequence'")); 
 	EndingLevelSequencePlayer = EndingLevelSequencePlayer->CreateLevelSequencePlayer(GetWorld(), LevelEndingSequence, FMovieSceneSequencePlaybackSettings(),EndLevelSequenceActor);
+	}
+	while (!EndingLevelSequencePlayer);
 
 }
 

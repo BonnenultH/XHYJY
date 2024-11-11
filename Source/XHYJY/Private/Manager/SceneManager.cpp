@@ -26,7 +26,7 @@ void ASceneManager::InitManager()
 	do
 	{
 		
-		CZ3CActor = LoadClass<AA_CZ3C>(nullptr, TEXT("/Script/Engine.Blueprint'/Game/Model/Rockets/CZ-3C/CZ3C_Actor.CZ3C_Actor_C'"));
+		CZ3CActor = LoadClass<AActor>(nullptr, TEXT("/Script/Engine.Blueprint'/Game/Model/Rockets/CZ-3C/CZ3C_Actor.CZ3C_Actor_C'"));
 		
 	}while(!CZ3CActor);
 	if(CZ3CActor)
@@ -152,8 +152,14 @@ void ASceneManager::InitSingleMesh()
 
 void ASceneManager::FindNeedMesh()
 {
-	UClass* MyClass = TargetRocketBPMap[UIManager->SelectTaskItem->GetCheapestRocket()];
-	TargetRocket = Cast<ABaseCZActor>(GetWorld()->SpawnActor<AActor>(MyClass,FVector::ZeroVector,FRotator::ZeroRotator));
+	UClass* MyClass;
+	do
+	{
+		MyClass = TargetRocketBPMap[UIManager->SelectTaskItem->GetCheapestRocket()];
+	}
+	while (!MyClass);
+	AActor* MyActor = GetWorld()->SpawnActor(MyClass,&FVector::ZeroVector,&FRotator::ZeroRotator);
+	TargetRocket = Cast<ABaseCZActor>(MyActor);
 
 	
 	do
@@ -174,15 +180,12 @@ void ASceneManager::FindNeedMesh()
 
 void ASceneManager::InitTargetRocket()
 {
-	if(!YscArry[0])
-	{
-		do
+	do
 		{
 			UGameplayStatics::GetAllActorsWithTag(GetWorld(),"YSC", YscArry);
-			;
 		}
-		while (!YscArry[0]);
-	}
+		while (!*YscArry.GetData());
+	
 	TargetRocket->AttachToActor(*YscArry.GetData(), FAttachmentTransformRules::KeepRelativeTransform);
 }
 
