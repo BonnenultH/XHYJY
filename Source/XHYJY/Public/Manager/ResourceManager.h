@@ -34,6 +34,8 @@ protected:
 	
 public:
 	TMap<EWidgetType, TSubclassOf<UUserWidget>> RSWidgetMap;
+
+	TMap<FString, std::string> CraftMap;
 	
 	UPROPERTY()
 	class UMediaPlayer* MP;

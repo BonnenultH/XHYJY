@@ -3,6 +3,9 @@
 
 #include "UMG/WBookLaunch.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "TcpSocket/VDSocket.h"
+
 
 void UWBookLaunch::InitWidget()
 {
@@ -41,7 +44,10 @@ void UWBookLaunch::InitWidget()
 	TextBlock_HTQ->SetText(FText::FromString(UIManager->SelectTaskItem->Name));
 	TextBlock_Rocket->SetText(FText::FromString(UIManager->GetRocketData(UIManager->SelectTaskItem->GetCheapestRocket())->RocketCNName));
 	TextBlock_Fireplace->SetText(FText::FromString(UIManager->SelectTaskItem->FirePlaceName));
+	
+	
 }
+
 
 FString  UWBookLaunch::TimeFormat(float Time)
 {

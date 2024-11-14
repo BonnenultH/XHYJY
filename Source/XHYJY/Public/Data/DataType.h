@@ -122,10 +122,10 @@ enum class EAnswer : uint8
 
 struct S_UserInfo
 {
-	const WIDECHAR* IDName;
-	const WIDECHAR* Accomplishment;
-	const WIDECHAR* Grades;
-	const WIDECHAR* HTQNumbers;
+	FString IDName;
+	FString Accomplishment;
+	int32 Grades;
+	int32 HTQNumbers;
 	EGender Gender = EGender::EG_None;
 };
 
@@ -231,6 +231,13 @@ struct CraftDataVO
 	std::string craftModel;
 	//时间格式是：2024-10-22
 	std::string finishTime;
+};
+
+struct FMyCraftData
+{
+	int32 grade;
+	FString craftModel;
+	FString finishTime;
 };
 
 struct TicketBillVO 
@@ -607,6 +614,10 @@ public:
 	TArray<FTaskRocket> RocketArry;
 
 	ERocketType CheapestRocketType = ERocketType::ERT_None;
+	
+	int32 UserGrade;
+	
+	FString Finishtime;
 };
 
 

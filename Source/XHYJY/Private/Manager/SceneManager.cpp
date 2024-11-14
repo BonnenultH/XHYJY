@@ -158,7 +158,7 @@ void ASceneManager::FindNeedMesh()
 		MyClass = TargetRocketBPMap[UIManager->SelectTaskItem->GetCheapestRocket()];
 	}
 	while (!MyClass);
-	AActor* MyActor = GetWorld()->SpawnActor(MyClass,&FVector::ZeroVector,&FRotator::ZeroRotator);
+	AActor* MyActor = GetWorld()->SpawnActor<AActor>(MyClass,FVector::ZeroVector,FRotator::ZeroRotator);
 	TargetRocket = Cast<ABaseCZActor>(MyActor);
 
 	

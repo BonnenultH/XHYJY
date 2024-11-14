@@ -24,14 +24,14 @@ protected:
 	virtual void BeginPlay() override;
 
 protected:
-	void InitUserFileGender();
+
 
 	void InitTaskTable();
 
 	void InitRocketTable();
 
 	void InitOrbitInfo();
-
+	
 	void InitQuestionTable();
 	
 	void InitRocketPartDiagram();
@@ -41,12 +41,13 @@ protected:
 
 	void UpdateTime(float DeltaTime);
 	
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void InitManager() override;
 
+	void InitUserFileGender();
 public:
 	void CreateVDWidget(EWidgetType WidgetType, bool bReturnWidget = false);
 
@@ -100,10 +101,14 @@ public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;
 
+	
+	TArray<FMyCraftData> HistoryArry;
+
 	TArray<FComprehensiveTests> TestsAry;
 
 	FProgressDelegate OnUpdateProgress;
 
+	UPROPERTY()
 	UItemTask* SelectTaskItem;
 
 	bool bShowOrbit = false;

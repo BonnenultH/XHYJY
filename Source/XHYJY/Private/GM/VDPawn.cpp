@@ -24,11 +24,12 @@ void AVDPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	UserInfoData.IDName			= L"不可思议的佳佳";
+	
+	UserInfoData.IDName			= L"不可思议的航航";
 	UserInfoData.Accomplishment = L"型号研究院高级研究员";
-	UserInfoData.Grades			= L"720";
-	UserInfoData.HTQNumbers		= L"30";
-	UserInfoData.Gender			= EGender::EG_Woman;
+	UserInfoData.Grades			= 20;
+	UserInfoData.HTQNumbers		= 0;
+	UserInfoData.Gender			= EGender::EG_Man;
 	
 	CreateManagers();
 

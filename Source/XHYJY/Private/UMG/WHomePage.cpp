@@ -14,8 +14,13 @@ void UWHomePage::InitWidget()
 		ResourceManager->MP->OpenSource(ResourceManager->MS);
 	}
 
-	Overlay_Start->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	GameStart();
 	StartButton->OnClicked.AddDynamic(this, &UWHomePage::CreatUserFile);
+}
+
+void UWHomePage::GameStart()
+{
+	Overlay_Start->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 }
 
 void UWHomePage::CreatUserFile()

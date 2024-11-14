@@ -3,7 +3,6 @@
 
 #include "UMG/WUserFile.h"
 
-#include "Kismet/GameplayStatics.h"
 
 void UWUserFile::InitWidget()
 {
@@ -27,8 +26,9 @@ void UWUserFile::InitUserFileInfo()
 		Gender->SetText(FText::FromString(TEXT("女")));
 	}
 	Accomplishment->SetText(FText::FromString(VDPawn->UserInfoData.Accomplishment));
-	Grades->SetText(FText::FromString(VDPawn->UserInfoData.Grades));
-	HTQNumbers->SetText(FText::FromString(VDPawn->UserInfoData.HTQNumbers));
+	Grades->SetText(FText::FromString(FString::FromInt(VDPawn->UserInfoData.Grades)));
+	HTQNumbers->SetText(FText::FromString(FString::FromInt(VDPawn->UserInfoData.HTQNumbers)));
+	VDPawn->UIManager->InitUserFileGender();
 }
 
 void UWUserFile::CreatHistoryTasks()

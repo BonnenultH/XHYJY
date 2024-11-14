@@ -164,6 +164,8 @@ AResourceManager::AResourceManager()
 void AResourceManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 }
 
 // Called every frame
@@ -189,6 +191,40 @@ void AResourceManager::InitManager()
 	EndingLevelSequencePlayer = EndingLevelSequencePlayer->CreateLevelSequencePlayer(GetWorld(), LevelEndingSequence, FMovieSceneSequencePlaybackSettings(),EndLevelSequenceActor);
 	}
 	while (!EndingLevelSequencePlayer);
+
+	FString BeiDouGEO = L"BeiDouGEO";
+	FString BeiDouMEO = L"BeiDouMEO";
+	FString BeiDouIGSO = L"BeiDouIGSO";
+	FString DongFangHong = L"DongFangHong";
+	FString QueQiao = L"QueQiao";
+	FString GaoFenSiHao = L"GaoFenSiHao";
+	FString FengYunSihao = L"FengYunSihao";
+	FString XiHe = L"XiHe";
+	
+	FString ShenZhou = L"ShenZhou";
+	FString MengTian = L"MengTian";
+	FString ChangESiHao = L"ChangESiHao";
+	FString TianZhou = L"TianZhou";
+	FString WenTian = L"WenTian";
+	FString TianHe = L"TianHe";
+	FString TianWen = L"TianWen";
+	
+	CraftMap.Add(L"北斗二号GEO-1",TCHAR_TO_UTF8(*BeiDouGEO));
+	CraftMap.Add(L"北斗二号MEO-1",TCHAR_TO_UTF8(*BeiDouMEO));
+	CraftMap.Add(L"北斗三号IGSO-2",TCHAR_TO_UTF8(*BeiDouIGSO));
+	CraftMap.Add(L"东方红一号",TCHAR_TO_UTF8(*DongFangHong));
+	CraftMap.Add(L"鹊桥",TCHAR_TO_UTF8(*QueQiao));
+	CraftMap.Add(L"高分四号",TCHAR_TO_UTF8(*GaoFenSiHao));
+	CraftMap.Add(L"风云四号A星",TCHAR_TO_UTF8(*FengYunSihao));
+	CraftMap.Add(L"羲和号",TCHAR_TO_UTF8(*XiHe));
+	CraftMap.Add(L"神舟飞船",TCHAR_TO_UTF8(*ShenZhou));
+	CraftMap.Add(L"梦天实验舱",TCHAR_TO_UTF8(*MengTian));
+	CraftMap.Add(L"嫦娥四号",TCHAR_TO_UTF8(*ChangESiHao));
+	CraftMap.Add(L"天舟飞船",TCHAR_TO_UTF8(*TianZhou));
+	CraftMap.Add(L"问天实验舱",TCHAR_TO_UTF8(*WenTian));
+	CraftMap.Add(L"天和核心舱", TCHAR_TO_UTF8(*TianHe));
+	CraftMap.Add(L"天问一号", TCHAR_TO_UTF8(*TianWen));
+
 
 }
 

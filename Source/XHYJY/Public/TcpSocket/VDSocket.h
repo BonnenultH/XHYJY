@@ -36,6 +36,8 @@ protected:
 	
 	std::wstring stringToWstring(const std::string& str);
 
+	FString WstringToFstring(std::wstring& str);
+
 	FString StringFromBinaryArray(const TArray<uint8>& BinaryArray)
 	{
 		return FString(ANSI_TO_TCHAR(reinterpret_cast<const char*>(BinaryArray.GetData())));
@@ -54,7 +56,7 @@ public:
 public:
 	bool bConnect = false;
 	FSocket* _TcpSocket;
-	FString _ClientIP = L"192.168.50.229";
+	FString _ClientIP = L"192.168.50.21";
 
 	FString MyEmptyData = "";
 	int32 BytesRead = 0;

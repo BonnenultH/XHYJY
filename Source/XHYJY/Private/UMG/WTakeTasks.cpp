@@ -307,11 +307,6 @@ void UWTakeTasks::CreateOrbits()
 	UIManager->SelectTaskItem = CurItemWidget->GetItemData();
 	SceneManager->InitSingleMesh();
 	UIManager->CreateVDWidget(EWidgetType::EWT_Orbits);
-
-	TArray<AActor*> MySockets;
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
-	AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
-//	MyTCPSocket->SendData();
 	
 }
 

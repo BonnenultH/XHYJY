@@ -36,13 +36,14 @@ void AUIManager::InitManager()
 	OnUpdateProgress.AddUObject(this, &AUIManager::UpdateProgress);
 	CreateVDWidget(EWidgetType::EWT_HomePage);
 	
-	InitUserFileGender();
+	
 	InitRocketTable();
 	InitTaskTable();
 	InitOrbitInfo();
 	InitQuestionTable();
 	InitRocketPartDiagram();
 }
+
 
 void AUIManager::UpdateProgress()
 {

@@ -23,6 +23,8 @@ protected:
 public:
 	virtual void InitWidget() override;
 
+	void GameStart();
+
 protected:
 	UPROPERTY(meta=(BindWidget))
 	UOverlay* Overlay_Start;

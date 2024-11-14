@@ -3,6 +3,7 @@
 
 #include "UMG/WComprehensiveTest.h"
 #include "Kismet/GameplayStatics.h"
+#include "TcpSocket/VDSocket.h"
 
 
 void UWComprehensiveTest::InitWidget()
@@ -144,6 +145,12 @@ void UWComprehensiveTest::ShowNextQue()
 void UWComprehensiveTest::CreateBook()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_BookLaunch);
+
+/*	TArray<AActor*> MySockets;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	MyTCPSocket->SendData();
+	*/
 }
 
 void UWComprehensiveTest::PlanScanSound()
