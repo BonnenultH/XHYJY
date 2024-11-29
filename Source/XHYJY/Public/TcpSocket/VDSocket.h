@@ -56,7 +56,7 @@ public:
 public:
 	bool bConnect = false;
 	FSocket* _TcpSocket;
-	FString _ClientIP = L"192.168.50.21";
+	FString _ClientIP = L"192.168.50.12";
 
 	FString MyEmptyData = "";
 	int32 BytesRead = 0;

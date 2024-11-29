@@ -32,14 +32,15 @@ void AVDSocket::BeginPlay()
 void AVDSocket::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
-//	CloseSocket();
+
+//  CloseSocket();
 }
 
 void AVDSocket::CreateSocket()
 {
 	TSharedPtr<FInternetAddr> Addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
 	bool bIsValid = false;
-	FString _ServerIp = "192.168.50.99";
+	FString _ServerIp = "192.168.50.29";
 	int32 Port = 9527;
 	Addr->SetIp(*_ServerIp, bIsValid);
 	Addr->SetPort(Port);

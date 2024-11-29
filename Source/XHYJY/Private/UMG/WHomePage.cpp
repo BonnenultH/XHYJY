@@ -14,7 +14,7 @@ void UWHomePage::InitWidget()
 		ResourceManager->MP->OpenSource(ResourceManager->MS);
 	}
 
-	GameStart();
+	
 	StartButton->OnClicked.AddDynamic(this, &UWHomePage::CreatUserFile);
 }
 

@@ -146,11 +146,10 @@ void UWComprehensiveTest::CreateBook()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_BookLaunch);
 
-/*	TArray<AActor*> MySockets;
+	TArray<AActor*> MySockets;
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
 	AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
 	MyTCPSocket->SendData();
-	*/
 }
 
 void UWComprehensiveTest::PlanScanSound()

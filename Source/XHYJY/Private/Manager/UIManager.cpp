@@ -57,7 +57,7 @@ void AUIManager::UpdateTime(float DeltaTime)
 		return;
 	}
 	
-	//UE_LOG(LogTemp, Log, TEXT("当前的分时间：%f, 当前的秒时间：%f, InDeltaTime == %f"), ManagerMinute, ManagerSecond, DeltaTime)
+	
 	if(UIManager->ManagerSecond == 0)
 	{
 		ManagerMinute -= 1;

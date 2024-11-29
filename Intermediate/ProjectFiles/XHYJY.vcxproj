@@ -527,7 +527,6 @@
     <None Include="..\..\Source\XHYJY.Target.cs"/>
     <None Include="..\..\Source\XHYJYEditor.Target.cs"/>
     <None Include="..\..\.gitignore"/>
-    <None Include="..\..\.vsconfig"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEngine.ini"/>
     <None Include="..\..\Config\DefaultGame.ini"/>

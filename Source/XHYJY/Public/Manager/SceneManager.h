@@ -95,12 +95,15 @@ protected:
 
 	UPROPERTY()
 	ABaseCZActor* TargetRocket;
+	UPROPERTY()
+	AActor* MyActor;
 
 
 	UPROPERTY()
 	AActor* DZJMesh;
 	FVector DZJOrignLocation;
-	
+
+	UPROPERTY()
 	TMap<ERocketType, UClass*> TargetRocketBPMap;
 
 	bool bStartUIBGM = true;

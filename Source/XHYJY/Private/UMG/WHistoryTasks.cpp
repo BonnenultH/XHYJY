@@ -30,24 +30,36 @@ void UWHistoryTasks::CreateTakeTasks()
 
 void UWHistoryTasks::InitHistoryView()
 {
+	TArray<UItemTask*> Tasks;
 	for(auto ItemData: UIManager->GetCategoryData().FirstDataMap)
 	{
 		for(auto Data : ItemData.Value.AllDataArry)
 		{
 			UItemTask* TaskItem = NewObject<UItemTask>(this);
 			TaskItem->InitTaskData(Data);
+
 			for (auto History :UIManager->HistoryArry)
 			{
 				if(History.craftModel == TaskItem->Name)
 				{
-					TaskItem->UserGrade = History.grade;
-					TaskItem->Finishtime = History.finishTime;
-					TileView_History->AddItem(TaskItem);
+					if(Tasks.Contains(TaskItem))
+					{
+						TaskItem = NewObject<UItemTask>(this);
+						TaskItem->InitTaskData(Data);
+					}
+					
+						TaskItem->UserGrade = History.grade;
+						TaskItem->Finishtime = History.finishTime;
+						Tasks.Add(TaskItem);
+						TileView_History->AddItem(TaskItem);
+					
 				}
+				
 			}
 		}
 	}
 }
+
 
 void UWHistoryTasks::OnSelectTask(UObject* Item)
 {
