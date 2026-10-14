@@ -40,6 +40,9 @@ protected:
 	void PlaySelectPartReverseAnim();
 
 	UFUNCTION()
+	void MakeItSelectable();
+
+	UFUNCTION()
 	void PlayErrorPart();
 
 	UFUNCTION()
@@ -58,6 +61,7 @@ protected:
 
 	UFUNCTION()
 	void GoTest();
+	
 
 public:
 	virtual void InitWidget() override;

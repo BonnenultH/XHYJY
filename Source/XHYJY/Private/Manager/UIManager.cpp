@@ -2,9 +2,15 @@
 
 
 #include "Manager/UIManager.h"
+
+#include "GM/VDGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 #include "UMG/BaseWidget.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
 #include "Manager/ResourceManager.h"
 #include "Materials/MaterialParameterCollectionInstance.h"
+#include "TcpSocket/VDSocket.h"
 
 
 // Sets default values
@@ -19,7 +25,19 @@ AUIManager::AUIManager()
 void AUIManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	//线上型号研究院
+	// TArray<AActor*> MySockets;
+	// UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	// MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	// ManagerMinute = MyTCPSocket->Time;
+
+	//线下和平里型号研究院
+	// MyGameInstance = Cast<UVDGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	// ManagerMinute = MyGameInstance->Time;
+
+	//本地化启动运行-放在initmanager里面了
+	//LoadTimeConfig();
 }
 
 // Called every frame
@@ -32,6 +50,7 @@ void AUIManager::Tick(float DeltaTime)
 void AUIManager::InitManager()
 {
 	Super::InitManager();
+	LoadTimeConfig();
 	
 	OnUpdateProgress.AddUObject(this, &AUIManager::UpdateProgress);
 	CreateVDWidget(EWidgetType::EWT_HomePage);
@@ -60,8 +79,24 @@ void AUIManager::UpdateTime(float DeltaTime)
 	
 	if(UIManager->ManagerSecond == 0)
 	{
+		if(UIManager->ManagerMinute == 0)
+		{
+			//新版线上开这个
+			// MyTCPSocket->SendData();
+			// MyTCPSocket->GameEnd();
+
+			//线下和平里 
+			// MyGameInstance->SendLocalReportLog();
+			// MyGameInstance->GameEnd();
+			
+			//本地运行
+			GetWorld()->GetFirstPlayerController()->ConsoleCommand(TEXT("RestartLevel"));
+
+			return;
+		}
 		ManagerMinute -= 1;
 		ManagerSecond = 59;
+		
 	}
 	if(Interval <= 1)
 	{
@@ -73,6 +108,75 @@ void AUIManager::UpdateTime(float DeltaTime)
 		ManagerSecond -= 1;
 	}
 }
+
+void AUIManager::LoadTimeConfig()
+{
+	const FString FilePath =
+		FPaths::ProjectDir() / TEXT("Content/Config.ini");
+
+	TArray<FString> FileLines;
+
+	if (!FFileHelper::LoadFileToStringArray(
+		FileLines,
+		*FilePath
+	))
+	{
+		UE_LOG(
+			LogTemp,
+			Error,
+			TEXT("读取配置失败，使用默认时间：%d分钟"),
+			TotalMinutes
+		);
+
+		ManagerMinute =
+			static_cast<float>(TotalMinutes);
+
+		ManagerSecond = 0.0f;
+		return;
+	}
+
+	// 第一行是服务器IP，第二行是时间
+	if (FileLines.Num() < 2)
+	{
+		UE_LOG(
+			LogTemp,
+			Error,
+			TEXT("Config.ini 缺少时间配置，使用默认时间：%d分钟"),
+			TotalMinutes
+		);
+
+		ManagerMinute =
+			static_cast<float>(TotalMinutes);
+
+		ManagerSecond = 0.0f;
+		return;
+	}
+
+	const int32 ConfigMinutes =
+		FCString::Atoi(
+			*FileLines[1].TrimStartAndEnd()
+		);
+
+	if (ConfigMinutes > 0)
+	{
+		TotalMinutes = ConfigMinutes;
+	}
+	else
+	{
+		UE_LOG(
+			LogTemp,
+			Error,
+			TEXT("时间配置无效，使用默认时间：%d分钟"),
+			TotalMinutes
+		);
+	}
+
+	ManagerMinute =
+		static_cast<float>(TotalMinutes);
+
+	ManagerSecond = 0.0f;
+}
+
 
 void AUIManager::InitUserFileGender()
 {
@@ -155,11 +259,40 @@ void AUIManager::InitOrbitInfo()
 
 void AUIManager::InitQuestionTable()
 {
-	TArray<FComprehensiveTests*> AllTests;
-	ResourceManager->ComprehensiveTest->GetAllRows<FComprehensiveTests>("", AllTests);
-	for(auto Test : AllTests)
+	//只有三道题目:
+	// TArray<FComprehensiveTests*> AllTests;
+	// ResourceManager->ComprehensiveTest->GetAllRows<FComprehensiveTests>("", AllTests);
+	// for(auto Test : AllTests)
+	// {
+	// 	TestsAry.Add(*Test);
+	// }
+	//随机多个题目
+	TestsAry.Empty();
+
+	if (!ResourceManager || !ResourceManager->ComprehensiveTest)
 	{
-		TestsAry.Add(*Test);
+		return;
+	}
+
+	TArray<FComprehensiveTests*> AllTests;
+
+	ResourceManager->ComprehensiveTest
+		->GetAllRows<FComprehensiveTests>(
+			TEXT("ComprehensiveTest"),
+			AllTests);
+
+	for (FComprehensiveTests* Test : AllTests)
+	{
+		if (Test)
+		{
+			TestsAry.Add(*Test);
+		}
+	}
+	
+	for (int32 i = TestsAry.Num() - 1; i > 0; --i)
+	{
+		const int32 RandomIndex = FMath::RandRange(0, i);
+		TestsAry.Swap(i, RandomIndex);
 	}
 	
 }

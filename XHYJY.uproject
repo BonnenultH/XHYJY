@@ -33,6 +33,14 @@
 		{
 			"Name": "StudioTelemetry",
 			"Enabled": false
+		},
+		{
+			"Name": "ElectraPlayer",
+			"Enabled": true
+		},
+		{
+			"Name": "Cargo",
+			"Enabled": true
 		}
 	]
 }

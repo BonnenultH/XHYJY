@@ -313,7 +313,6 @@ void UWTakeTasks::CreateOrbits()
 void UWTakeTasks::UnSelect()
 {
 	PlaySoundReselect();
-	
 	PlayAnimationReverse(Ani_showInfo);
 }
 

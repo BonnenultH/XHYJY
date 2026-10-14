@@ -20,6 +20,8 @@ protected:
 public:
 	virtual void InitWidget() override;
 
+	void GameRestart();
+
 protected:
 	UPROPERTY(meta=(BindWidget))
 	UBaseWidget* WBP_PersonTitle;
@@ -36,9 +38,11 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 	UImage* Image_Level;
-	
 
-	
+	FTimerHandle DelayReturn;
+
+	//class UVDGameInstance* MyGameInstance ;
+	class AVDSocket* MyTCPSocket;
 	
 	
 };

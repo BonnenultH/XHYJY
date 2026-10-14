@@ -9,8 +9,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
+#include "GM/VDGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "TcpSocket/VDSocket.h"
 
 // Sets default values
 AVDPawn::AVDPawn()
@@ -77,6 +79,23 @@ void AVDPawn::Move(const FInputActionValue& Value)
 	AddMovementInput(UKismetMathLibrary::GetRightVector(GetControlRotation()), MovementVector.Y);
 	AddMovementInput(UKismetMathLibrary::GetForwardVector(GetControlRotation()), MovementVector.X);
 	AddMovementInput(UKismetMathLibrary::GetUpVector(GetControlRotation()), MovementVector.Z);
+}
+
+void AVDPawn::LocalStart()
+{
+	//线上型号研究院
+	 TArray<AActor*> MySockets;
+	 UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	 AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	 //MyTCPSocket->GameStart();
+
+
+	//线下和平里
+	// UVDGameInstance* MyGameInstance = Cast<UVDGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	// MyGameInstance->GameStart();
+
+	
+	
 }
 
 // Called every frame

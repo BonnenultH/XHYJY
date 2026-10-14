@@ -19,6 +19,8 @@ protected:
 	void CreatUserFile();
 
 	void PlayStartGameSound();
+
+	void PlayBackgroundMovie();
 	
 public:
 	virtual void InitWidget() override;

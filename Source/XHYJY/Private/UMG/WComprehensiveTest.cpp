@@ -127,6 +127,9 @@ void UWComprehensiveTest::ShowNextQue()
 	{
 		Border_BG->SetBrushFromTexture(ResourceManager->TestBG);
 		SceneManager->CollisionClose();
+
+		UIManager->bTimeStart = false;
+		Hint->SetVisibility(ESlateVisibility::Hidden);
 		if(ResourceManager->EndingLevelSequencePlayer)
 		{
 			PlayEndingSound();
@@ -142,14 +145,19 @@ void UWComprehensiveTest::ShowNextQue()
 	InitQuestions();
 }
 
+
 void UWComprehensiveTest::CreateBook()
 {
 	UIManager->CreateVDWidget(EWidgetType::EWT_BookLaunch);
 
-	TArray<AActor*> MySockets;
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
-	AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
-	MyTCPSocket->SendData();
+	
+	//不用了吧 新版型号研究院把这个打开 发reportlog
+	// TArray<AActor*> MySockets;
+	// UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	// AVDSocket* MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	// MyTCPSocket->SendData(); 
+	// MyTCPSocket->SendLocalReportLog();
+
 }
 
 void UWComprehensiveTest::PlanScanSound()

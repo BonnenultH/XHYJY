@@ -25,7 +25,6 @@ void ASceneManager::InitManager()
 
 	do
 	{
-		
 		CZ3CActor = LoadClass<AActor>(nullptr, TEXT("/Script/Engine.Blueprint'/Game/Model/Rockets/CZ-3C/CZ3C_Actor.CZ3C_Actor_C'"));
 		
 	}while(!CZ3CActor);

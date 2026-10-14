@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Manager/ResourceManager.h"
@@ -20,7 +20,7 @@ AResourceManager::AResourceManager()
 	InitMediaResource();
 	
 	ConstructorHelpers::FObjectFinder<UMaterialParameterCollection> GenderObj(TEXT("'/Game/UMG/UserFile/Texture/Meidum_Mat.Meidum_Mat'"));
-	GenderMaterial= GenderObj.Object;
+	GenderMaterial= GenderObj.Object; 
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> TexProgress(TEXT("'/Game/UMG/Child/PersonInfo/LoadingOk.LoadingOk'"));
 	ProgressOkImage= TexProgress.Object;
@@ -55,10 +55,10 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UDataTable> ComprehensiveTestObj(TEXT("'/Game/UMG/DataTable/ComprehensiveTest.ComprehensiveTest'"));
 	ComprehensiveTest= ComprehensiveTestObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> CapacityIconObj(TEXT("'/Game/UMG/Child/RocketMode/Tabel.Tabel'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> CapacityIconObj(TEXT("'/Game/UMG/Child/RocketMode/KG.KG'"));
 	CapacityIcon= CapacityIconObj.Object;
 
-	ConstructorHelpers::FObjectFinder<UTexture2D> PriceIconObj(TEXT("'/Game/UMG/Child/RocketMode/PriceTable.PriceTable'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> PriceIconObj(TEXT("'/Game/UMG/Child/RocketMode/RMB.RMB'"));
 	PriceIcon= PriceIconObj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketSeleBGObj(TEXT("'/Game/UMG/Child/RocketMode/BG_Selected.BG_Selected'"));
@@ -70,25 +70,25 @@ AResourceManager::AResourceManager()
 	ConstructorHelpers::FObjectFinder<UTexture2D> RocketWrongObj(TEXT("'/Game/UMG/Child/RocketMode/WrongBG.WrongBG'"));
 	RocketWrong= RocketWrongObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> JQObj(TEXT("'/Game/UMG/Launch/button/JQ.JQ'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> JQObj(TEXT("'/Game/UMG/Launch/button/JQ_HTQYZ.JQ_HTQYZ'"));
 	JQ= JQObj.Object;
 
-	ConstructorHelpers::FObjectFinder<UTexture2D> TYObj(TEXT("'/Game/UMG/Launch/button/TY.TY'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> TYObj(TEXT("'/Game/UMG/Launch/button/TY_HTQYZ.TY_HTQYZ'"));
 	TY= TYObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> XCObj(TEXT("'/Game/UMG/Launch/button/XC.XC'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> XCObj(TEXT("'/Game/UMG/Launch/button/XC_HTQYZ.XC_HTQYZ'"));
 	XC= XCObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> WCObj(TEXT("'/Game/UMG/Launch/button/WC.WC'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> WCObj(TEXT("'/Game/UMG/Launch/button/WC_HTQYZ.WC_HTQYZ'"));
 	WC= WCObj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UTexture2D> HoistDownObj(TEXT("'/Game/UMG/Hoisting/ImageDiagram/Down.Down'"));
 	HoistDown = HoistDownObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> TestBGObj(TEXT("'/Game/UMG/ComprehensiveTest/BG.BG'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> TestBGObj(TEXT("'/Game/UMG/ComprehensiveTest/BG_HTQYZ.BG_HTQYZ'"));
 	TestBG = TestBGObj.Object;
 	
-	ConstructorHelpers::FObjectFinder<UTexture2D> TestWarningObj(TEXT("'/Game/UMG/ComprehensiveTest/BG_Warning.BG_Warning'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> TestWarningObj(TEXT("'/Game/UMG/ComprehensiveTest/BG_Warning_HTQYZ.BG_Warning_HTQYZ'"));
 	TestWarning = TestWarningObj.Object;
 	
 	ConstructorHelpers::FObjectFinder<UMaterial> WarningObj(TEXT("'/Game/UMG/HistoryTasks/Texture/M_Warning.M_Warning'"));
@@ -203,7 +203,7 @@ void AResourceManager::InitManager()
 	
 	FString ShenZhou = L"ShenZhou";
 	FString MengTian = L"MengTian";
-	FString ChangESiHao = L"ChangESiHao";
+	FString ChangELiuHao = L"ChangELiuHao";
 	FString TianZhou = L"TianZhou";
 	FString WenTian = L"WenTian";
 	FString TianHe = L"TianHe";
@@ -219,7 +219,7 @@ void AResourceManager::InitManager()
 	CraftMap.Add(L"羲和号",TCHAR_TO_UTF8(*XiHe));
 	CraftMap.Add(L"神舟飞船",TCHAR_TO_UTF8(*ShenZhou));
 	CraftMap.Add(L"梦天实验舱",TCHAR_TO_UTF8(*MengTian));
-	CraftMap.Add(L"嫦娥四号",TCHAR_TO_UTF8(*ChangESiHao));
+	CraftMap.Add(L"嫦娥六号",TCHAR_TO_UTF8(*ChangELiuHao));
 	CraftMap.Add(L"天舟飞船",TCHAR_TO_UTF8(*TianZhou));
 	CraftMap.Add(L"问天实验舱",TCHAR_TO_UTF8(*WenTian));
 	CraftMap.Add(L"天和核心舱", TCHAR_TO_UTF8(*TianHe));

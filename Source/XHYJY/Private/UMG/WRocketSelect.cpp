@@ -229,7 +229,6 @@ void UWRocketSelect::SelectPRocketError()
 	else
 	{
 		// 选对了
-	
 		CreateLaunch();
 	}
 }
@@ -240,6 +239,13 @@ void UWRocketSelect::SelectRocketItem(UObject* ObjItem)
 	UWRocketMode* ItemWidget = Cast<UWRocketMode>(RocketListView->GetEntryWidgetFromItem(Item));
 	if(SelectedRocketArry.Contains(Item))
 	{
+		ItemWidget->BGChanged(1);
+		if(SelectedRocketArry.Num() <= SeletedBoxArry.Num())
+		{
+			SeletedBoxArry[SelectedRocketArry.Num() - 1]->SetBrushFromTexture(ResourceManager->UnCheckBar, true);
+		}
+		SelectedRocketArry.Remove(Item);
+		Chosen->SetText(FText::FromString(FString::FromInt(SelectedRocketArry.Num())));
 		return;
 	}
 	

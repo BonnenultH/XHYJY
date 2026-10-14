@@ -87,6 +87,9 @@ protected:
 	UButton* Button_D;
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* TextBlock_D;
+
+	UPROPERTY(meta=(BindWidget))
+	UHorizontalBox* Hint;
 	
 	int32 QuesNum = 0;
 	

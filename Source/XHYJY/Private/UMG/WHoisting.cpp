@@ -3,6 +3,7 @@
 
 #include "UMG/WHoisting.h"
 
+#include "Animation/UMGSequencePlayer.h"
 #include "Components/OverlaySlot.h"
 #include "Components/VerticalBoxSlot.h"
 #include "Kismet/GameplayStatics.h"
@@ -185,6 +186,7 @@ void UWHoisting::PlayStartHoist()
 {
 	PlaySoundButton();
 	
+	SceneManager->SetSelectable(false);
 	PlayAnimation(StartHoist);
 	FTimerHandle Delaypop;
 	GetWorld()->GetTimerManager().SetTimer(Delaypop, this, &UWHoisting::PlaySelectPartAnim, 0.75f);
@@ -194,8 +196,8 @@ void UWHoisting::PlayOperateInstructions()
 {
 	PlaySoundButton();
 	
-	PlayAnimation(Instructions);
 	SceneManager->SetSelectable(false);
+	PlayAnimation(Instructions);
 }
 
 void UWHoisting::PlayReverseOperateIns()
@@ -235,6 +237,12 @@ void UWHoisting::PlaySelectPartReverseAnim()
 	PlaySoundButton();
 	
 	PlayAnimationReverse(StartSelectPartAnim);
+	FTimerHandle DelaySelectable;
+	GetWorld()->GetTimerManager().SetTimer(DelaySelectable, this, &UWHoisting::MakeItSelectable, 0.8f);
+}
+
+void UWHoisting::MakeItSelectable()
+{
 	SceneManager->SetSelectable(true);
 }
 

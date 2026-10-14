@@ -5,6 +5,7 @@
 #include "BaseManager.h"
 #include "UIManager.generated.h"
 
+
 class UBaseWidget;
 
 
@@ -25,7 +26,6 @@ protected:
 
 protected:
 
-
 	void InitTaskTable();
 
 	void InitRocketTable();
@@ -40,6 +40,9 @@ protected:
 	void UpdateProgress();
 
 	void UpdateTime(float DeltaTime);
+
+private:
+	void LoadTimeConfig();
 	
 public:
 	// Called every frame
@@ -88,7 +91,7 @@ public:
 
 protected:
 	int32 ManagerProgress = 0;
-	float Interval;
+	float Interval = 0.0f;
 
 	FHTQCategoryData HTQCategoryData;
 	TMap<ERocketType, FRocketTable*> RocketMap;
@@ -96,11 +99,13 @@ protected:
 	
 	TMap<ERocketType, FDiagramUITable*> DiagramMap;
 	int32 TaskGrade = 100;
+
+//	class UVDGameInstance* MyGameInstance;
+	class AVDSocket* MyTCPSocket;
 	
 public:
 	TMap<EWidgetType, UBaseWidget*> WidgetMap;
 	EWidgetType CurWidgetType = EWidgetType::EWT_None;
-
 	
 	TArray<FMyCraftData> HistoryArry;
 
@@ -114,8 +119,12 @@ public:
 	bool bShowOrbit = false;
 	bool bShowRocket = false;
 	bool bShowFirePlace = false;
+
 	
-	float	ManagerMinute = 8;
-	float	ManagerSecond = 0;
+	float	ManagerMinute =  8.0f;
+	float   ManagerSecond = 0.0f;
 	bool	bTimeStart = false;
+	
+	int32   TotalMinutes = 8;
+	
 };

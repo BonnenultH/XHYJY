@@ -100,6 +100,6 @@ public:
 	UButton* Button_WrongAgain;
 
 	UPROPERTY()
-	UButton* CurButton;
+	UButton* CurButton = nullptr;
 	
 };

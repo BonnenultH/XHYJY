@@ -110,7 +110,6 @@ protected:
 	bool bHoist = false;
 	UAudioComponent* AudioComponent;
 
-
 	UPROPERTY()
 	TArray<AActor*> YscArry;
 	UPROPERTY()

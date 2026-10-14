@@ -30,6 +30,8 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 
+	UFUNCTION(BlueprintCallable)
+	void LocalStart();
 
 public:	
 	// Called every frame

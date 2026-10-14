@@ -8,14 +8,12 @@
 void UWHomePage::InitWidget()
 {
 	Super::InitWidget();
-	
-	if(ResourceManager->MP && ResourceManager->MS)
-	{
-		ResourceManager->MP->OpenSource(ResourceManager->MS);
-	}
 
-	
+	//本地运行
+	GameStart();
 	StartButton->OnClicked.AddDynamic(this, &UWHomePage::CreatUserFile);
+
+	PlayBackgroundMovie();
 }
 
 void UWHomePage::GameStart()
@@ -32,6 +30,16 @@ void UWHomePage::CreatUserFile()
 void UWHomePage::PlayStartGameSound()
 {
 	UGameplayStatics::PlaySound2D(this, ResourceManager->StartGame);
+}
+
+void UWHomePage::PlayBackgroundMovie()
+{
+	if(ResourceManager->MP && ResourceManager->MS)
+	{
+		ResourceManager->MP->OpenSource(ResourceManager->MS);
+	}
+	
+
 }
 
 

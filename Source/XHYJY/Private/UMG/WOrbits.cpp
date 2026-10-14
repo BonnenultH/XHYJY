@@ -91,7 +91,6 @@ void UWOrbits::CreateRocketSelect()
 	if(CurSelectedOrbit.HTQOrbitType == UIManager->SelectTaskItem->HTQOrbitType)
 	{
 		PlayAnimation(Orbit_RightPop);
-	
 	}
 	else
 	{

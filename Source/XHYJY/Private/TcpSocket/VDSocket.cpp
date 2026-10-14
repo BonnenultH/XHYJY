@@ -13,6 +13,14 @@
 #include "UMG/WHomePage.h"
 
 // Sets default values
+// 几个版本： 本地版本运行时：Create CLose Tick修改到If
+// UIMananger:SendData beginply里 
+// Comprehensive :SendData
+// BookLaunch: SendData
+//本地 Socket关掉 开始按钮打开
+
+//线下开UGAMEINSTANCE
+
 AVDSocket::AVDSocket()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -24,43 +32,67 @@ AVDSocket::AVDSocket()
 void AVDSocket::BeginPlay()
 {
 	Super::BeginPlay();
-
-//	CreateSocket();
+    //CreateSocket();
 	
 }
 
 void AVDSocket::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
-
-//  CloseSocket();
+    //CloseSocket();
+	
 }
 
 void AVDSocket::CreateSocket()
 {
+	FString _ServerIp;
+	int32 Port = 9527;
+	
+	FString FilePath = FPaths::ProjectDir()/TEXT("Content/Config.ini");
+	TArray<FString> FileLines;
+	TArray<FString> Words;
+	
+	if(FFileHelper::LoadFileToStringArray(FileLines, *FilePath))
+	{
+		for(const FString& Line :FileLines)
+		{
+			Words.Add(Line);
+		}
+		_ServerIp = Words[0];
+		Time = FCString::Atoi(*Words[1]);
+	
+	}
+	
 	TSharedPtr<FInternetAddr> Addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
 	bool bIsValid = false;
-	FString _ServerIp = "192.168.50.29";
-	int32 Port = 9527;
+	
 	Addr->SetIp(*_ServerIp, bIsValid);
 	Addr->SetPort(Port);
 
 	_TcpSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, "TCPClient", false);
-	
 	bConnect = _TcpSocket->Connect(*Addr);
 
+	bool bCanBind = false;
+	TSharedRef<FInternetAddr> ClientIP = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->GetLocalHostAddr(*GLog, bCanBind);
+	if (ClientIP->IsValid())
+	{
+		_ClientIP = ClientIP->ToString(false);
+	}
+	UE_LOG(LogTemp, Log, TEXT("My IP is %s;My Server IP is %s"), *_ClientIP, *_ServerIp)
+	
 	if(bConnect)
 	{
 		UE_LOG(LogTemp, Log, TEXT("链接成功"));
-
 		SendData(EActionCode::ClintIP, _ClientIP);
 		
-		
+		//StartReceiving();
 	}
 	else
 	{
 		UE_LOG(LogTemp, Log, TEXT("链接失败"));
 	}
+
+	
 }
 
 void AVDSocket::CloseSocket()
@@ -72,6 +104,8 @@ void AVDSocket::CloseSocket()
 		_TcpSocket =nullptr;
 	}
 }
+
+
 
 bool AVDSocket::SendData(EActionCode Action, FString Data)
 {
@@ -105,8 +139,19 @@ void AVDSocket::SendData()
 	nlohmann::json ReportJson;
 	CraftDataVO MyCraft;
 
+	std::string NAME;
+	
 	AVDPawn* Pawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
-	std::string NAME = Pawn->ResourceManager->CraftMap[Pawn->UIManager->SelectTaskItem->Name];
+
+	
+	if (!Pawn->UIManager->SelectTaskItem)
+	{
+		NAME = Pawn->ResourceManager->CraftMap[L"东方红一号"];
+	}
+	else
+	{
+		NAME = Pawn->ResourceManager->CraftMap[Pawn->UIManager->SelectTaskItem->Name];
+	}
 	MyCraft.craftModel = NAME;
 	MyCraft.grade = Pawn->UIManager->GetGrade();
 	ReportJson["craft"]["craftModel"] = MyCraft.craftModel;
@@ -126,12 +171,39 @@ void AVDSocket::SendData()
 }
 
 
+void AVDSocket::StartReceiving()
+{
+	AsyncTask(ENamedThreads::AnyBackgroundThreadNormalTask, [this]()
+	{
+		while (_TcpSocket->GetConnectionState() == SCS_Connected)
+		{
+			BytesRead = 0;
+			_TcpSocket->Recv(ReceiveArry,sizeof(ReceiveArry),BytesRead);
+			if (BytesRead > 0)
+			{
+				TArray<uint8> NewData;
+				NewData.Append(ReceiveArry, BytesRead);
+				ReceivedDataQueue.Enqueue(NewData);
+			}
+		}
+	});
+}
+
+
 // Called every frame
 void AVDSocket::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-/*	if(_TcpSocket->HasPendingData(size))
+/*
+ 	TArray<uint8> ReceivedData;
+	while (ReceivedDataQueue.Dequeue(ReceivedData))
+	{
+		ParseData(ReceivedData);
+	}
+
+	 				
+	if(_TcpSocket->HasPendingData(size))
 	{
 		BytesRead = 0;
 		_TcpSocket->Recv(ReceiveArry,sizeof(ReceiveArry),BytesRead);
@@ -147,11 +219,12 @@ void AVDSocket::Tick(float DeltaTime)
 		
 		UE_LOG(LogTemp, Log, TEXT("MY Value:%d"),Value)
 		EActionCode actionCode  = (EActionCode)Value;
-		
+
+		//本地版本只使用开始和结束指令
 		if (actionCode == EActionCode::GetCustomerInfo)
 		{
-			UE_LOG(LogTemp, Log, TEXT("GET CUSTOMERINFO"))
 			AnalysisCustomerInfo();
+			UE_LOG(LogTemp, Log, TEXT("GET CUSTOMERINFO"))
 		}
 		else if(actionCode == EActionCode::GameStart)
 		{
@@ -160,19 +233,58 @@ void AVDSocket::Tick(float DeltaTime)
 		}
 		else if(actionCode == EActionCode::GameStop)
 		{
+			//FullTimeAssessment();
+			//新版的开这个
 			GameEnd();
-			UE_LOG(LogTemp, Log, TEXT("GAME END!!"))
 		}
 	}
-*/	
-	
+		
+	*/		
 }
 
+/*void AVDSocket::ParseData(TArray<uint8>& Data)
+{
+	TArray<uint8> SubArray;
+	SubArray.Append(Data.GetData() + 4, 4);
+	int32 Value = *(reinterpret_cast<int32*>(SubArray.GetData()));
+	UE_LOG(LogTemp, Log, TEXT("MY Value:%d"),Value)
+	EActionCode actionCode  = (EActionCode)Value;
+
+	//本地版本只使用开始和结束指令
+	if (actionCode == EActionCode::GetCustomerInfo)
+	{
+		AnalysisCustomerInfo();
+		UE_LOG(LogTemp, Log, TEXT("GET CUSTOMERINFO"))
+	}
+	
+	else if(actionCode == EActionCode::GameStart)
+	{
+		GameStart();
+		UE_LOG(LogTemp, Log, TEXT("GAME START!!"))
+	}
+	else if(actionCode == EActionCode::GameStop)
+	{
+		GameEnd();
+	}
+	
+/*	if(actionCode == EActionCode::GameStart)
+	{
+		GameStart();
+		UE_LOG(LogTemp, Log, TEXT("GAME START!!"))
+	}
+	else if(actionCode == EActionCode::GameStop)
+	{
+		GameEnd();
+	}
+
+}
+
+*/
 void AVDSocket::AnalysisCustomerInfo()
 {
 	if(BytesRead != 0)
 	{
-		uint8 TempArry[5000];
+/*		uint8 TempArry[40960];
 		int i = 0;
 		for(auto st : ReceiveArry)
 		{
@@ -183,8 +295,14 @@ void AVDSocket::AnalysisCustomerInfo()
 			++i;
 		}
 		std::string str((char*)TempArry);
-		nlohmann::json JsonStr = nlohmann::json::parse(str);
+	//	UE_LOG(LogTemp, Log, TEXT("Parsed string: %s"), *FString(str.c_str()));  
 
+		nlohmann::json JsonStr = nlohmann::json::parse(str);
+*/
+		uint8* DataStart = ReceiveArry + 8;
+		std::string StdReceivedJSONString(reinterpret_cast<char*>(DataStart), BytesRead - 8);
+		nlohmann::json JsonStr = nlohmann::json::parse(StdReceivedJSONString);
+		
 		bool Playerresult = JsonStr.contains("player");
 		bool Historyresult = JsonStr.contains("history");
 		
@@ -192,7 +310,7 @@ void AVDSocket::AnalysisCustomerInfo()
 		{
 			nlohmann::json player = JsonStr["player"];
 
-			LONG playerId = player["playerId"].get<LONG>();
+		//	LONG playerId = player["playerId"].get<LONG>();
 				
 			std::string nickname =player["nickname"].get<std::string>();
 			std::wstring Mynickname = stringToWstring(nickname);
@@ -222,7 +340,6 @@ void AVDSocket::AnalysisCustomerInfo()
 			
 			int32 craftNumber = player["craftNumber"].get<int32>();
 			Pawn->UserInfoData.HTQNumbers = craftNumber;
-			
 			TArray<FMyCraftData> TestArry;
 			nlohmann::json history = JsonStr["history"];
 			for (nlohmann::json jsonobj : history)
@@ -250,42 +367,131 @@ void AVDSocket::AnalysisCustomerInfo()
 
 void AVDSocket::GameStart()
 {
-	AVDPawn* VdPawn = nullptr;
-	VdPawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+	AVDPawn* VdPawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 	if(VdPawn)
 	{
 	UWHomePage* HomePage = Cast<UWHomePage>(VdPawn->UIManager->WidgetMap[EWidgetType::EWT_HomePage]);
 	HomePage->GameStart();
 	}
+	//LocalDataArchive(EActionCode::GameStart);
 	UE_LOG(LogTemp,Log,TEXT("  GameStart   "));
 }
 
 void AVDSocket::GameEnd()
 {
+	//LocalDataArchive(EActionCode::GameStop);
+	GetWorld()->GetFirstPlayerController()->ConsoleCommand(TEXT("RestartLevel"));
 	UE_LOG(LogTemp,Log,TEXT("  GameEnd   "));
 }
 
+void AVDSocket::LocalDataArchive(EActionCode ECode)
+{
+	FString TextPath = FPaths::ProjectDir() + TEXT("Content/Log.txt");
+	TextPath = FPaths::ConvertRelativePathToFull(TextPath);
+	TArray<FString> TextLines;
+	
+	FDateTime Dt = FDateTime::Now();
+	//UE_LOG(LogTemp, Display, TEXT("当前时间:%d年%d月%d日%d时%d分%d秒"), Dt.GetYear(), Dt.GetMonth(), Dt.GetDay(), Dt.GetHour(), Dt.GetMinute(), Dt.GetSecond());
+	//%d月%d日%d时%d分%d秒  , Dt.GetMonth(), Dt.GetDay(), Dt.GetHour(), Dt.GetMinute(), Dt.GetSecond()
 
-// void AVDSocket::SendReportLog()
-// {
-// 	TArray<uint8> DataSendArray;
-// 	nlohmann::json ReportJson;
-// 	CraftDataVO MyCraft;
-// 	int32 Craftaction = static_cast<int32>(ECraft::DongFangHong);
-// 	ReportJson["craftModel"] = Craftaction;
-// 	ReportJson["Grade"] = 50;
-// 	std::string str = to_string(ReportJson);
-//
-// 	int32 action = static_cast<int32>(EActionCode::SetReportVRLog);
-// 	int32 dataAmount = sizeof(action) + sizeof(str.c_str());
-// 	
-// 	DataSendArray.Append(reinterpret_cast<const uint8*>(&dataAmount), sizeof(dataAmount));
-// 	DataSendArray.Append(reinterpret_cast<const uint8*>(&action), sizeof(action));
-// 	DataSendArray.Append(reinterpret_cast<const uint8*>(TCHAR_TO_UTF8(&str)),sizeof(str));
-//
-// 	int32 BytesSent = 0;
-// 	_TcpSocket->Send(DataSendArray.GetData(),DataSendArray.Num(), BytesSent);
-// }
+	
+	FString TextContent = FString::FromInt(Dt.GetYear());
+	TextContent.Append(TEXT("年"));
+	TextContent.Append(FString::FromInt(Dt.GetMonth()));
+	TextContent.Append(TEXT("月"));
+	TextContent.Append(FString::FromInt(Dt.GetDay()));
+	TextContent.Append(TEXT("日"));
+	TextContent.Append(FString::FromInt(Dt.GetHour()));
+	TextContent.Append(TEXT("时"));
+	TextContent.Append(FString::FromInt(Dt.GetMinute()));
+	TextContent.Append(TEXT("分"));
+	TextContent.Append(FString::FromInt(Dt.GetSecond()));
+	TextContent.Append(TEXT("秒    "));
+
+	if (ECode == EActionCode::GameStart)
+	{
+		FString GameStart = TEXT("[游戏开始] \n");
+		TextContent = TextContent.Append(GameStart);
+		TextLines.Add(TextContent);
+		FFileHelper::SaveStringArrayToFile(TextLines, *TextPath,FFileHelper::EEncodingOptions::ForceUTF8);
+	}
+	else if(ECode == EActionCode::GameStop)
+	{
+		AVDPawn* VdPawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+		float TotalTime = 60 * Time;
+		float UsingTime = TotalTime - ((VdPawn->UIManager->ManagerMinute) * 60.0 + VdPawn->UIManager->ManagerSecond);
+		
+		FString GameStop = TEXT("[游戏结束] \n");
+		TextContent = TextContent.Append(GameStop);
+		TextLines.Add(TextContent);
+		TextLines.Add(TEXT("体验时长： "));
+		TextLines.Add(FString::FromInt(FMath::FloorToInt(UsingTime)));
+		TextLines.Add(TEXT("秒    OK\n\n"));
+		
+	}
+	
+}
+
+void AVDSocket::SendReportLog()
+ {
+ 	TArray<uint8> DataSendArray;
+ 	nlohmann::json ReportJson;
+ 	
+	ReportJson["experienceLog"]["id"] = NULL;
+	ReportJson["experienceLog"]["member"] = NULL;
+	ReportJson["experienceLog"]["ticket"] = NULL;
+	ReportJson["experienceLog"]["content"] = NULL;
+	ReportJson["experienceLog"]["role"] = NULL;
+	ReportJson["experienceLog"]["equipment"] = NULL;
+	ReportJson["experienceLog"]["startTime"] = NULL;
+	ReportJson["experienceLog"]["endTime"] = NULL;
+	ReportJson["experienceLog"]["finished"] = NULL;
+	ReportJson["experienceLog"]["score"] = 91;
+	ReportJson["experienceLog"]["marks"] = 0;
+	ReportJson["experienceLog"]["shopId"] = NULL;
+
+	ReportJson["history"];
+	ReportJson["questions"] = NULL;
+	
+	std::string str = to_string(ReportJson);
+	FString ReportLog(str.c_str());
+
+ 	int32 action = static_cast<int32>(EActionCode::SetReportVRLog);
+ 	int32 dataAmount = sizeof(action) + FCString::Strlen(*ReportLog);
+ 	
+ 	DataSendArray.Append(reinterpret_cast<const uint8*>(&dataAmount), sizeof(dataAmount));
+ 	DataSendArray.Append(reinterpret_cast<const uint8*>(&action), sizeof(action));
+ 	DataSendArray.Append(reinterpret_cast<const uint8*>(TCHAR_TO_UTF8(*ReportLog)),FCString::Strlen(*ReportLog));
+
+	int32 BytesSent = 0;
+ 	_TcpSocket->Send(DataSendArray.GetData(),DataSendArray.Num(), BytesSent);
+
+	
+ }
+
+void AVDSocket::FullTimeAssessment()
+{
+	AVDPawn* VdPawn = Cast<AVDPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+	float TotalTime = 60 * Time;
+	float UsingTime;
+	UsingTime = TotalTime - ((VdPawn->UIManager->ManagerMinute) * 60.0 +  VdPawn->UIManager->ManagerSecond);
+	
+	if (UsingTime >= TotalTime * 0.7)
+	{
+		SendLocalReportLog();
+		GameEnd();
+	}
+	else
+	{
+		GameEnd();
+	}
+}
+
+void AVDSocket::SendLocalReportLog()
+{
+	SendData(EActionCode::SetReportVRLog,"");
+}
+
 
 std::wstring AVDSocket::stringToWstring(const std::string& str)
 {

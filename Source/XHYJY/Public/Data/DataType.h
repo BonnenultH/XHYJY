@@ -277,6 +277,7 @@ struct FHTQOrbit
 	GENERATED_BODY()
 
 	FHTQOrbit() {};
+	//默认构造
 	
 	FHTQOrbit(EOrbit _HTQOrbitType, FString _HTQOrbitInfo, FString _HTQOrbitName)
 	{
@@ -284,6 +285,7 @@ struct FHTQOrbit
 		HTQOrbitInfo = _HTQOrbitInfo;
 		HTQOrbitName = _HTQOrbitName;
 	};
+	//带参构造
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EOrbit HTQOrbitType;
@@ -428,7 +430,6 @@ public:
 		FirstDataMap.Add(DataType, Data);
 	}
 
-public:
 	TMap<EHFCategory, FHTQFirstData> FirstDataMap;
 };
 
