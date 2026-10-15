@@ -5,6 +5,7 @@
 
 //#include "GM/VDGameInstance.h"
 //#include "Kismet/GameplayStatics.h"
+#include "Kismet/GameplayStatics.h"
 #include "TcpSocket/VDSocket.h"
 
 
@@ -19,9 +20,9 @@ void UWBookLaunch::InitWidget()
 	//MyGameInstance = Cast<UVDGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 
 	//线下和平里
-	// TArray<AActor*> MySockets;
-	// UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
-	// MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	TArray<AActor*> MySockets;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
 	
 	if(UIManager->GetGrade() == 100)
 	{
@@ -75,8 +76,8 @@ void UWBookLaunch::InitWidget()
 void UWBookLaunch::GameRestart()
 {
 	//新版本的型号研究院打开这个
-	// MyTCPSocket->SendData();
-	// MyTCPSocket->GameEnd();
+	MyTCPSocket->SendData();
+	MyTCPSocket->GameEnd();
 
 	//线下和平里
 	// MyGameInstance->SendLocalReportLog();

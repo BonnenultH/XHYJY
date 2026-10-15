@@ -32,14 +32,14 @@ AVDSocket::AVDSocket()
 void AVDSocket::BeginPlay()
 {
 	Super::BeginPlay();
-    //CreateSocket();
+    CreateSocket();
 	
 }
 
 void AVDSocket::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
-    //CloseSocket();
+    CloseSocket();
 	
 }
 
@@ -195,14 +195,69 @@ void AVDSocket::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-/*
- 	TArray<uint8> ReceivedData;
+	if (!_TcpSocket || !bConnect)
+	{
+		return;
+	}
+
+	uint32 PendingSize = 0;
+	while (_TcpSocket->HasPendingData(PendingSize) && PendingSize > 0)
+	{
+		uint8 Buffer[40960];
+		const int32 ToRead = static_cast<int32>(
+			FMath::Min<uint32>(PendingSize, sizeof(Buffer))
+		);
+
+		int32 ReadCount = 0;
+		if (!_TcpSocket->Recv(Buffer, ToRead, ReadCount) || ReadCount <= 0)
+		{
+			break;
+		}
+
+		ReceiveData.Append(Buffer, ReadCount);
+	}
+
+	while (ReceiveData.Num() >= 4)
+	{
+		int32 BodyLength = 0;
+		FMemory::Memcpy(&BodyLength, ReceiveData.GetData(), 4);
+
+		if (BodyLength < 4 || BodyLength > 1024 * 1024)
+		{
+			UE_LOG(LogTemp, Error, TEXT("错误的包长：%d"), BodyLength);
+			ReceiveData.Empty();
+			CloseSocket();
+			bConnect = false;
+			return;
+		}
+
+		const int32 FullLength = 4 + BodyLength;
+		if (ReceiveData.Num() < FullLength)
+		{
+			break;
+		}
+
+		TArray<uint8> Frame;
+		Frame.Append(ReceiveData.GetData(), FullLength);
+		ReceiveData.RemoveAt(0, FullLength);
+
+		int32 Action = 0;
+		FMemory::Memcpy(&Action, Frame.GetData() + 4, 4);
+		ParseData(Frame);
+
+		if (Action == static_cast<int32>(EActionCode::GameStop))
+		{
+			return; // GameEnd 会重启关卡
+		}
+	}
+	
+ /*	TArray<uint8> ReceivedData;
 	while (ReceivedDataQueue.Dequeue(ReceivedData))
 	{
 		ParseData(ReceivedData);
 	}
 
-	 				
+		 				
 	if(_TcpSocket->HasPendingData(size))
 	{
 		BytesRead = 0;
@@ -239,11 +294,16 @@ void AVDSocket::Tick(float DeltaTime)
 		}
 	}
 		
-	*/		
+*/			
 }
 
-/*void AVDSocket::ParseData(TArray<uint8>& Data)
+void AVDSocket::ParseData(TArray<uint8>& Data)
 {
+	if (Data.Num() < 8)
+	{
+		return;
+	}
+	
 	TArray<uint8> SubArray;
 	SubArray.Append(Data.GetData() + 4, 4);
 	int32 Value = *(reinterpret_cast<int32*>(SubArray.GetData()));
@@ -251,13 +311,13 @@ void AVDSocket::Tick(float DeltaTime)
 	EActionCode actionCode  = (EActionCode)Value;
 
 	//本地版本只使用开始和结束指令
-	if (actionCode == EActionCode::GetCustomerInfo)
-	{
-		AnalysisCustomerInfo();
-		UE_LOG(LogTemp, Log, TEXT("GET CUSTOMERINFO"))
-	}
-	
-	else if(actionCode == EActionCode::GameStart)
+	// if (actionCode == EActionCode::GetCustomerInfo)
+	// {
+	// 	AnalysisCustomerInfo();
+	// 	UE_LOG(LogTemp, Log, TEXT("GET CUSTOMERINFO"))
+	// }
+	//
+	if(actionCode == EActionCode::GameStart)
 	{
 		GameStart();
 		UE_LOG(LogTemp, Log, TEXT("GAME START!!"))
@@ -266,7 +326,7 @@ void AVDSocket::Tick(float DeltaTime)
 	{
 		GameEnd();
 	}
-	
+}
 /*	if(actionCode == EActionCode::GameStart)
 	{
 		GameStart();

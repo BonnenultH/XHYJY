@@ -70,7 +70,7 @@ public:
 
 public:
 	bool bConnect = false;
-	FSocket* _TcpSocket;
+	FSocket* _TcpSocket = nullptr;
 	FString _ClientIP;
 	int Time;
 

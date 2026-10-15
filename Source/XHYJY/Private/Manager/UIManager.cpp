@@ -27,10 +27,10 @@ void AUIManager::BeginPlay()
 	Super::BeginPlay();
 
 	//线上型号研究院
-	// TArray<AActor*> MySockets;
-	// UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
-	// MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
-	// ManagerMinute = MyTCPSocket->Time;
+	TArray<AActor*> MySockets;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(),"MyBPSocket", MySockets);
+	MyTCPSocket = Cast<AVDSocket>(MySockets[0]);
+	ManagerMinute = MyTCPSocket->Time;
 
 	//线下和平里型号研究院
 	// MyGameInstance = Cast<UVDGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
@@ -82,15 +82,15 @@ void AUIManager::UpdateTime(float DeltaTime)
 		if(UIManager->ManagerMinute == 0)
 		{
 			//新版线上开这个
-			// MyTCPSocket->SendData();
-			// MyTCPSocket->GameEnd();
+			 MyTCPSocket->SendData();
+			 MyTCPSocket->GameEnd();
 
 			//线下和平里 
 			// MyGameInstance->SendLocalReportLog();
 			// MyGameInstance->GameEnd();
 			
 			//本地运行
-			GetWorld()->GetFirstPlayerController()->ConsoleCommand(TEXT("RestartLevel"));
+			//GetWorld()->GetFirstPlayerController()->ConsoleCommand(TEXT("RestartLevel"));
 
 			return;
 		}

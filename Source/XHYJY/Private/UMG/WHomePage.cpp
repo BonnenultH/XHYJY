@@ -10,7 +10,7 @@ void UWHomePage::InitWidget()
 	Super::InitWidget();
 
 	//本地运行
-	GameStart();
+	//GameStart();
 	StartButton->OnClicked.AddDynamic(this, &UWHomePage::CreatUserFile);
 
 	PlayBackgroundMovie();
